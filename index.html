@@ -1,12 +1,13 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=28;</script>
+<script>window.VR_N=29;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
 <!-- v1.2.0: Alfabeto, scheda Tabelle: tabelle al posto delle celle singole -->
 <!-- v1.1.2: nomi hari delle colonne più evidenti (teoria, test, feedback del varga); Sandhi con devanāgarī; Analisi sillabica; moduli Nomi, Pronomi, Verbi e Vocabolario -->
 <!-- v1.1.4: scelta del tema Auto / Giorno / Notte nelle Impostazioni -->
+<!-- v1.2.9: barra in basso alla giusta altezza nel browser (margine reale del telefono; dentro la cornice di Claude resta il minimo di 34px), scomparsa delle barre con attesa di 0,9 s e transizione più lenta -->
 <!-- v1.1.9: Sandhi, scheda Regole: niente blocchi nidificati, testo a tutta larghezza (numero sopra il sūtra, spiegazione senza rientro) -->
 <!-- v1.1.8: Sandhi, scheda Regole: le tre sezioni in blocchi separati con intestazione ben visibile -->
 <!-- v1.1.7: Sandhi, scheda Regole: i sūtra divisi nelle tre sezioni del libro (sarveśvara, viṣṇujana, viṣṇusarga) -->
@@ -139,11 +140,15 @@ p { margin: 0 0 8px; }
   -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
 .nav .back { pointer-events: auto; }
 
+/* dentro il visualizzatore di Claude (cornice) il margine di sicurezza non viene passato (env = 0): lì si usa comunque almeno 34px */
+html.in-frame .tabs { bottom: calc(max(env(safe-area-inset-bottom, 0px), 34px) + 26px); }
 /* le barre (scheda in basso, controllo segmentato in alto) si nascondono scorrendo verso il basso e tornano scorrendo verso l'alto */
 .nav .modbar { transition: transform .34s cubic-bezier(.3,.9,.3,1), opacity .24s ease; }
 html.bars-off .tabs { transform: translateY(calc(100% + 90px)); opacity: 0; pointer-events: none; }
 html.bars-off .nav .modbar { transform: translateY(-84px); opacity: 0; pointer-events: none; }
-@media (prefers-reduced-motion: reduce) { .tabs, .nav .modbar { transition: opacity .01s; } }
+/* quando spariscono, le barre lo fanno con calma; quando tornano restano veloci */
+html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease; }
+@media (prefers-reduced-motion: reduce) { .tabs, .nav .modbar, html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: opacity .01s; } }
 /* esercizi: indietro è solo testo (niente cerchio di vetro) e a destra il cronometro */
 .nav.exnav { justify-content: space-between; padding-left: 2px; }
 .nav.exnav .back.txt { width: auto; min-width: 0; height: 44px; padding: 0 12px 0 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
@@ -175,8 +180,8 @@ html.bars-off .nav .modbar { transform: translateY(-84px); opacity: 0; pointer-e
 /* --- barra delle schede fluttuante (capsula, margine dal bordo) --- */
 .tabs {
   position: fixed; z-index: 8; left: 0; right: 0; margin: 0 auto;
-  /* come la barra di Instagram: sopra l'indicatore home. Dove il visualizzatore non passa il margine di sicurezza (env = 0) si usa comunque almeno 34px */
-  bottom: calc(max(env(safe-area-inset-bottom, 0px), 34px) + 26px);
+  /* come la barra di Instagram: sopra l'indicatore home. Nel browser e nell'app aggiunta alla Home vale il margine di sicurezza reale del telefono */
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 26px);
   /* capsula compatta solo con icone (come la barra di Instagram): ogni voce è larga 64px */
   width: min(calc(var(--n, 3) * 64px + 8px + (var(--n, 3) - 1) * 2px), calc(100vw - 24px));
   display: flex; gap: 2px; padding: 4px; border-radius: 999px;
@@ -5074,16 +5079,19 @@ const MODULES = [
 
   // ---------- barre che si nascondono scorrendo ----------
   (function () {
-    const root = document.documentElement; let last = window.scrollY, acc = 0;
+    const root = document.documentElement; let last = window.scrollY, acc = 0, timer = null;
+    const HIDE_DELAY = 900;   // millisecondi di attesa, mentre si scorre verso il basso, prima che le barre spariscano
+    const cancel = () => { if (timer) { clearTimeout(timer); timer = null; } };
     window.addEventListener('scroll', () => {
       const y = Math.max(0, window.scrollY), d = y - last; last = y;
-      if (y < 40) { acc = 0; root.classList.remove('bars-off'); return; }
+      if (y < 40) { acc = 0; cancel(); root.classList.remove('bars-off'); return; }
       if (Math.sign(d) !== Math.sign(acc)) acc = 0;
       acc += d;
-      if (acc > 14) root.classList.add('bars-off');
-      else if (acc < -8) root.classList.remove('bars-off');
+      if (acc > 14) {
+        if (!timer && !root.classList.contains('bars-off')) timer = setTimeout(() => { timer = null; if (window.scrollY >= 40) root.classList.add('bars-off'); }, HIDE_DELAY);
+      } else if (acc < -8) { cancel(); root.classList.remove('bars-off'); }
     }, { passive: true });
-    window.__barsReset = () => { root.classList.remove('bars-off'); last = window.scrollY; acc = 0; };
+    window.__barsReset = () => { cancel(); root.classList.remove('bars-off'); last = window.scrollY; acc = 0; };
   })();
   document.addEventListener('visibilitychange', () => { if (document.hidden) { save(); queuePush(true); } });
   window.addEventListener('pagehide', () => { save(); queuePush(true); });
