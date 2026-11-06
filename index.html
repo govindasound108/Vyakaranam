@@ -1,12 +1,13 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=32;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=33;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
 <!-- v1.2.0: Alfabeto, scheda Tabelle: tabelle al posto delle celle singole -->
 <!-- v1.1.2: nomi hari delle colonne più evidenti (teoria, test, feedback del varga); Sandhi con devanāgarī; Analisi sillabica; moduli Nomi, Pronomi, Verbi e Vocabolario -->
 <!-- v1.1.4: scelta del tema Auto / Giorno / Notte nelle Impostazioni -->
+<!-- v1.3.3: tema Notte in grafite Apple (grigi neutri, accento ambra, verde/rosso iOS) -->
 <!-- v1.3.2: funziona anche offline (service worker, manifest, icone) come Kārtika -->
 <!-- v1.3.1: Cerca per affinità (testo parziale o con errori) e «sutra 44»; barre più trasparenti (liquid glass) -->
 <!-- v1.3.0: Cerca anche moduli, esercizi e sezioni di teoria; forme di nomi, pronomi e verbi con caso e numero (o persona e numero) e casella evidenziata in tabella; due parole (nome + desinenza); grafia all’inglese come ripiego -->
@@ -18,7 +19,8 @@
 <!-- v1.1.6: esercizi dentro i moduli senza icone. v1.1.5: dai commenti: via il titolo v.2, Test del giorno da 15 domande, Ripasso errori, Progressi con media, colori e moduli, Moduli senza icone, Impostazioni nella barra -->
 
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="theme-color" content="#FDFAF3">
+<meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Vyākaraṇam">
 <link rel="manifest" href="manifest.webmanifest">
@@ -52,38 +54,38 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ground: #0E1230; --halo1: rgba(74, 58, 110, .55); --halo2: rgba(40, 46, 110, .6); --bgtop: rgba(140, 120, 230, .38);
-    --ink: #F3EEE2; --soft: #C9C6E0; --accent: #E9B65A; --accent-fill: #E9B65A; --on-accent: #1A1530;
-    --paper: rgba(255, 255, 255, .07); --cell: rgba(255, 255, 255, .1); --row: rgba(255, 255, 255, .09); --fill: rgba(255, 255, 255, .09);
-    --sel-bg: rgba(233, 182, 90, .2); --sel-ink: #F3CC80;
-    --hair: rgba(255, 255, 255, .16); --mark: #E9B94A;
-    --ti-glow: rgba(233, 182, 90, .3); --ti-sh: rgba(10, 12, 36, .9); --ti-a: #F8DFA0; --ti-b: #E2A93E;
-    --lq-a: rgba(255, 255, 255, .26); --lq-b: rgba(255, 255, 255, .06); --lq-c: rgba(255, 255, 255, .15);
-    --lq-sel-a: rgba(255, 255, 255, .46); --lq-sel-b: rgba(255, 255, 255, .16); --lq-in: rgba(255, 255, 255, .4);
-    --gl-edge: inset 0 1px 0 rgba(255, 255, 255, .34), inset 0 0 0 1px rgba(255, 255, 255, .1), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
-    --gl-ring: 0 0 0 1px rgba(0, 0, 0, .35);
-    --bar-edge: inset 0 1px 0 rgba(255, 255, 255, .38), inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
-    --gl-sh: 0 12px 32px -12px rgba(0, 0, 0, .6);
-    --good: #72D194; --good-soft: rgba(114, 209, 148, .17); --bad: #F59580; --bad-soft: rgba(245, 149, 128, .17);
-    --t-r: #F08A74; --t-o: #EDA24F; --t-y: #EBCB57;
+    --ground: #1C1C1E; --halo1: rgba(0, 0, 0, 0); --halo2: rgba(0, 0, 0, 0); --bgtop: rgba(255, 255, 255, .08);
+    --ink: #F5F5F7; --soft: #AEAEB2; --accent: #F0B24B; --accent-fill: #F0B24B; --on-accent: #1C1C1E;
+    --paper: rgba(44, 44, 46, .78); --cell: rgba(58, 58, 60, .92); --row: rgba(58, 58, 60, .55); --fill: rgba(120, 120, 128, .26);
+    --sel-bg: rgba(240, 178, 75, .2); --sel-ink: #F6C877;
+    --hair: rgba(98, 98, 102, .6); --mark: #F0B24B;
+    --ti-glow: rgba(240, 178, 75, .22); --ti-sh: rgba(0, 0, 0, .9); --ti-a: #F8DFA0; --ti-b: #EDB04A;
+    --lq-a: rgba(98, 98, 102, .5); --lq-b: rgba(60, 60, 64, .22); --lq-c: rgba(80, 80, 84, .4);
+    --lq-sel-a: rgba(130, 130, 136, .65); --lq-sel-b: rgba(90, 90, 96, .4); --lq-in: rgba(110, 110, 116, .7);
+    --gl-edge: inset 0 1px 0 rgba(255, 255, 255, .22), inset 0 0 0 1px rgba(255, 255, 255, .07);
+    --gl-ring: 0 0 0 1px rgba(0, 0, 0, .5);
+    --bar-edge: inset 0 1px 0 rgba(255, 255, 255, .24), inset 0 0 0 1px rgba(255, 255, 255, .08);
+    --gl-sh: 0 12px 32px -14px rgba(0, 0, 0, .7);
+    --good: #32D74B; --good-soft: rgba(50, 215, 75, .16); --bad: #FF6B63; --bad-soft: rgba(255, 107, 99, .16);
+    --t-r: #FF6B63; --t-o: #FF9F0A; --t-y: #FFD60A;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --ground: #0E1230; --halo1: rgba(74, 58, 110, .55); --halo2: rgba(40, 46, 110, .6); --bgtop: rgba(140, 120, 230, .38);
-  --ink: #F3EEE2; --soft: #C9C6E0; --accent: #E9B65A; --accent-fill: #E9B65A; --on-accent: #1A1530;
-  --paper: rgba(255, 255, 255, .07); --cell: rgba(255, 255, 255, .1); --row: rgba(255, 255, 255, .09); --fill: rgba(255, 255, 255, .09);
-  --sel-bg: rgba(233, 182, 90, .2); --sel-ink: #F3CC80;
-  --hair: rgba(255, 255, 255, .16); --mark: #E9B94A;
-  --ti-glow: rgba(233, 182, 90, .3); --ti-sh: rgba(10, 12, 36, .9); --ti-a: #F8DFA0; --ti-b: #E2A93E;
-  --lq-a: rgba(255, 255, 255, .26); --lq-b: rgba(255, 255, 255, .06); --lq-c: rgba(255, 255, 255, .15);
-  --lq-sel-a: rgba(255, 255, 255, .46); --lq-sel-b: rgba(255, 255, 255, .16); --lq-in: rgba(255, 255, 255, .4);
-  --gl-edge: inset 0 1px 0 rgba(255, 255, 255, .34), inset 0 0 0 1px rgba(255, 255, 255, .1), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
-  --gl-ring: 0 0 0 1px rgba(0, 0, 0, .35);
-  --bar-edge: inset 0 1px 0 rgba(255, 255, 255, .38), inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
-  --gl-sh: 0 12px 32px -12px rgba(0, 0, 0, .6);
-  --good: #72D194; --good-soft: rgba(114, 209, 148, .17); --bad: #F59580; --bad-soft: rgba(245, 149, 128, .17);
-  --t-r: #F08A74; --t-o: #EDA24F; --t-y: #EBCB57;
+  --ground: #1C1C1E; --halo1: rgba(0, 0, 0, 0); --halo2: rgba(0, 0, 0, 0); --bgtop: rgba(255, 255, 255, .08);
+  --ink: #F5F5F7; --soft: #AEAEB2; --accent: #F0B24B; --accent-fill: #F0B24B; --on-accent: #1C1C1E;
+  --paper: rgba(44, 44, 46, .78); --cell: rgba(58, 58, 60, .92); --row: rgba(58, 58, 60, .55); --fill: rgba(120, 120, 128, .26);
+  --sel-bg: rgba(240, 178, 75, .2); --sel-ink: #F6C877;
+  --hair: rgba(98, 98, 102, .6); --mark: #F0B24B;
+  --ti-glow: rgba(240, 178, 75, .22); --ti-sh: rgba(0, 0, 0, .9); --ti-a: #F8DFA0; --ti-b: #EDB04A;
+  --lq-a: rgba(98, 98, 102, .5); --lq-b: rgba(60, 60, 64, .22); --lq-c: rgba(80, 80, 84, .4);
+  --lq-sel-a: rgba(130, 130, 136, .65); --lq-sel-b: rgba(90, 90, 96, .4); --lq-in: rgba(110, 110, 116, .7);
+  --gl-edge: inset 0 1px 0 rgba(255, 255, 255, .22), inset 0 0 0 1px rgba(255, 255, 255, .07);
+  --gl-ring: 0 0 0 1px rgba(0, 0, 0, .5);
+  --bar-edge: inset 0 1px 0 rgba(255, 255, 255, .24), inset 0 0 0 1px rgba(255, 255, 255, .08);
+  --gl-sh: 0 12px 32px -14px rgba(0, 0, 0, .7);
+  --good: #32D74B; --good-soft: rgba(50, 215, 75, .16); --bad: #FF6B63; --bad-soft: rgba(255, 107, 99, .16);
+  --t-r: #FF6B63; --t-o: #FF9F0A; --t-y: #FFD60A;
   color-scheme: dark;
 }
 
