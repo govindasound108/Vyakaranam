@@ -1,12 +1,13 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=29;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=30;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
 <!-- v1.2.0: Alfabeto, scheda Tabelle: tabelle al posto delle celle singole -->
 <!-- v1.1.2: nomi hari delle colonne più evidenti (teoria, test, feedback del varga); Sandhi con devanāgarī; Analisi sillabica; moduli Nomi, Pronomi, Verbi e Vocabolario -->
 <!-- v1.1.4: scelta del tema Auto / Giorno / Notte nelle Impostazioni -->
+<!-- v1.3.0: Cerca anche moduli, esercizi e sezioni di teoria; forme di nomi, pronomi e verbi con caso e numero (o persona e numero) e casella evidenziata in tabella; due parole (nome + desinenza); grafia all’inglese come ripiego -->
 <!-- v1.2.9: barra in basso alla giusta altezza nel browser (margine reale del telefono; dentro la cornice di Claude resta il minimo di 34px), scomparsa delle barre con attesa di 0,9 s e transizione più lenta -->
 <!-- v1.1.9: Sandhi, scheda Regole: niente blocchi nidificati, testo a tutta larghezza (numero sopra il sūtra, spiegazione senza rientro) -->
 <!-- v1.1.8: Sandhi, scheda Regole: le tre sezioni in blocchi separati con intestazione ben visibile -->
@@ -716,6 +717,8 @@ html { overscroll-behavior-y: contain; }
 .np-c .dv { font: 400 12px var(--f-dev); color: var(--soft); }
 .np-c.x { opacity: .6; }
 .np-c.hl { background: var(--sel-bg); box-shadow: inset 0 0 0 2px var(--accent-fill); }
+.at.tp td.hl { background: var(--sel-bg); box-shadow: inset 0 0 0 2px var(--accent-fill); }
+.lab, .sa-shn { scroll-margin-top: 96px; }
 .np-c.blank { background: none; box-shadow: inset 0 0 0 1.5px var(--hair); cursor: pointer; font-family: var(--f-serif); }
 .np-c.blank.sel { background: var(--sel-bg); box-shadow: inset 0 0 0 2px var(--accent-fill); }
 .np-c.ok { background: var(--good-soft); box-shadow: inset 0 0 0 1.5px var(--good); }
@@ -1417,7 +1420,7 @@ Object.assign(I18N.en, {
   'sa.title': 'Sandhi', 'sa.sub': 'From the Notion page “Sandhi” and the book',
   'tab.rules': 'Rules',
   'sa.intro': 'Sūtras 42–83. Tap a sūtra to open its explanation and examples. The formulas come from the Notion page; the text of the sūtras, the explanations (English sentence of the book, with an Italian translation) and the examples come from the book Hari-nāmāmṛta-vyākaraṇam and from the Notion page. The Devanāgarī is computed from the IAST. To practise, go to the Exercises tab.',
-  'q.title': 'Search', 'q.sub': 'Everything you have studied', 'q.ph': 'Sūtra, verse, metre, word, form…', 'q.hint': 'Type at least two letters. Accents are optional: krsna finds kṛṣṇa. A number finds the sūtra.', 'q.none': 'No results', 'q.more': '{n} more, refine the search', 'q.g.sutra': 'Sandhi sūtras', 'q.g.metre': 'Metres', 'q.g.verse': 'Verses', 'q.aria': 'Search field', 'sa.noexp': 'No explanation for this sūtra in the book.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combination of vowels', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combination of consonants', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combination with the visarga', 'sa.formulas': 'Formulas', 'sa.sarv': 'sarveśvara (vowel)',
+  'q.title': 'Search', 'q.sub': 'Everything you have studied', 'q.ph': 'Module, sūtra, verse, metre, word, form…', 'q.hint': 'Type at least two letters. Accents are optional: krsna finds kṛṣṇa. A number finds the sūtra.', 'q.none': 'No results', 'q.more': '{n} more, refine the search', 'q.g.sutra': 'Sandhi sūtras', 'q.g.metre': 'Metres', 'q.g.verse': 'Verses', 'q.g.mod': 'Modules', 'q.g.ex': 'Exercises', 'q.g.sec': 'Topics', 'q.g.form': 'Forms in the tables', 'q.lenient': 'Searched for “{q}”', 'q.aria': 'Search field', 'sa.noexp': 'No explanation for this sūtra in the book.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combination of vowels', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combination of consonants', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combination with the visarga', 'sa.formulas': 'Formulas', 'sa.sarv': 'sarveśvara (vowel)',
   'sa.fnote': 'The number is the sūtra. “=” means the two vowels join; “→” means the first vowel changes before the second.',
   'sa.sutras': 'Sūtras', 'sa.snote': 'Text of the sūtras from the book. No exercises yet for sūtras: {l}.',
   'sa.sutra': 'Sūtra {n}',
@@ -1443,7 +1446,7 @@ Object.assign(I18N.it, {
   'sa.title': 'Sandhi', 'sa.sub': 'Dalla pagina Notion “Sandhi” e dal libro',
   'tab.rules': 'Regole',
   'sa.intro': 'Sūtra 42–83. Tocca un sūtra per aprire spiegazione ed esempi. Le formule vengono dalla pagina Notion; il testo dei sūtra, le spiegazioni (frase inglese del libro, con traduzione italiana) e gli esempi vengono dal libro Hari-nāmāmṛta-vyākaraṇam e dalla pagina Notion. Il devanāgarī è calcolato dall’IAST. Per esercitarti passa alla scheda Esercizi.',
-  'q.title': 'Cerca', 'q.sub': 'Tutto ciò che hai studiato', 'q.ph': 'Sūtra, verso, metro, parola, forma…', 'q.hint': 'Scrivi almeno due lettere. Gli accenti sono facoltativi: krsna trova kṛṣṇa. Un numero trova il sūtra.', 'q.none': 'Nessun risultato', 'q.more': 'altri {n}, restringi la ricerca', 'q.g.sutra': 'Sūtra di Sandhi', 'q.g.metre': 'Metri', 'q.g.verse': 'Versi', 'q.aria': 'Campo di ricerca', 'sa.noexp': 'Nel libro non c’è una spiegazione per questo sūtra.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combinazione di vocali', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combinazione di consonanti', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combinazione con il visarga', 'sa.formulas': 'Formule', 'sa.sarv': 'sarveśvara (vocale)',
+  'q.title': 'Cerca', 'q.sub': 'Tutto ciò che hai studiato', 'q.ph': 'Modulo, sūtra, verso, metro, parola, forma…', 'q.hint': 'Scrivi almeno due lettere. Gli accenti sono facoltativi: krsna trova kṛṣṇa. Un numero trova il sūtra.', 'q.none': 'Nessun risultato', 'q.more': 'altri {n}, restringi la ricerca', 'q.g.sutra': 'Sūtra di Sandhi', 'q.g.metre': 'Metri', 'q.g.verse': 'Versi', 'q.g.mod': 'Moduli', 'q.g.ex': 'Esercizi', 'q.g.sec': 'Argomenti', 'q.g.form': 'Forme nelle tabelle', 'q.lenient': 'Ho cercato «{q}»', 'q.aria': 'Campo di ricerca', 'sa.noexp': 'Nel libro non c’è una spiegazione per questo sūtra.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combinazione di vocali', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combinazione di consonanti', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combinazione con il visarga', 'sa.formulas': 'Formule', 'sa.sarv': 'sarveśvara (vocale)',
   'sa.fnote': 'Il numero è il sūtra. “=” vuol dire che le due vocali si fondono; “→” che la prima vocale cambia davanti alla seconda.',
   'sa.sutras': 'Sūtra', 'sa.snote': 'Testo dei sūtra dal libro. Non ci sono ancora esercizi per i sūtra: {l}.',
   'sa.sutra': 'Sūtra {n}',
@@ -2378,7 +2381,7 @@ const MODULES = [
   const LENS = [10, 20, 30];
   const CORDER = ['metri', 'esercizi'];
   const AORDER = ['tabelle', 'esercizi'];
-  const S = { screen: 'home', tab: 'metri', atab: 'tabelle', stab: 'regole', mtab: 'teoria', nsel: { nomi: 'krishna', pronomi: 'asmad', verbi: 'vand' }, openMetre: null, verse: null, scan: false, ex: null, sheet: null, testMods: [], testAll: true, testLen: 10, peek: false, still: false, dir: 0, tp: {}, rst: false, code: null, codeMsg: null, restore: false, pm: {}, sx: {}, q: '' };
+  const S = { hl: null, screen: 'home', tab: 'metri', atab: 'tabelle', stab: 'regole', mtab: 'teoria', nsel: { nomi: 'krishna', pronomi: 'asmad', verbi: 'vand' }, openMetre: null, verse: null, scan: false, ex: null, sheet: null, testMods: [], testAll: true, testLen: 10, peek: false, still: false, dir: 0, tp: {}, rst: false, code: null, codeMsg: null, restore: false, pm: {}, sx: {}, q: '' };
 
   // ---------- componenti ----------
   function topbar(title, sub, backAct, backLabel, navExtra, exMode) {
@@ -3962,6 +3965,7 @@ const MODULES = [
     const body = rows.map(r => `<tr><th scope="row" class="rh">${r[0]}</th>${r[1].map((c, i) => `<td class="${[i % 2 === 0 ? 'alt' : '', r[2] && r[2][i] ? r[2][i] : ''].join(' ').trim()}">${c}</td>`).join('')}</tr>`).join('');
     return `<div class="at-w"><table class="at tp"><colgroup><col style="width:70px"></colgroup><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
   }
+  const hlOf = id => (c, n) => !!(S.hl && S.hl.id === id && S.hl.cells.some(x => x[0] === c && x[1] === n));
   function tblTab(P, o) {
     o = o || {};
     const rl = o.rowLab || (c => `${t('csa.' + c)}<small>${CASE_SK[c]}</small>`);
@@ -3972,7 +3976,7 @@ const MODULES = [
         const dv = P.dv(c, n), flag = P.mod === 'nomi' ? P.raw.t[c][n][2] : null;
         const body = o.hlsf ? o.hlsf(c, n) : esc(P.txt(c, n));
         cells.push(`${body}${flag ? '<sup class="dg">!</sup>' : ''}${dv ? `<span class="dv">${esc(dv)}</span>` : ''}`);
-        cls.push(flag === 'x' ? 'x' : '');
+        cls.push((flag === 'x' ? 'x' : '') + (o.hl && o.hl(c, n) ? ' hl' : ''));
       }
       rows.push([rl(c), cells, cls]);
     }
@@ -3992,7 +3996,7 @@ const MODULES = [
       <section class="card flat" data-pswipe="nomi">
         <h2 class="np-title">${esc(N.name)} <span class="dev-s">${N.dev}</span></h2>
         ${N.cls ? `<p class="np-cls">${esc(N.cls)}</p>` : ''}
-        ${tblTab(P, {})}
+        ${tblTab(P, { hl: hlOf(id) })}
         ${hasFlag ? `<p class="note tight"><sup class="dg">!</sup> ${t(N.t.some(r => r.some(c => c[2] === 'x')) ? 'no.flagX' : 'no.flagAlt')}</p>` : ''}
       </section>
       <section class="card flat">${lists.replace('<p class="lab">', '<p class="lab first">')}</section>`;
@@ -4003,13 +4007,14 @@ const MODULES = [
       <section class="card flat" data-pswipe="pronomi">
         <h2 class="np-title">${esc(N.name)} <span class="dev-s">${N.dev}</span></h2>
         <p class="np-cls">${t('pr.p' + N.p)}</p>
-        ${tblTab(P, {})}
+        ${tblTab(P, { hl: hlOf(id) })}
       </section>`;
   }
   function viewTeoriaVerbi() {
     const id = S.nsel.verbi, V = verbOf(id), P = PAR[id], a = V.pada === 'a';
     const suf = tpTable([0, 1, 2].map(p => [perN(p), [0, 1, 2].map(n => `${esc(V.suf[p][n])}<span class="dv">${V.sd[p][n]}</span>`)]));
     const conj = tblTab(P, {
+      hl: hlOf(id),
       rowLab: p => perN(p),
       hlsf: (p, n) => { const f = V.f[p][n], h = V.hl[p][n]; return esc(f.slice(0, f.length - h.length)) + `<b class="sf">${esc(h)}</b>`; }
     });
@@ -4541,10 +4546,52 @@ const MODULES = [
   // Il confronto ignora accenti, maiuscole, spazi e trattini (krsna trova kṛṣṇa). Le forme segnate come punto aperto del Notion non entrano.
   const nz = x => String(x).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[\s\-’'ʼ]/g, '');
   let SIDX = null;
+  // grafia all'inglese come ripiego: krishna → krsna, bhyaam → bhyam
+  const alt = x => nz(x).replace(/sh/g, 's').replace(/ri/g, 'r').replace(/aa/g, 'a').replace(/ii/g, 'i').replace(/uu/g, 'u').replace(/w/g, 'v');
+  const plain = html => { const d = document.createElement('div'); d.innerHTML = html; return (d.textContent || '').replace(/\s+/g, ' ').trim(); };
+  // porta il modulo sulla scheda voluta: teoria (tabelle, regole) o esercizi
+  function showMod(mod, ex) {
+    S.screen = mod; S.verse = null; S.sheet = null; S.hl = null;
+    if (mod === 'alfabeto') S.atab = ex ? 'esercizi' : 'tabelle';
+    else if (mod === 'sillabe' || mod === 'sandhi') S.stab = ex ? 'esercizi' : 'regole';
+    else if (mod === 'chanda') S.tab = ex ? 'esercizi' : 'metri';
+    else S.mtab = ex ? 'esercizi' : 'teoria';
+  }
+  // etichetta di una forma: dove sta nella tabella (caso o persona, e numero)
+  function cellsLabel(P, cells) {
+    const rowName = P.mod === 'verbi' ? perN : (c => t('csa.' + c));
+    return [0, 1, 2].map(n => ({ n, rows: cells.filter(x => x.n === n).map(x => rowName(x.c)) })).filter(g => g.rows.length)
+      .map(g => g.rows.join(', ') + ' · ' + numN(g.n)).join(' / ');
+  }
   function searchIndex() {
     if (SIDX) return SIDX;
     const ix = [];
-    const add = (k, id, title, sub, hay) => ix.push({ k, id, title, sub, hay: nz(hay) });
+    const add = (k, id, title, sub, hay, x) => ix.push({ k, id, title, sub, hay: nz(hay), x: x || '' });
+    // moduli ed esercizi
+    MODULES.filter(m => m.active).forEach(m => add('modulo', m.id, t('mod.' + m.id), nz(m.src) === nz(t('mod.' + m.id)) ? '' : m.src, t('mod.' + m.id) + ' ' + m.src + ' ' + m.id));
+    const KINDS = { alfabeto: ALPHA_KINDS, sillabe: SYL_KINDS, sandhi: SANDHI_KINDS, chanda: CH_KINDS };
+    NMODS.forEach(m => { KINDS[m] = NEWMOD[m]; });
+    Object.keys(KINDS).forEach(m => KINDS[m].forEach(k => {
+      const nm = kindName(k); if (nm === 'kind.' + k) return;
+      const d = t('ex.' + k + 'D'), dd = d === 'ex.' + k + 'D' ? '' : d;
+      add('esercizio', k, nm, t('mod.' + m) + (dd ? ' · ' + dd : ''), nm + ' ' + t('mod.' + m) + ' ' + dd, m);
+    }));
+    // argomenti: le sezioni di teoria che l'app mostra già (titoli e testo sotto ogni titolo)
+    [['alfabeto', viewAlfaTabelle, 1], ['sillabe', viewSillabeRegole, 1], ['nomi', viewTeoriaNomi, 0], ['pronomi', viewTeoriaPronomi, 0], ['verbi', viewTeoriaVerbi, 0], ['vocab', viewTeoriaVocab, 0]].forEach(([m, fn, full]) => {
+      let html = '';
+      try { html = fn(); } catch (e) { return; }
+      html.split(/<p class="lab(?: first)?">/).slice(1).forEach(part => {
+        const i = part.indexOf('</p>'); if (i < 0) return;
+        const title = plain(part.slice(0, i));
+        const rest = full ? part.slice(i + 4) : part.slice(i + 4).split(/<div class="at-w">|<table|<ul class="np-list"/)[0];
+        if (title) add('sezione', m + '|' + nz(title), title, t('mod.' + m), title + ' ' + plain(rest), m + '|' + nz(title));
+      });
+    });
+    try {
+      const sh = viewSandhiRegole(), re = /<header class="sa-sh"><span class="sa-shn"><b>(.*?)<\/b><span>(.*?)<\/span><\/span><i>(.*?)<\/i><\/header>/g;
+      let mm;
+      while ((mm = re.exec(sh))) { const title = plain(mm[1]); add('sezione', 'sandhi|' + nz(title), title, t('mod.sandhi') + ' · ' + plain(mm[3]), title + ' ' + plain(mm[2]), 'sandhi|' + nz(title)); }
+    } catch (e) { /* senza sezioni di sandhi */ }
     SANDHI.ST.forEach(st => {
       const info = SUT_INFO[st.n] || ['', ''];
       const forms = SANDHI.CLS.filter(c => c.s === st.n).map(c => c.A.join(' ') + ' ' + c.B.join(' ') + ' ' + c.r).concat(SUT_FORM[st.n] || []).join(' ');
@@ -4555,28 +4602,64 @@ const MODULES = [
     E.METRES.forEach(m => add('metre', m.id, m.name + ' · ' + m.dev, t('met.sylls', { n: m.n }) + ' · ' + schemaOf(m), m.name + ' ' + m.dev + ' ' + m.lak.join(' ')));
     VERSES.forEach(v => add('verse', v.id, v.ref, v.lines[0], v.ref + ' ' + v.lines.join(' ') + ' ' + v.lines.map(l => E.toDevanagari(l)).join(' ')));
     VOCAB.forEach(w => add('vocab', w.i, w.i + ' · ' + w.d, w.m, w.i + ' ' + w.d + ' ' + w.m));
-    NOUNS.forEach(n => {
-      const forms = [].concat(...n.t.map(r => r.filter(c => c[2] !== 'x').map(c => c[0] + ' ' + c[1])));
-      add('nomi', n.id, n.name + ' · ' + n.dev, n.cls || '', n.name + ' ' + n.dev + ' ' + n.cls + ' ' + forms.join(' '));
+    // paradigmi (solo nome e classe) e, a parte, ogni forma delle tabelle con le sue caselle. Le forme segnate come punto aperto del Notion non entrano.
+    NOUNS.forEach(n => add('nomi', n.id, n.name + ' · ' + n.dev, n.cls || '', n.name + ' ' + n.dev + ' ' + n.cls + ' ' + n.id));
+    PRONS.forEach(p => add('pronomi', p.id, p.name + ' · ' + p.dev, '', p.name + ' ' + p.dev + ' ' + p.id));
+    VERBS.forEach(v => add('verbi', v.id, v.name + ' · ' + v.dev, v.mean, v.name + ' ' + v.dev + ' ' + v.mean + ' ' + v.id));
+    Object.keys(PAR).forEach(id => {
+      const P = PAR[id], seen = {};
+      for (let c = 0; c < P.nc; c++) for (let n = 0; n < 3; n++) {
+        if (P.mod === 'nomi' && P.raw.t[c][n][2] === 'x') continue;
+        const dv = P.dv(c, n);
+        P.txt(c, n).split(/\s*\/\s*/).forEach(f => {
+          if (!f) return;
+          const key = nz(f);
+          (seen[key] = seen[key] || { f, dv, cells: [] }).cells.push({ c, n });
+        });
+      }
+      Object.keys(seen).forEach(key => {
+        const o = seen[key];
+        ix.push({ k: 'forma', id, title: o.f + (o.dv ? ' · ' + o.dv : ''), sub: P.name + ' — ' + cellsLabel(P, o.cells), hay: nz(o.f + ' ' + o.dv), pn: nz(P.name + ' ' + id), x: o.cells.map(x => x.c + '.' + x.n).join(';') });
+      });
     });
-    PRONS.forEach(p => add('pronomi', p.id, p.name + ' · ' + p.dev, '', p.name + ' ' + p.dev + ' ' + [].concat(...p.t).join(' ')));
-    VERBS.forEach(v => add('verbi', v.id, v.name + ' · ' + v.dev, v.mean, v.name + ' ' + v.dev + ' ' + v.mean + ' ' + [].concat(...v.f).join(' ') + ' ' + [].concat(...v.d).join(' ')));
     SIDX = ix;
     return ix;
+  }
+  function searchHits(ix, raw, nq, digits, lenient) {
+    if (digits) return ix.filter(e => e.k === 'sutra' && String(e.id).startsWith(raw));
+    const toks = raw.split(/\s+/).filter(Boolean), fx = lenient ? alt : nz;
+    // un paradigma che si chiama proprio come la ricerca non elenca tutte le sue forme
+    const named = {};
+    Object.keys(PAR).forEach(id => { if (nq === nz(PAR[id].name) || nq === nz(id)) named[id] = true; });
+    let out = ix.filter(e => e.hay.includes(nq) && !(e.k === 'forma' && named[e.id]));
+    // due parole: nome del paradigma + forma o desinenza (krishna bhyam, vand te)
+    if (toks.length >= 2) {
+      const a = fx(toks[0]), b = fx(toks.slice(1).join(''));
+      const pair = ix.filter(e => e.k === 'forma' && e.pn.includes(a) && e.hay.includes(b));
+      out = pair.concat(out.filter(e => pair.indexOf(e) < 0));
+    }
+    return out;
   }
   function searchResults(q) {
     const raw = String(q || '').trim(), n = nz(raw);
     if (!n || (n.length < 2 && !/[^\u0000-ɏ]/.test(n))) return `<p class="note c">${t('q.hint')}</p>`;
-    const digits = /^\d+$/.test(raw);
-    const hit = searchIndex().filter(e => (digits ? e.k === 'sutra' && String(e.id).startsWith(raw) : e.hay.includes(n)));
+    const digits = /^\d+$/.test(raw), ix = searchIndex();
+    let nq = n, hit = searchHits(ix, raw, nq, digits, false), said = '';
+    if (!hit.length && !digits) {
+      const a = alt(raw);
+      if (a !== n && a.length >= 2) { nq = a; hit = searchHits(ix, raw, nq, false, true); said = a; }
+    }
     if (!hit.length) return `<p class="note c">${t('q.none')}</p>`;
-    const groups = [['sutra', t('q.g.sutra')], ['metre', t('q.g.metre')], ['verse', t('q.g.verse')], ['vocab', t('mod.vocab')], ['nomi', t('mod.nomi')], ['pronomi', t('mod.pronomi')], ['verbi', t('mod.verbi')]];
-    return groups.map(([k, label]) => {
-      const rs = hit.filter(e => e.k === k);
-      if (!rs.length) return '';
-      const rows = rs.slice(0, 6).map(e => `<button class="vrow" data-act="searchgo" data-k="${e.k}" data-id="${esc(String(e.id))}"><span class="vt"><span class="ex-t">${esc(e.title)}</span>${e.sub ? `<span class="vd q-sub">${esc(e.sub)}</span>` : ''}</span>${CHEV}</button>`).join('');
-      return `<h2 class="h2">${label}</h2><div class="list">${rows}</div>${rs.length > 6 ? `<p class="note">${t('q.more', { n: rs.length - 6 })}</p>` : ''}`;
-    }).join('');
+    const rank = e => (e.hay === nq ? 0 : e.hay.startsWith(nq) ? 1 : nz(e.title).includes(nq) ? 2 : 3);
+    const groups = [['modulo', t('q.g.mod')], ['esercizio', t('q.g.ex')], ['sezione', t('q.g.sec')], ['sutra', t('q.g.sutra')], ['metre', t('q.g.metre')], ['verse', t('q.g.verse')], ['vocab', t('mod.vocab')], ['forma', t('q.g.form')], ['nomi', t('mod.nomi')], ['pronomi', t('mod.pronomi')], ['verbi', t('mod.verbi')]];
+    const blocks = groups.map(([k, label], gi) => {
+      const rs = hit.filter(e => e.k === k).sort((x, y) => rank(x) - rank(y));
+      if (!rs.length) return null;
+      const cap = k === 'forma' ? 8 : 6;
+      const rows = rs.slice(0, cap).map(e => `<button class="vrow" data-act="searchgo" data-k="${e.k}" data-id="${esc(String(e.id))}" data-x="${esc(e.x || '')}"><span class="vt"><span class="ex-t">${esc(e.title)}</span>${e.sub ? `<span class="vd q-sub">${esc(e.sub)}</span>` : ''}</span>${CHEV}</button>`).join('');
+      return { r: rank(rs[0]), gi, html: `<h2 class="h2">${label}</h2><div class="list">${rows}</div>${rs.length > cap ? `<p class="note">${t('q.more', { n: rs.length - cap })}</p>` : ''}` };
+    }).filter(Boolean).sort((x, y) => x.r - y.r || x.gi - y.gi);
+    return (said ? `<p class="note c">${t('q.lenient', { q: esc(said) })}</p>` : '') + blocks.map(b => b.html).join('');
   }
   function viewCerca() {
     return `<header class="bar top"><h1 class="t">${t('q.title')}</h1><p class="sub">${t('q.sub')}</p></header>
@@ -4641,7 +4724,7 @@ const MODULES = [
   }
 
   // ---------- azioni ----------
-  const goTo = (to, dir) => { S.screen = to; S.verse = null; S.sheet = null; S.dir = dir || 0; draw(true); };
+  const goTo = (to, dir) => { S.screen = to; S.verse = null; S.sheet = null; S.hl = null; S.dir = dir || 0; draw(true); };
   const ACT = {
     go(d) {
       const a = GORDER.indexOf(curTab()), b = GORDER.indexOf(d.to);
@@ -4652,6 +4735,25 @@ const MODULES = [
     progress() { goTo('progress', 1); },
     searchgo(d) {
       const k = d.k, id = d.id;
+      S.hl = null;
+      if (k === 'modulo') { ACT.module({ id }); return; }
+      if (k === 'esercizio') { showMod(d.x, true); S.dir = 1; draw(true); return; }
+      if (k === 'sezione') {
+        const at = d.x.indexOf('|'), m = d.x.slice(0, at), h = d.x.slice(at + 1);
+        showMod(m, false); S.dir = 1; draw(true);
+        const el = [...app.querySelectorAll('.lab, .sa-shn b')].find(e => nz(e.textContent) === h);
+        if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start' });
+        return;
+      }
+      if (k === 'forma') {
+        const P = PAR[id];
+        showMod(P.mod, false); S.nsel[P.mod] = id;
+        S.hl = { id, cells: d.x.split(';').map(z => z.split('.').map(Number)) };
+        S.dir = 1; draw(true);
+        const el = app.querySelector('.tp td.hl');
+        if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center' });
+        return;
+      }
       if (k === 'sutra') { S.screen = 'sandhi'; S.stab = 'regole'; S.sx[id] = true; }
       else if (k === 'metre') { S.screen = 'chanda'; S.tab = 'metri'; S.verse = null; S.openMetre = id; }
       else if (k === 'verse') { S.screen = 'chanda'; S.tab = 'versi'; S.verse = id; S.vm = verseById(id).metre; S.scan = false; }
@@ -4665,6 +4767,7 @@ const MODULES = [
     settings() { goTo('settings', 1); },
     info() { goTo('info', 1); },
     module(d) {
+      S.hl = null;
       const m = MODULES.find(x => x.id === d.id);
       if (m.active) {
         if (m.id === 'alfabeto') { S.screen = 'alfabeto'; S.atab = 'tabelle'; }
@@ -4722,7 +4825,7 @@ const MODULES = [
       langPref = d.v === 'auto' || I18N[d.v] ? d.v : 'auto';
       try { localStorage.setItem(LKEY, langPref); } catch (e) { /* ok */ }
       LANG = langPref === 'auto' ? detectLang() : langPref;
-      setLangAttr(); draw(false);
+      SIDX = null; setLangAttr(); draw(false);
     },
     tab(d) {
       const a = CORDER.indexOf(S.tab), b = CORDER.indexOf(d.t);
@@ -4905,7 +5008,7 @@ const MODULES = [
       S.dir = b > a ? 1 : b < a ? -1 : 0;
       S.mtab = d.t; draw(true);
     },
-    nsel(d) { if (PAR[d.id] && PAR[d.id].mod === d.mod) S.nsel[d.mod] = d.id; draw(false); },
+    nsel(d) { S.hl = null; if (PAR[d.id] && PAR[d.id].mod === d.mod) S.nsel[d.mod] = d.id; draw(false); },
     tcell(d) {
       const q = S.ex.q; if (q.checked) return;
       const i = +d.i; delete q.placed[i]; q.sel = i; draw(false);
