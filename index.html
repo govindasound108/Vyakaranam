@@ -1,12 +1,13 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=31;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=32;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
 <!-- v1.2.0: Alfabeto, scheda Tabelle: tabelle al posto delle celle singole -->
 <!-- v1.1.2: nomi hari delle colonne più evidenti (teoria, test, feedback del varga); Sandhi con devanāgarī; Analisi sillabica; moduli Nomi, Pronomi, Verbi e Vocabolario -->
 <!-- v1.1.4: scelta del tema Auto / Giorno / Notte nelle Impostazioni -->
+<!-- v1.3.2: funziona anche offline (service worker, manifest, icone) come Kārtika -->
 <!-- v1.3.1: Cerca per affinità (testo parziale o con errori) e «sutra 44»; barre più trasparenti (liquid glass) -->
 <!-- v1.3.0: Cerca anche moduli, esercizi e sezioni di teoria; forme di nomi, pronomi e verbi con caso e numero (o persona e numero) e casella evidenziata in tabella; due parole (nome + desinenza); grafia all’inglese come ripiego -->
 <!-- v1.2.9: barra in basso alla giusta altezza nel browser (margine reale del telefono; dentro la cornice di Claude resta il minimo di 34px), scomparsa delle barre con attesa di 0,9 s e transizione più lenta -->
@@ -17,6 +18,11 @@
 <!-- v1.1.6: esercizi dentro i moduli senza icone. v1.1.5: dai commenti: via il titolo v.2, Test del giorno da 15 domande, Ripasso errori, Progressi con media, colori e moduli, Moduli senza icone, Impostazioni nella barra -->
 
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#FDFAF3">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vyākaraṇam">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Devanagari:wght@400;600&display=swap">
 <style>
 /* Layout: colonna da telefono nello stile di Kārtika, aggiornata alle linee guida Liquid Glass di iOS 27.
@@ -5252,6 +5258,21 @@ const MODULES = [
     // nel visualizzatore dell'artefatto l'indirizzo della pagina contiene il numero della versione (…/_f/<versione>/):
     // rileggerlo darebbe sempre la stessa versione, quindi lì il controllo non può funzionare
     const FRAMED = /\.frame\.claudeusercontent\.com$/i.test(location.hostname);
+    // con il service worker (modalità offline) la pagina normale arriva dalla copia salvata: il controllo usa un indirizzo con ?u=,
+    // che il service worker lascia passare sempre alla rete
+    const fresh = () => { const u = new URL(PAGE); u.searchParams.set('u', Date.now()); return u.href; };
+    // dopo il download la nuova pagina sostituisce quella salvata, così «Aggiorna» ricarica davvero la versione nuova
+    async function keep(html) {
+      try {
+        if (!window.caches || html.indexOf('</html>') < 0) return;
+        const urls = [new URL('./', PAGE).href, new URL('index.html', PAGE).href];
+        for (const k of await caches.keys()) {
+          if (k.indexOf('vyakaranam-') !== 0) continue;
+          const c = await caches.open(k);
+          for (const u of urls) await c.put(u, new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } }));
+        }
+      } catch (e) {}
+    }
     const BUILD = Number(window.VR_N) || 0;
     const RE = /VR_N\s*=\s*(\d+)/;
     const P = d => '<svg class="pi" viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg>';
@@ -5290,7 +5311,7 @@ const MODULES = [
 
     // legge solo l'inizio della pagina finché compare l'ID versione
     async function peekBuild(signal) {
-      const res = await fetch(PAGE, { cache: 'no-store', signal });
+      const res = await fetch(fresh(), { cache: 'no-store', signal });
       if (!res.ok) throw new Error('http ' + res.status);
       let txt = '';
       if (res.body && res.body.getReader) {
@@ -5312,10 +5333,12 @@ const MODULES = [
     }
     // scarica la pagina intera aggiornando la cache del browser, così la prossima apertura è già pronta
     async function download(signal) {
-      const res = await fetch(PAGE, { cache: 'reload', signal });
+      const res = await fetch(fresh(), { cache: 'reload', signal });
       if (!res.ok) throw new Error('http ' + res.status);
-      const m = RE.exec(await res.text());
+      const txt = await res.text();
+      const m = RE.exec(txt);
       if (!m) throw new Error('no build');
+      await keep(txt);
       return Number(m[1]);
     }
 
@@ -5417,5 +5440,21 @@ const MODULES = [
   cloudInit();
 })();
 
+</script>
+<script>
+/* Modalità offline: il service worker salva l'app sul dispositivo. Solo su GitHub Pages (non nella cornice di Claude);
+   non ricarica mai da solo la pagina, per non interrompere un esercizio. */
+(function () {
+  try {
+    if (!('serviceWorker' in navigator) || location.protocol.indexOf('http') !== 0) return;
+    if (window.top !== window.self || /\.frame\.claudeusercontent\.com$/i.test(location.hostname)) return;
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').then(function (reg) {
+        reg.update().catch(function () {});
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) reg.update().catch(function () {}); });
+      }).catch(function () {});
+    });
+  } catch (e) {}
+})();
 </script>
 </body></html>
