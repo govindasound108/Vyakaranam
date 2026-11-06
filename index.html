@@ -1,12 +1,13 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=30;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=31;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
 <!-- v1.2.0: Alfabeto, scheda Tabelle: tabelle al posto delle celle singole -->
 <!-- v1.1.2: nomi hari delle colonne più evidenti (teoria, test, feedback del varga); Sandhi con devanāgarī; Analisi sillabica; moduli Nomi, Pronomi, Verbi e Vocabolario -->
 <!-- v1.1.4: scelta del tema Auto / Giorno / Notte nelle Impostazioni -->
+<!-- v1.3.1: Cerca per affinità (testo parziale o con errori) e «sutra 44»; barre più trasparenti (liquid glass) -->
 <!-- v1.3.0: Cerca anche moduli, esercizi e sezioni di teoria; forme di nomi, pronomi e verbi con caso e numero (o persona e numero) e casella evidenziata in tabella; due parole (nome + desinenza); grafia all’inglese come ripiego -->
 <!-- v1.2.9: barra in basso alla giusta altezza nel browser (margine reale del telefono; dentro la cornice di Claude resta il minimo di 34px), scomparsa delle barre con attesa di 0,9 s e transizione più lenta -->
 <!-- v1.1.9: Sandhi, scheda Regole: niente blocchi nidificati, testo a tutta larghezza (numero sopra il sūtra, spiegazione senza rientro) -->
@@ -35,6 +36,7 @@
   --lq-sel-a: rgba(255, 255, 255, 1); --lq-sel-b: rgba(255, 255, 255, .62); --lq-in: rgba(255, 255, 255, .95);
   --gl-edge: inset 0 1.5px 0 rgba(255, 255, 255, 1), inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 -10px 16px -12px rgba(255, 255, 255, .7);
   --gl-ring: 0 0 0 1px rgba(31, 42, 92, .09);
+  --bar-edge: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 0 0 1px rgba(255, 255, 255, .42), inset 0 -9px 14px -12px rgba(255, 255, 255, .38);
   --gl-sh: 0 10px 28px -14px rgba(60, 45, 20, .24);
   --good: #2A7448; --good-soft: rgba(48, 150, 92, .16); --bad: #A83A26; --bad-soft: rgba(200, 70, 45, .14);
   --t-r: #B9412C; --t-o: #D2802A; --t-y: #CFA21A;
@@ -54,6 +56,7 @@
     --lq-sel-a: rgba(255, 255, 255, .46); --lq-sel-b: rgba(255, 255, 255, .16); --lq-in: rgba(255, 255, 255, .4);
     --gl-edge: inset 0 1px 0 rgba(255, 255, 255, .34), inset 0 0 0 1px rgba(255, 255, 255, .1), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
     --gl-ring: 0 0 0 1px rgba(0, 0, 0, .35);
+    --bar-edge: inset 0 1px 0 rgba(255, 255, 255, .38), inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
     --gl-sh: 0 12px 32px -12px rgba(0, 0, 0, .6);
     --good: #72D194; --good-soft: rgba(114, 209, 148, .17); --bad: #F59580; --bad-soft: rgba(245, 149, 128, .17);
     --t-r: #F08A74; --t-o: #EDA24F; --t-y: #EBCB57;
@@ -71,6 +74,7 @@
   --lq-sel-a: rgba(255, 255, 255, .46); --lq-sel-b: rgba(255, 255, 255, .16); --lq-in: rgba(255, 255, 255, .4);
   --gl-edge: inset 0 1px 0 rgba(255, 255, 255, .34), inset 0 0 0 1px rgba(255, 255, 255, .1), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
   --gl-ring: 0 0 0 1px rgba(0, 0, 0, .35);
+  --bar-edge: inset 0 1px 0 rgba(255, 255, 255, .38), inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -8px 14px -10px rgba(255, 255, 255, .1);
   --gl-sh: 0 12px 32px -12px rgba(0, 0, 0, .6);
   --good: #72D194; --good-soft: rgba(114, 209, 148, .17); --bad: #F59580; --bad-soft: rgba(245, 149, 128, .17);
   --t-r: #F08A74; --t-o: #EDA24F; --t-y: #EBCB57;
@@ -186,9 +190,10 @@ html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { tr
   /* capsula compatta solo con icone (come la barra di Instagram): ogni voce è larga 64px */
   width: min(calc(var(--n, 3) * 64px + 8px + (var(--n, 3) - 1) * 2px), calc(100vw - 24px));
   display: flex; gap: 2px; padding: 4px; border-radius: 999px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--lq-a) 46%, transparent), color-mix(in srgb, var(--lq-b) 55%, transparent) 58%, color-mix(in srgb, var(--lq-c) 52%, transparent));
-  box-shadow: var(--gl-edge), var(--gl-ring), 0 14px 34px -14px rgba(40, 30, 10, .38);
-  -webkit-backdrop-filter: blur(22px) saturate(2.3) brightness(1.05); backdrop-filter: blur(22px) saturate(2.3) brightness(1.05);
+  /* liquid glass: poco colore, molto sfocato, bordo luminoso sottile */
+  background: linear-gradient(135deg, color-mix(in srgb, var(--lq-a) 18%, transparent), color-mix(in srgb, var(--lq-b) 26%, transparent) 58%, color-mix(in srgb, var(--lq-c) 22%, transparent));
+  box-shadow: var(--bar-edge), var(--gl-ring), 0 14px 34px -14px rgba(40, 30, 10, .3);
+  -webkit-backdrop-filter: blur(26px) saturate(2.5) brightness(1.08); backdrop-filter: blur(26px) saturate(2.5) brightness(1.08);
   transition: transform .34s cubic-bezier(.3,.9,.3,1), opacity .24s ease;
 }
 @media (prefers-reduced-transparency: reduce) { .tabs { background: var(--ground); -webkit-backdrop-filter: none; backdrop-filter: none; } }
@@ -463,17 +468,17 @@ tr:last-child td { border-bottom: 0; }
 /* barra delle schede del modulo: in alto, accanto al tasto indietro (resta fissa mentre scorri), a capsula di vetro */
 .nav .modbar { flex: 1; min-width: 0; margin: 0 0 0 10px; pointer-events: auto; }
 .modseg { --pad: 4px; padding: 4px; border-radius: 999px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--lq-a) 46%, transparent), color-mix(in srgb, var(--lq-b) 55%, transparent) 58%, color-mix(in srgb, var(--lq-c) 52%, transparent));
-  box-shadow: var(--gl-edge), var(--gl-ring), 0 10px 26px -16px rgba(40, 30, 10, .34);
-  -webkit-backdrop-filter: blur(28px) saturate(2); backdrop-filter: blur(28px) saturate(2); }
+  background: linear-gradient(135deg, color-mix(in srgb, var(--lq-a) 32%, transparent), color-mix(in srgb, var(--lq-b) 40%, transparent) 58%, color-mix(in srgb, var(--lq-c) 36%, transparent));
+  box-shadow: var(--bar-edge), var(--gl-ring), 0 10px 26px -16px rgba(40, 30, 10, .3);
+  -webkit-backdrop-filter: blur(28px) saturate(2.3); backdrop-filter: blur(28px) saturate(2.3); }
 .modseg .segb { min-height: 34px; font-size: 14px; }
 
 /* barra dei moduli: un'unica capsula di vetro (indietro + schede), voce attiva più leggibile */
 .nav.seg-nav { padding-top: 8px; align-items: flex-start; transition: transform .34s cubic-bezier(.3,.9,.3,1), opacity .24s ease; }
 .nav.seg-nav::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 8px; height: 48px; border-radius: 999px; pointer-events: none;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--lq-a) 46%, transparent), color-mix(in srgb, var(--lq-b) 55%, transparent) 58%, color-mix(in srgb, var(--lq-c) 52%, transparent));
-  box-shadow: var(--gl-edge), var(--gl-ring), 0 10px 26px -16px rgba(40, 30, 10, .34);
-  -webkit-backdrop-filter: blur(22px) saturate(2.3) brightness(1.05); backdrop-filter: blur(22px) saturate(2.3) brightness(1.05); }
+  background: linear-gradient(135deg, color-mix(in srgb, var(--lq-a) 32%, transparent), color-mix(in srgb, var(--lq-b) 40%, transparent) 58%, color-mix(in srgb, var(--lq-c) 36%, transparent));
+  box-shadow: var(--bar-edge), var(--gl-ring), 0 10px 26px -16px rgba(40, 30, 10, .3);
+  -webkit-backdrop-filter: blur(24px) saturate(2.4) brightness(1.06); backdrop-filter: blur(24px) saturate(2.4) brightness(1.06); }
 .nav.seg-nav .back { position: relative; z-index: 1; width: 44px; height: 48px; margin-left: 2px; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
 .nav.seg-nav .back::after { content: ""; position: absolute; right: 0; top: 14px; bottom: 14px; width: 1px; background: var(--hair); }
 .nav.seg-nav .modbar { margin: 0; height: 48px; display: flex; align-items: center; transition: none; }
@@ -1420,7 +1425,7 @@ Object.assign(I18N.en, {
   'sa.title': 'Sandhi', 'sa.sub': 'From the Notion page “Sandhi” and the book',
   'tab.rules': 'Rules',
   'sa.intro': 'Sūtras 42–83. Tap a sūtra to open its explanation and examples. The formulas come from the Notion page; the text of the sūtras, the explanations (English sentence of the book, with an Italian translation) and the examples come from the book Hari-nāmāmṛta-vyākaraṇam and from the Notion page. The Devanāgarī is computed from the IAST. To practise, go to the Exercises tab.',
-  'q.title': 'Search', 'q.sub': 'Everything you have studied', 'q.ph': 'Module, sūtra, verse, metre, word, form…', 'q.hint': 'Type at least two letters. Accents are optional: krsna finds kṛṣṇa. A number finds the sūtra.', 'q.none': 'No results', 'q.more': '{n} more, refine the search', 'q.g.sutra': 'Sandhi sūtras', 'q.g.metre': 'Metres', 'q.g.verse': 'Verses', 'q.g.mod': 'Modules', 'q.g.ex': 'Exercises', 'q.g.sec': 'Topics', 'q.g.form': 'Forms in the tables', 'q.lenient': 'Searched for “{q}”', 'q.aria': 'Search field', 'sa.noexp': 'No explanation for this sūtra in the book.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combination of vowels', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combination of consonants', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combination with the visarga', 'sa.formulas': 'Formulas', 'sa.sarv': 'sarveśvara (vowel)',
+  'q.title': 'Search', 'q.sub': 'Everything you have studied', 'q.ph': 'Module, sūtra, verse, metre, word, form…', 'q.hint': 'Type at least two letters. Accents are optional: krsna finds kṛṣṇa. A number finds the sūtra.', 'q.none': 'No results', 'q.more': '{n} more, refine the search', 'q.g.sutra': 'Sandhi sūtras', 'q.g.metre': 'Metres', 'q.g.verse': 'Verses', 'q.g.mod': 'Modules', 'q.g.ex': 'Exercises', 'q.g.sec': 'Topics', 'q.g.form': 'Forms in the tables', 'q.lenient': 'Searched for “{q}”', 'q.fuzzy': 'No exact match for “{q}”: here are the closest ones.', 'q.aria': 'Search field', 'sa.noexp': 'No explanation for this sūtra in the book.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combination of vowels', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combination of consonants', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combination with the visarga', 'sa.formulas': 'Formulas', 'sa.sarv': 'sarveśvara (vowel)',
   'sa.fnote': 'The number is the sūtra. “=” means the two vowels join; “→” means the first vowel changes before the second.',
   'sa.sutras': 'Sūtras', 'sa.snote': 'Text of the sūtras from the book. No exercises yet for sūtras: {l}.',
   'sa.sutra': 'Sūtra {n}',
@@ -1446,7 +1451,7 @@ Object.assign(I18N.it, {
   'sa.title': 'Sandhi', 'sa.sub': 'Dalla pagina Notion “Sandhi” e dal libro',
   'tab.rules': 'Regole',
   'sa.intro': 'Sūtra 42–83. Tocca un sūtra per aprire spiegazione ed esempi. Le formule vengono dalla pagina Notion; il testo dei sūtra, le spiegazioni (frase inglese del libro, con traduzione italiana) e gli esempi vengono dal libro Hari-nāmāmṛta-vyākaraṇam e dalla pagina Notion. Il devanāgarī è calcolato dall’IAST. Per esercitarti passa alla scheda Esercizi.',
-  'q.title': 'Cerca', 'q.sub': 'Tutto ciò che hai studiato', 'q.ph': 'Modulo, sūtra, verso, metro, parola, forma…', 'q.hint': 'Scrivi almeno due lettere. Gli accenti sono facoltativi: krsna trova kṛṣṇa. Un numero trova il sūtra.', 'q.none': 'Nessun risultato', 'q.more': 'altri {n}, restringi la ricerca', 'q.g.sutra': 'Sūtra di Sandhi', 'q.g.metre': 'Metri', 'q.g.verse': 'Versi', 'q.g.mod': 'Moduli', 'q.g.ex': 'Esercizi', 'q.g.sec': 'Argomenti', 'q.g.form': 'Forme nelle tabelle', 'q.lenient': 'Ho cercato «{q}»', 'q.aria': 'Campo di ricerca', 'sa.noexp': 'Nel libro non c’è una spiegazione per questo sūtra.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combinazione di vocali', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combinazione di consonanti', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combinazione con il visarga', 'sa.formulas': 'Formule', 'sa.sarv': 'sarveśvara (vocale)',
+  'q.title': 'Cerca', 'q.sub': 'Tutto ciò che hai studiato', 'q.ph': 'Modulo, sūtra, verso, metro, parola, forma…', 'q.hint': 'Scrivi almeno due lettere. Gli accenti sono facoltativi: krsna trova kṛṣṇa. Un numero trova il sūtra.', 'q.none': 'Nessun risultato', 'q.more': 'altri {n}, restringi la ricerca', 'q.g.sutra': 'Sūtra di Sandhi', 'q.g.metre': 'Metri', 'q.g.verse': 'Versi', 'q.g.mod': 'Moduli', 'q.g.ex': 'Esercizi', 'q.g.sec': 'Argomenti', 'q.g.form': 'Forme nelle tabelle', 'q.lenient': 'Ho cercato «{q}»', 'q.fuzzy': 'Nessun risultato esatto per «{q}»: ecco i più affini.', 'q.aria': 'Campo di ricerca', 'sa.noexp': 'Nel libro non c’è una spiegazione per questo sūtra.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combinazione di vocali', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combinazione di consonanti', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combinazione con il visarga', 'sa.formulas': 'Formule', 'sa.sarv': 'sarveśvara (vocale)',
   'sa.fnote': 'Il numero è il sūtra. “=” vuol dire che le due vocali si fondono; “→” che la prima vocale cambia davanti alla seconda.',
   'sa.sutras': 'Sūtra', 'sa.snote': 'Testo dei sūtra dal libro. Non ci sono ancora esercizi per i sūtra: {l}.',
   'sa.sutra': 'Sūtra {n}',
@@ -4625,8 +4630,39 @@ const MODULES = [
     SIDX = ix;
     return ix;
   }
+  // distanza di modifica minima tra la ricerca q e una qualunque parte della parola w (anche un pezzo solo)
+  function editSub(q, w) {
+    const m = q.length, n = w.length;
+    let prev = new Array(n + 1).fill(0), cur = new Array(n + 1);
+    for (let i = 1; i <= m; i++) {
+      cur[0] = i;
+      for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j - 1] + (q[i - 1] === w[j - 1] ? 0 : 1), prev[j] + 1, cur[j - 1] + 1);
+      const tmp = prev; prev = cur; cur = tmp;
+    }
+    return Math.min.apply(null, prev);
+  }
+  const fuzzyMax = q => Math.min(3, Math.floor(q.length / 4));   // errori ammessi: 4–7 lettere 1, 8–11 lettere 2, 12 o più 3
+  const wordsOf = e => e.w || (e.w = (e.title + ' ' + (e.k === 'forma' ? '' : e.sub || '')).split(/[\s·\/()\-–—,.;:’'ʼ]+/).map(nz).filter(x => x.length >= 2));
+  // risultati più affini: ogni parola scritta deve somigliare a una parola della voce (errori e pezzi di parola compresi)
+  function fuzzyHits(ix, raw) {
+    const toks = raw.split(/\s+/).map(nz).filter(x => x.length >= 2);
+    if (!toks.length || toks.some(x => fuzzyMax(x) < 1)) return [];
+    const out = [];
+    ix.forEach(e => {
+      const ws = wordsOf(e); let tot = 0;
+      for (const q of toks) {
+        const k = fuzzyMax(q); let best = 99;
+        for (const w of ws) { const d = editSub(q, w); if (d < best) best = d; if (best === 0) break; }
+        if (best > k) return;
+        tot += best;
+      }
+      out.push(Object.assign({}, e, { score: tot }));
+    });
+    return out.sort((x, y) => x.score - y.score).slice(0, 10);
+  }
   function searchHits(ix, raw, nq, digits, lenient) {
     if (digits) return ix.filter(e => e.k === 'sutra' && String(e.id).startsWith(raw));
+    if (/^sutras?$/.test(nq)) return ix.filter(e => e.k === 'sutra');
     const toks = raw.split(/\s+/).filter(Boolean), fx = lenient ? alt : nz;
     // un paradigma che si chiama proprio come la ricerca non elenca tutte le sue forme
     const named = {};
@@ -4641,25 +4677,30 @@ const MODULES = [
     return out;
   }
   function searchResults(q) {
-    const raw = String(q || '').trim(), n = nz(raw);
-    if (!n || (n.length < 2 && !/[^\u0000-ɏ]/.test(n))) return `<p class="note c">${t('q.hint')}</p>`;
+    const raw0 = String(q || '').trim(), n = nz(raw0);
+    // «sutra 44», «sūtra n. 44», «sutra44» o solo «44»: il sūtra con quel numero
+    const sm = /^(?:sutras?|sut)[n.:#]*(\d+)$/.exec(n);
+    const raw = sm ? sm[1] : raw0;
+    if (!n || (n.length < 2 && !/[^\u0000-ɏ]/.test(n) && !sm)) return `<p class="note c">${t('q.hint')}</p>`;
     const digits = /^\d+$/.test(raw), ix = searchIndex();
-    let nq = n, hit = searchHits(ix, raw, nq, digits, false), said = '';
+    let nq = sm ? raw : n, hit = searchHits(ix, raw, nq, digits, false), said = '', fuzzy = false;
     if (!hit.length && !digits) {
       const a = alt(raw);
       if (a !== n && a.length >= 2) { nq = a; hit = searchHits(ix, raw, nq, false, true); said = a; }
     }
+    if (!hit.length && !digits) { hit = fuzzyHits(ix, raw); fuzzy = hit.length > 0; said = ''; nq = n; }
     if (!hit.length) return `<p class="note c">${t('q.none')}</p>`;
-    const rank = e => (e.hay === nq ? 0 : e.hay.startsWith(nq) ? 1 : nz(e.title).includes(nq) ? 2 : 3);
+    const rank = e => (fuzzy ? e.score : digits ? (String(e.id) === raw ? 0 : 1) : e.hay === nq ? 0 : e.hay.startsWith(nq) ? 1 : nz(e.title).includes(nq) ? 2 : 3);
     const groups = [['modulo', t('q.g.mod')], ['esercizio', t('q.g.ex')], ['sezione', t('q.g.sec')], ['sutra', t('q.g.sutra')], ['metre', t('q.g.metre')], ['verse', t('q.g.verse')], ['vocab', t('mod.vocab')], ['forma', t('q.g.form')], ['nomi', t('mod.nomi')], ['pronomi', t('mod.pronomi')], ['verbi', t('mod.verbi')]];
     const blocks = groups.map(([k, label], gi) => {
-      const rs = hit.filter(e => e.k === k).sort((x, y) => rank(x) - rank(y));
+      const rs = hit.filter(e => e.k === k).sort((x, y) => rank(x) - rank(y) || (digits ? Number(x.id) - Number(y.id) : 0));
       if (!rs.length) return null;
       const cap = k === 'forma' ? 8 : 6;
       const rows = rs.slice(0, cap).map(e => `<button class="vrow" data-act="searchgo" data-k="${e.k}" data-id="${esc(String(e.id))}" data-x="${esc(e.x || '')}"><span class="vt"><span class="ex-t">${esc(e.title)}</span>${e.sub ? `<span class="vd q-sub">${esc(e.sub)}</span>` : ''}</span>${CHEV}</button>`).join('');
       return { r: rank(rs[0]), gi, html: `<h2 class="h2">${label}</h2><div class="list">${rows}</div>${rs.length > cap ? `<p class="note">${t('q.more', { n: rs.length - cap })}</p>` : ''}` };
     }).filter(Boolean).sort((x, y) => x.r - y.r || x.gi - y.gi);
-    return (said ? `<p class="note c">${t('q.lenient', { q: esc(said) })}</p>` : '') + blocks.map(b => b.html).join('');
+    const note = fuzzy ? `<p class="note c">${t('q.fuzzy', { q: esc(raw0) })}</p>` : said ? `<p class="note c">${t('q.lenient', { q: esc(said) })}</p>` : '';
+    return note + blocks.map(b => b.html).join('');
   }
   function viewCerca() {
     return `<header class="bar top"><h1 class="t">${t('q.title')}</h1><p class="sub">${t('q.sub')}</p></header>
