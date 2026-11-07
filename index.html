@@ -1,12 +1,14 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=35;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=37;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
 <!-- v1.2.0: Alfabeto, scheda Tabelle: tabelle al posto delle celle singole -->
 <!-- v1.1.2: nomi hari delle colonne più evidenti (teoria, test, feedback del varga); Sandhi con devanāgarī; Analisi sillabica; moduli Nomi, Pronomi, Verbi e Vocabolario -->
 <!-- v1.1.4: scelta del tema Auto / Giorno / Notte nelle Impostazioni -->
+<!-- v1.3.7: icona, manifest e colori della barra spostati nell'head (prima erano nel body e iOS non li leggeva) -->
+<!-- v1.3.6: casi e numeri in sanscrito (caturthī ekavacana…), italiano piccolo accanto -->
 <!-- v1.3.5: nuova icona dell'app (immagine fornita da Govinda) -->
 <!-- v1.3.4: la barra in basso scorrendo si riduce a una capsula con la sola scheda attiva (non sparisce più) -->
 <!-- v1.3.3: tema Notte in grafite Apple (grigi neutri, accento ambra, verde/rosso iOS) -->
@@ -21,12 +23,6 @@
 <!-- v1.1.6: esercizi dentro i moduli senza icone. v1.1.5: dai commenti: via il titolo v.2, Test del giorno da 15 domande, Ripasso errori, Progressi con media, colori e moduli, Moduli senza icone, Impostazioni nella barra -->
 
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Vyākaraṇam">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Devanagari:wght@400;600&display=swap">
 <style>
 /* Layout: colonna da telefono nello stile di Kārtika, aggiornata alle linee guida Liquid Glass di iOS 27.
@@ -728,9 +724,17 @@ html { overscroll-behavior-y: contain; }
 .np-title .dev-s { font-size: 20px; }
 .np-cls { color: var(--soft); font-size: 13px; margin: 0 0 8px; }
 .np-sk { color: var(--soft); font-weight: 400; font-size: .86em; }
-.np-t { display: grid; grid-template-columns: minmax(0, .6fr) repeat(3, minmax(0, 1fr)); gap: 5px; margin: 8px 0 4px; }
+/* italiano in piccolo accanto al nome sanscrito di caso e numero */
+.np-it { color: var(--soft); font-weight: 400; font-size: .76em; font-style: italic; }
+.np-h small, .at thead th small { display: block; font: italic 400 10px/1.15 var(--f-serif); text-transform: none; letter-spacing: 0; opacity: .85; }
+.np-row span i, .np-trio span i { display: block; }
+.np-row i small, .np-trio i small { display: block; font: italic 400 9.5px/1.2 var(--f-serif); text-transform: none; letter-spacing: 0; opacity: .9; }
+.mname small { display: block; font: italic 400 12px/1.2 var(--f-serif); color: var(--soft); margin-top: 1px; }
+.opts.g3 .mname { font-size: 15px; text-align: center; overflow-wrap: normal; }
+.np-r { overflow-wrap: normal; }
+.np-t { display: grid; grid-template-columns: minmax(0, 1fr) repeat(3, minmax(0, 1fr)); gap: 5px; margin: 8px 0 4px; }
 .np-h { font: 600 11px var(--f-ui); letter-spacing: .05em; text-transform: uppercase; color: var(--soft); padding: 4px 2px; text-align: center; align-self: end; }
-.np-r { font: 600 11px/1.25 var(--f-ui); color: var(--soft); padding: 4px 0; align-self: center; overflow-wrap: break-word; }
+.np-r { font: 600 10.5px/1.25 var(--f-ui); color: var(--soft); padding: 4px 0; align-self: center; overflow-wrap: break-word; }
 .np-r small { display: block; font: 400 11px var(--f-serif); font-style: italic; color: var(--soft); }
 .np-c { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; text-align: center; min-height: 54px; padding: 5px 2px; border-radius: 14px;
   background: var(--cell); box-shadow: inset 0 0 0 1px var(--hair); font: 500 13px/1.2 var(--f-serif); overflow-wrap: break-word; border: 0; color: inherit; }
@@ -2589,7 +2593,7 @@ const MODULES = [
     if (ty === 'hname') return t('weak.hname', { n: ALPHA.NB[a].n });
     if (ty === 'sutra') return t('weak.sutra', { n: a }) + (SANDHI.SB[a] ? ' · ' + SANDHI.SB[a].t : '');
     if (ty === 'case') return t('weak.case', { c: caseN(+a) });
-    if (ty === 'vform') return t('weak.vform', { p: pnLab(+a[0], +a[1]) });
+    if (ty === 'vform') return t('weak.vform', { p: pnTxt(+a[0], +a[1]) });
     if (ty === 'word') return t('weak.word', { w: a });
     if (ty === 'yati') return t('weak.yati', { m: E.METRE_BY_ID[a] ? E.METRE_BY_ID[a].name : a });
     const [x, y] = a.split('>');
@@ -3629,10 +3633,18 @@ const MODULES = [
   const CASE_DV = ['प्रथमा', 'द्वितीया', 'तृतीया', 'चतुर्थी', 'पञ्चमी', 'षष्ठी', 'सप्तमी', 'संबोधन'];
   const NUM_SK = ['ekavacana', 'dvivacana', 'bahuvacana'];
   const NUM_DV = ['एकवचनम्', 'द्विवचनम्', 'बहुवचनम्'];
-  const caseN = c => t('cs.' + c), numN = n => t('nb.' + n), perN = p => t('pe.' + p);
-  const cnLab = (c, n) => caseN(c) + ' ' + numN(n);
-  const cnFull = (c, n) => `${caseN(c)} <span class="np-sk">(${CASE_SK[c]})</span> · ${numN(n)} <span class="np-sk">(${NUM_SK[n]})</span>`;
-  const pnLab = (p, n) => perN(p) + ' ' + numN(n);
+  // casi e numeri: il nome sanscrito è quello principale, quello italiano resta piccolo accanto (v1.3.6).
+  // caseN/numN = testo semplice (elenchi, ricerca); caseH/numH = HTML con l'italiano in piccolo.
+  // Le persone dei verbi restano 1ª/2ª/3ª: il Notion non dà i nomi sanscriti.
+  const itSm = s => `<span class="np-it">${s}</span>`;
+  const caseN = c => CASE_SK[c], numN = n => NUM_SK[n], perN = p => t('pe.' + p);
+  const lc = x => String(x).toLowerCase();
+  const caseH = c => `${CASE_SK[c]} ${itSm('(' + lc(t('cs.' + c)) + ')')}`, numH = n => `${NUM_SK[n]} ${itSm('(' + lc(t('nb.' + n)) + ')')}`;
+  const numHs = n => `${NUM_SK[n]}<small>${t('nb.' + n)}</small>`;   // su due righe, per caselle strette
+  const cnLab = (c, n) => `${CASE_SK[c]} ${NUM_SK[n]} ${itSm('(' + lc(t('cs.' + c)) + ' ' + lc(t('nb.' + n)) + ')')}`;
+  const cnFull = (c, n) => cnLab(c, n);
+  const pnLab = (p, n) => perN(p) + ' · ' + numH(n);
+  const pnTxt = (p, n) => perN(p) + ' · ' + numN(n);
   const nmPick = a => a[rnd(a.length)];
   const nmRange = n => Array.from({ length: n }, (_, i) => i);
 
@@ -3963,8 +3975,8 @@ const MODULES = [
   // tabella (riga × numero) per la teoria e per le domande
   function tblHtml(P, o) {
     o = o || {};
-    const rl = o.rowLab || (c => `${t('csa.' + c)}<small>${CASE_SK[c]}</small>`);
-    const head = `<span></span>` + [0, 1, 2].map(n => `<span class="np-h">${numN(n)}</span>`).join('');
+    const rl = o.rowLab || (c => `${CASE_SK[c]}<small>${t('cs.' + c)}</small>`);
+    const head = `<span></span>` + [0, 1, 2].map(n => `<span class="np-h">${NUM_SK[n]}<small>${t('nb.' + n)}</small></span>`).join('');
     let rows = '';
     for (let c = 0; c < P.nc; c++) {
       rows += `<span class="np-r">${rl(c)}</span>`;
@@ -3981,14 +3993,14 @@ const MODULES = [
 
   // tabella vera per la teoria: rows = [etichetta di riga, [contenuto delle tre celle], [classi delle celle]]
   function tpTable(rows) {
-    const head = '<th></th>' + [0, 1, 2].map(n => `<th scope="col">${numN(n)}</th>`).join('');
+    const head = '<th></th>' + [0, 1, 2].map(n => `<th scope="col">${NUM_SK[n]}<small>${t('nb.' + n)}</small></th>`).join('');
     const body = rows.map(r => `<tr><th scope="row" class="rh">${r[0]}</th>${r[1].map((c, i) => `<td class="${[i % 2 === 0 ? 'alt' : '', r[2] && r[2][i] ? r[2][i] : ''].join(' ').trim()}">${c}</td>`).join('')}</tr>`).join('');
-    return `<div class="at-w"><table class="at tp"><colgroup><col style="width:70px"></colgroup><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+    return `<div class="at-w"><table class="at tp"><colgroup><col style="width:80px"></colgroup><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
   }
   const hlOf = id => (c, n) => !!(S.hl && S.hl.id === id && S.hl.cells.some(x => x[0] === c && x[1] === n));
   function tblTab(P, o) {
     o = o || {};
-    const rl = o.rowLab || (c => `${t('csa.' + c)}<small>${CASE_SK[c]}</small>`);
+    const rl = o.rowLab || (c => `${CASE_SK[c]}<small>${t('cs.' + c)}</small>`);
     const rows = [];
     for (let c = 0; c < P.nc; c++) {
       const cells = [], cls = [];
@@ -4007,9 +4019,9 @@ const MODULES = [
     const id = S.nsel.nomi, P = PAR[id], N = P.raw;
     const hasFlag = N.t.some(r => r.some(c => c[2]));
     const lists = `<p class="lab">${t('no.cases')}</p>
-      <ol class="np-ol">${CASE_SK.map((s, i) => `<li><b>${s}</b> <span class="dev-s">${CASE_DV[i]}</span> · ${caseN(i)}</li>`).join('')}</ol>
+      <ol class="np-ol">${CASE_SK.map((s, i) => `<li><b>${s}</b> <span class="dev-s">${CASE_DV[i]}</span> · ${t('cs.' + i)}</li>`).join('')}</ol>
       <p class="lab">${t('no.numbers')}</p>
-      <ol class="np-ol">${NUM_SK.map((s, i) => `<li><b>${s}</b> <span class="dev-s">${NUM_DV[i]}</span> · ${numN(i)}</li>`).join('')}</ol>
+      <ol class="np-ol">${NUM_SK.map((s, i) => `<li><b>${s}</b> <span class="dev-s">${NUM_DV[i]}</span> · ${t('nb.' + i)}</li>`).join('')}</ol>
       <p class="lab">${t('no.genders')}</p>
       <ul class="np-ol"><li>${t('gn.f')}</li><li>${t('gn.m')}</li><li>${t('gn.n')}</li></ul>`;
     return `<p class="intro">${t('no.intro')}</p>${selBar('nomi')}
@@ -4116,7 +4128,7 @@ const MODULES = [
   const formLab = q => o => `<span class="mname">${esc(o)}</span>${q.dv && q.dv[o] ? `<span class="dv">${esc(q.dv[o])}</span>` : ''}`;
   const comboLab = (kind, o) => { const [c, n] = o.split(',').map(Number); return kind.startsWith('ve') ? pnLab(c, n) : cnLab(c, n); };
   const bigForm = (s, dv) => `<p class="np-w">${esc(s)}</p>${dv ? `<p class="np-d">${esc(dv)}</p>` : ''}`;
-  const rowHtml = (P, c, nb) => `<p class="np-row">${[0, 1, 2].map(n => `<span class="${n === nb ? 'on' : ''}"><i>${numN(n)}</i>${esc(P.txt(c, n))}</span>`).join('')}</p>`;
+  const rowHtml = (P, c, nb) => `<p class="np-row">${[0, 1, 2].map(n => `<span class="${n === nb ? 'on' : ''}"><i>${numHs(n)}</i>${esc(P.txt(c, n))}</span>`).join('')}</p>`;
 
   function viewTabQ(q, ex) {
     const P = PAR[q.pid], mod = P.mod, nm = esc(P.name);
@@ -4249,9 +4261,9 @@ const MODULES = [
       if (done) ctx = rowHtml(P, q.cs, q.tn);
     } else if (k === 'no_err') {
       lab = t('no.q.err');
-      head = `<p class="np-s first">${esc(P.name)} · ${caseN(q.cs)} <span class="np-sk">(${CASE_SK[q.cs]})</span></p><p class="np-trio">${q.row.map((s, n) => `<span class="${done ? (n === q.answer ? 'bad' : '') : ''}"><i>${numN(n)}</i>${esc(s)}</span>`).join('')}</p>`;
-      label = o => `<span class="mname">${numN(o)}</span>`; cls = 'g3';
-      if (done) ctx = `<p class="note tight">${t('no.fb.err', { w: esc(q.rep), l: cnLab(q.c2, q.n2), c: esc(P.txt(q.cs, q.nb)), m: numN(q.nb) })}</p>`;
+      head = `<p class="np-s first">${esc(P.name)} · ${caseH(q.cs)}</p><p class="np-trio">${q.row.map((s, n) => `<span class="${done ? (n === q.answer ? 'bad' : '') : ''}"><i>${numHs(n)}</i>${esc(s)}</span>`).join('')}</p>`;
+      label = o => `<span class="mname">${numHs(o)}</span>`; cls = 'g3';
+      if (done) ctx = `<p class="note tight">${t('no.fb.err', { w: esc(q.rep), l: cnLab(q.c2, q.n2), c: esc(P.txt(q.cs, q.nb)), m: numH(q.nb) })}</p>`;
     } else if (k === 've_cell') {
       const p = Math.min(q.ps, 2);
       lab = t(q.mode === 'a' ? 've.q.cellA' : 've.q.cellB', { v: esc(P.name) });
@@ -4269,8 +4281,8 @@ const MODULES = [
     const lbl = o => label(o);
     let fb = '';
     if (done) {
-      const A = k === 'no_err' ? numN(q.answer) : (cls === 'lst' ? comboLab(k, q.answer) : esc(q.answer));
-      const B = k === 'no_err' ? numN(q.opts[q.picked]) : (cls === 'lst' ? comboLab(k, q.opts[q.picked]) : esc(q.opts[q.picked]));
+      const A = k === 'no_err' ? numH(q.answer) : (cls === 'lst' ? comboLab(k, q.answer) : esc(q.answer));
+      const B = k === 'no_err' ? numH(q.opts[q.picked]) : (cls === 'lst' ? comboLab(k, q.opts[q.picked]) : esc(q.opts[q.picked]));
       fb = `${fbRow(right, q, A, B)}${ctx}${nextRow(ex)}`;
     }
     return `<section class="panel q"><p class="q-lab">${lab}</p>${head}${optsHtml(q, lbl, cls, extra)}${fb}</section>`;
@@ -4579,7 +4591,7 @@ const MODULES = [
   }
   // etichetta di una forma: dove sta nella tabella (caso o persona, e numero)
   function cellsLabel(P, cells) {
-    const rowName = P.mod === 'verbi' ? perN : (c => t('csa.' + c));
+    const rowName = P.mod === 'verbi' ? perN : (c => CASE_SK[c]);
     return [0, 1, 2].map(n => ({ n, rows: cells.filter(x => x.n === n).map(x => rowName(x.c)) })).filter(g => g.rows.length)
       .map(g => g.rows.join(', ') + ' · ' + numN(g.n)).join(' / ');
   }
