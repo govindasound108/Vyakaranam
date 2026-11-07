@@ -1,15 +1,43 @@
 /* Harināmāmṛta-vyākaraṇam — service worker: tutto in cache al primo avvio, poi funziona senza rete.
    Il numero di VERSION segue quello dell'app (window.VR_N in index.html): lo aggiorna tools/sync-sw-version.py. */
-const VERSION = "vyakaranam-v37";
+const VERSION = "vyakaranam-v42";
 /* Indispensabile: senza questo file l'app non può aprirsi offline. Se non si scarica (anche dopo i nuovi tentativi)
    l'installazione si ferma e riparte alla prossima apertura con la rete. */
 const REQUIRED = ["index.html"];
 /* Facoltativi: non devono mai bloccare l'installazione. Se ne manca qualcuno, si salva da solo alla prima richiesta. */
-const OPTIONAL = ["./", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"];
+const OPTIONAL = ["./", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png", "audio/shikharini-lakshana.m4a"];
 /* Deve essere identico al link dei font in index.html */
 const FONTS_CSS = "https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Devanagari:wght@400;600&display=swap";
 /* Su github.io tutte le app dello stesso account condividono lo stesso archivio: qui si toccano solo le cache "vyakaranam-". */
 const PREFIX = "vyakaranam-";
+
+/* Audio: Safari chiede i file audio a pezzi (Range) e vuole una risposta 206; dalla copia salvata si ritaglia l'intervallo richiesto. */
+function rangeResponse(full, buf, range) {
+  const size = buf.byteLength;
+  let type = full.headers.get("Content-Type") || "";
+  if (!/^audio\//.test(type)) type = "audio/mp4";
+  const m = /^bytes=(\d*)-(\d*)$/.exec(range || "");
+  if (!m || (m[1] === "" && m[2] === "")) {
+    return new Response(buf, { status: 200, headers: { "Content-Type": type, "Content-Length": String(size), "Accept-Ranges": "bytes" } });
+  }
+  let start, end;
+  if (m[1] === "") { start = Math.max(0, size - Number(m[2])); end = size - 1; }
+  else { start = Number(m[1]); end = m[2] === "" ? size - 1 : Math.min(Number(m[2]), size - 1); }
+  if (start >= size || start > end) return new Response(null, { status: 416, headers: { "Content-Range": "bytes */" + size } });
+  return new Response(buf.slice(start, end + 1), { status: 206, headers: { "Content-Type": type, "Content-Range": "bytes " + start + "-" + end + "/" + size, "Content-Length": String(end - start + 1), "Accept-Ranges": "bytes" } });
+}
+/* Se un audio non è ancora in cache lo si scarica intero in background (una volta sola), così la volta dopo funziona anche offline. */
+const audioBusy = new Set();
+async function cacheAudio(url) {
+  if (audioBusy.has(url)) return;
+  audioBusy.add(url);
+  try {
+    const c = await caches.open(VERSION);
+    if (await c.match(url)) return;
+    const r = await fetch(new Request(url, { cache: "reload" }));
+    if (r.ok && r.status === 200) await c.put(url, r);
+  } catch (_) {} finally { audioBusy.delete(url); }
+}
 
 /* Salva i font in cache; se mancano (o ne mancano dei pezzi) ci riprova a ogni apertura, in background. */
 let fontsBusy = false;
@@ -74,6 +102,14 @@ self.addEventListener("fetch", (e) => {
     const same = uu.origin === location.origin;
     /* il controllo del gesto "trascina per aggiornare" (index.html?u=...) deve sempre chiedere alla rete, mai alla copia salvata */
     if (same && uu.searchParams.has("u")) return fetch(new Request(e.request.url, { cache: "no-store" }));
+    if (same && /\/audio\/[^/]+$/.test(uu.pathname)) {
+      const ac = await caches.open(VERSION);
+      const key = uu.origin + uu.pathname;
+      const full = await ac.match(key);
+      if (full) return rangeResponse(full, await full.clone().arrayBuffer(), e.request.headers.get("Range"));
+      e.waitUntil(cacheAudio(key));
+      return fetch(e.request);
+    }
     const cache = await caches.open(VERSION);
     const isPage = e.request.mode === "navigate" || (same && (uu.pathname.endsWith("/") || uu.pathname.endsWith("index.html")));
     if (isPage) {

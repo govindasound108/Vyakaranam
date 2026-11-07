@@ -1,6 +1,7 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=37;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=42;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
@@ -271,6 +272,8 @@ html.bars-off .tabs { transition: width .55s cubic-bezier(.4, 0, .2, 1), gap .55
 .mh-sub { display: block; color: var(--soft); font-size: 14px; margin-top: 2px; }
 .detail { padding: 2px 16px 18px 14px; }
 .lak { font: italic 400 16px/1.65 var(--f-serif); margin: 0; }
+.aud { margin: 10px 0 2px; display: grid; gap: 8px; }
+.aud audio { width: 100%; height: 40px; display: block; }
 .vlink { display: block; width: 100%; text-align: left; padding: 11px 16px; margin: 0 0 8px; min-height: 46px; background: var(--cell); border: 0; border-radius: 16px;
   box-shadow: inset 0 0 0 1px var(--hair); font: 500 15px var(--f-ui); color: var(--ink); cursor: pointer; }
 .vlink:active { background: var(--sel-bg); }
@@ -337,6 +340,7 @@ button, .syl { touch-action: manipulation; -webkit-tap-highlight-color: transpar
 .ex-f { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; }
 .q-lab { font: 600 13px var(--f-ui); color: var(--soft); margin: 0 0 8px; }
 .q-dev { margin: 0; }
+.pe { color: var(--accent); font-weight: 600; margin-left: .15em; }
 .q-iast { font: italic 400 15px var(--f-serif); color: var(--soft); margin: 2px 0 16px; }
 .hint { background: var(--sel-bg); padding: 10px 14px; border-radius: 16px; }
 .opts { display: grid; gap: 10px; margin: 16px 0; }
@@ -673,6 +677,9 @@ html { overscroll-behavior-y: contain; }
 .sa-v { font: 600 16px var(--f-serif); }
 
 .sa-dev { font: 400 21px/1.4 var(--f-dev); color: var(--soft); text-align: center; margin: 0 0 8px; overflow-wrap: anywhere; }
+.sa-o.sk .sa-n { font: 600 11px/1.3 var(--f-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--soft); margin-bottom: 2px; }
+.sa-o.sk .sa-sk { font: 600 18px/1.4 var(--f-serif); overflow-wrap: anywhere; }
+.sa-gl { text-align: center; font: italic 400 15px/1.45 var(--f-serif); color: var(--soft); margin: 0 0 8px; }
 .sa-o { display: flex; flex-direction: column; min-width: 0; }
 .sa-o.c { align-items: center; }
 .qbox { margin: 14px 0 4px; }
@@ -901,7 +908,7 @@ const Engine = (function () {
     metre('malini', 'Mālinī', 'मालिनी', ['na', 'na', 'ma', 'ya', 'ya'], '', [8],
       ['nana-maya-yayuteyaṃ mālinī bhogilokaiḥ']),
     metre('shikharini', 'Śikhariṇī', 'शिखरिणी', ['ya', 'ma', 'na', 'sa', 'bha'], 'LG', [6],
-      ['rasairudraiśchinnā yamanasabhalāgāḥ śikhariṇī']),
+      ['rasairudraiśchinnā yamanasabhalāgāḥ śikhariṇī'], { audio: [{ src: 'audio/shikharini-lakshana.m4a' }] }),
     metre('mandakranta', 'Mandākrāntā', 'मन्दाक्रान्ता', ['ma', 'bha', 'na', 'ta', 'ta'], 'GG', [4, 10],
       ['mandākrāntāmbudhi-rasanagair ma-bha-nau tau ga-yugmam']),
     metre('shardula', 'Śārdūlavikrīḍita', 'शार्दूलविक्रीडितम्', ['ma', 'sa', 'ja', 'sa', 'ta', 'ta'], 'G', [12],
@@ -1137,7 +1144,7 @@ const I18N = {
     'met.formula': 'The formula (from the course Notion)', 'met.ganas': 'The gaṇas',
     'met.trick': 'A trick added by the app: each gaṇa is its own syllable plus the next two in the formula. ya-mā-tā = laghu guru guru, mā-tā-rā = guru guru guru.',
     'met.practiceGana': 'Practise the gaṇas', 'met.sylls': '{n} syllables',
-    'met.laks': 'Lakṣaṇa (from the course Notion)', 'met.pattern': 'Pattern',
+    'met.laks': 'Lakṣaṇa (from the course Notion)', 'met.listen': 'Listen to the lakṣaṇa', 'met.pattern': 'Pattern',
     'met.versesIn': 'Verses in the app', 'met.noVerses': 'No verses yet for this metre.',
     'rule.anustup': 'Syllable 5 laghu, 6 guru, 7 laghu in the 2nd and 4th pāda',
     'yati.none': 'no fixed pause in the course', 'yati.pause': 'pause (yati) {s}',
@@ -1338,7 +1345,7 @@ const I18N = {
     'met.formula': 'La formula (dal Notion del corso)', 'met.ganas': 'I gaṇa',
     'met.trick': 'Trucco, aggiunto dall’app: ogni gaṇa è la sua sillaba più le due successive nella formula. ya-mā-tā = laghu guru guru, mā-tā-rā = guru guru guru.',
     'met.practiceGana': 'Esercitati sui gaṇa', 'met.sylls': '{n} sillabe',
-    'met.laks': 'Lakṣaṇa (dal Notion del corso)', 'met.pattern': 'Schema',
+    'met.laks': 'Lakṣaṇa (dal Notion del corso)', 'met.listen': 'Ascolta il lakṣaṇa', 'met.pattern': 'Schema',
     'met.versesIn': 'Versi nell\'app', 'met.noVerses': 'Nessun verso ancora per questo metro.',
     'rule.anustup': '5ª sillaba laghu, 6ª guru, 7ª laghu nel 2° e 4° pāda',
     'yati.none': 'nessuna pausa fissa nel corso', 'yati.pause': 'pausa (yati) {s}',
@@ -1447,7 +1454,7 @@ Object.assign(I18N.en, {
   'q.title': 'Search', 'q.sub': 'Everything you have studied', 'q.ph': 'Module, sūtra, verse, metre, word, form…', 'q.hint': 'Type at least two letters. Accents are optional: krsna finds kṛṣṇa. A number finds the sūtra.', 'q.none': 'No results', 'q.more': '{n} more, refine the search', 'q.g.sutra': 'Sandhi sūtras', 'q.g.metre': 'Metres', 'q.g.verse': 'Verses', 'q.g.mod': 'Modules', 'q.g.ex': 'Exercises', 'q.g.sec': 'Topics', 'q.g.form': 'Forms in the tables', 'q.lenient': 'Searched for “{q}”', 'q.fuzzy': 'No exact match for “{q}”: here are the closest ones.', 'q.aria': 'Search field', 'sa.noexp': 'No explanation for this sūtra in the book.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combination of vowels', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combination of consonants', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combination with the visarga', 'sa.formulas': 'Formulas', 'sa.sarv': 'sarveśvara (vowel)',
   'sa.fnote': 'The number is the sūtra. “=” means the two vowels join; “→” means the first vowel changes before the second.',
   'sa.sutras': 'Sūtras', 'sa.snote': 'Text of the sūtras from the book. No exercises yet for sūtras: {l}.',
-  'sa.sutra': 'Sūtra {n}',
+  'sa.sutra': 'Sūtra {n}', 'sa.why': 'Why', 'sa.whyN': 'Sūtra {n} says instead',
   'sa.q.fuse': 'What do these two vowels become when they join?',
   'sa.q.sem': 'The first vowel changes before the second. What does it become?',
   'sa.q.sut': 'Which sūtra applies to this combination?',
@@ -1473,7 +1480,7 @@ Object.assign(I18N.it, {
   'q.title': 'Cerca', 'q.sub': 'Tutto ciò che hai studiato', 'q.ph': 'Modulo, sūtra, verso, metro, parola, forma…', 'q.hint': 'Scrivi almeno due lettere. Gli accenti sono facoltativi: krsna trova kṛṣṇa. Un numero trova il sūtra.', 'q.none': 'Nessun risultato', 'q.more': 'altri {n}, restringi la ricerca', 'q.g.sutra': 'Sūtra di Sandhi', 'q.g.metre': 'Metri', 'q.g.verse': 'Versi', 'q.g.mod': 'Moduli', 'q.g.ex': 'Esercizi', 'q.g.sec': 'Argomenti', 'q.g.form': 'Forme nelle tabelle', 'q.lenient': 'Ho cercato «{q}»', 'q.fuzzy': 'Nessun risultato esatto per «{q}»: ecco i più affini.', 'q.aria': 'Campo di ricerca', 'sa.noexp': 'Nel libro non c’è una spiegazione per questo sūtra.', 'sa.sec1': 'Sarveśvara-sandhi', 'sa.sec1d': 'Combinazione di vocali', 'sa.sec2': 'Viṣṇujana-sandhi', 'sa.sec2d': 'Combinazione di consonanti', 'sa.sec3': 'Viṣṇusarga-sandhi', 'sa.sec3d': 'Combinazione con il visarga', 'sa.formulas': 'Formule', 'sa.sarv': 'sarveśvara (vocale)',
   'sa.fnote': 'Il numero è il sūtra. “=” vuol dire che le due vocali si fondono; “→” che la prima vocale cambia davanti alla seconda.',
   'sa.sutras': 'Sūtra', 'sa.snote': 'Testo dei sūtra dal libro. Non ci sono ancora esercizi per i sūtra: {l}.',
-  'sa.sutra': 'Sūtra {n}',
+  'sa.sutra': 'Sūtra {n}', 'sa.why': 'Perché', 'sa.whyN': 'Il sūtra {n} dice invece',
   'sa.q.fuse': 'In che cosa si trasformano queste due vocali quando si uniscono?',
   'sa.q.sem': 'La prima vocale cambia davanti alla seconda. In che cosa diventa?',
   'sa.q.sut': 'Quale sūtra si applica a questa combinazione?',
@@ -1505,9 +1512,9 @@ Object.assign(I18N.en, {
   'sl.r3': 'Vāmana + anusvāra (viṣṇu-cakra), visarga (viṣṇu-sarga) or a final consonant (halanta) = trivikrama. At the end of the pāda the syllable becomes trivikrama.',
   'sl.r4': 'At the end of a line (pāda), before | or ||, the syllable is always treated as trivikrama.',
   'sl.r4ex': 'Example (Bhagavad-gītā 9.31): in nigacchati and praṇaśyati the last syllable ti is laghu by itself, but at the end of the pāda it becomes guru.',
-  'sl.iso': 'In the exercises a word is judged on its own. Rule 4 applies only to words that end a pāda, and the exercise says so.',
-  'sl.isoNote': 'Word taken on its own: rule 4 does not apply.',
-  'sl.endNote': 'Last word of a pāda: rule 4 applies to its last syllable.',
+  'sl.iso': 'In the exercises a word is judged on its own. Rule 4 applies only to words that end a pāda, and the exercise marks them with a vertical line (|).',
+  'sl.isoNote': 'Word taken on its own: rule 4 does not apply.', 'sl.endAria': 'end of the pāda',
+  'sl.endNote': 'The vertical line (|) marks the end of the pāda: rule 4 applies to its last syllable.',
   'sl.q.lg': 'Is the highlighted syllable laghu or guru?',
   'sl.q.rule': 'Which rule makes the highlighted syllable guru?',
   'sl.q.tap': 'Tap the guru syllables of this word.',
@@ -1537,9 +1544,9 @@ Object.assign(I18N.it, {
   'sl.r3': 'Vāmana + anusvāra (viṣṇu-cakra), visarga (viṣṇu-sarga) o consonante finale (halanta) = trivikrama. A fine pāda la sillaba diventa trivikrama.',
   'sl.r4': 'A fine riga (pāda), prima di | o ||, la sillaba è sempre trattata come trivikrama.',
   'sl.r4ex': 'Esempio (Bhagavad-gītā 9.31): in nigacchati e praṇaśyati l’ultima sillaba ti da sola è laghu, ma a fine pāda diventa guru.',
-  'sl.iso': 'Negli esercizi una parola è giudicata da sola. La regola 4 vale solo per le parole che chiudono un pāda, e l’esercizio lo dice.',
-  'sl.isoNote': 'Parola presa da sola: la regola 4 non si applica.',
-  'sl.endNote': 'Ultima parola di un pāda: la regola 4 vale per la sua ultima sillaba.',
+  'sl.iso': 'Negli esercizi una parola è giudicata da sola. La regola 4 vale solo per le parole che chiudono un pāda, e l’esercizio le segna con una linea verticale (|).',
+  'sl.isoNote': 'Parola presa da sola: la regola 4 non si applica.', 'sl.endAria': 'fine del pāda',
+  'sl.endNote': 'La linea verticale (|) segna la fine del pāda: la regola 4 vale per la sua ultima sillaba.',
   'sl.q.lg': 'La sillaba evidenziata è laghu o guru?',
   'sl.q.rule': 'Quale regola rende guru la sillaba evidenziata?',
   'sl.q.tap': 'Tocca le sillabe guru di questa parola.',
@@ -1844,18 +1851,18 @@ const MODULES = [
     const SUT = [
       [42, 'daśāvatāra ekātmake militvā trivikramaḥ'], [43, 'a-dvayam i-dvaye e'], [44, 'u-dvaye o'], [45, 'ṛ-dvaye ar'],
       [46, 'ṛ-dvayā-dvayayor (sandhir vā vāmanaś ca vā) ṛti'], [47, 'ḷ-dvaye al'], [48, 'e-dvaye ai'], [49, 'o-dvaye au'],
-      [50, 'i-dvayam eva yaḥ sarveśvare'], [51, 'u-dvayaṃ vaḥ'], [52, 'ṛ-dvayaṃ raḥ'], [53, 'ḷ-dvayaṃ laḥ'],
-      [54, 'e ay, ai āy'], [55, 'o av, au āv'], [56, 'e-obhyām asya haro viṣṇupadānte'], [57, 'ay-ādīnāṃ ya-vayor vā'],
-      [58, 'teṣāṃ na sandhir nityam'], [59, 'o-rāmāntānām anantānāṃ cāvyayānāṃ sarveśvare'],
-      [60, 'īd-ūd-etāṃ dvi-vacanasya maṇīvādi-varjam'],
+      [50, 'i-dvayam eva yaḥ sarveśvare'], [51, 'u-dvayaṁ vaḥ'], [52, 'ṛ-dvayaṁ raḥ'], [53, 'ḷ-dvayaṁ laḥ'],
+      [54, 'e ay, ai āy'], [55, 'o av, au āv'], [56, 'e-obhyām asya haro viṣṇupadānte'], [57, 'ay-ādīnāṁ ya-vayor vā'],
+      [58, 'teṣāṁ na sandhir nityam'], [59, 'o-rāmāntānām anantānāṁ cāvyayānāṁ sarveśvare'],
+      [60, 'īd-ūd-etāṁ dvi-vacanasya maṇīvādi-varjam'],
       [61, 'viṣṇudāso viṣṇupadānte harighoṣe ca harigadā'], [62, 'hariveṇau hariveṇur vā'], [63, 'yādava-mātre harikamalam'],
       [64, 'tataḥ śaś cho vā'], [65, 'ho harighoṣaḥ'], [66, 'da-tau para-varṇau la-ca-ṭa-vargeṣu nityam'], [67, 'taś ca śe'],
       [68, 'no ’ntaś ca-chayoḥ śa-rāmaḥ, ṭa-ṭhayoḥ ṣa-rāmaḥ, ta-thayoḥ sa-rāmaḥ, viṣṇucakra-pūrvo viṣṇucāpa-pūrvo vā'],
-      [69, 'le la-rāma eva'], [70, 'ja-jha-ña-śa-rāmeṣu ña-rāmaḥ'], [71, 'śe cānto vā'], [72, 'mo viṣṇucakraṃ viṣṇujane'],
+      [69, 'le la-rāma eva'], [70, 'ja-jha-ña-śa-rāmeṣu ña-rāmaḥ'], [71, 'śe cānto vā'], [72, 'mo viṣṇucakraṁ viṣṇujane'],
       [73, 'viṣṇucakrasya hariveṇur viṣṇuvarge, viṣṇupadāntasya tu vā'], [74, 'dviḥ sarveśvara-mātrāc chaḥ'],
       [75, 'viṣṇupadāntāt trivikramād vā'], [76, 'vāmanāt ṅa-ṇa-nā dviḥ sarveśvare'],
-      [77, 'ra-rāmāt (viṣṇujane viṣṇujano vā), sarveśvare tu harigotraṃ vinā'],
-      [78, 'viṣṇujanād viṣṇudāsasyādarśanaṃ sa-varge viṣṇudāse'],
+      [77, 'ra-rāmāt (viṣṇujane viṣṇujano vā), sarveśvare tu harigotraṁ vinā'],
+      [78, 'viṣṇujanād viṣṇudāsasyādarśanaṁ sa-varge viṣṇudāse'],
       [79, '(viṣṇusargaḥ) ca-chayoḥ śa-rāmaḥ, ṭa-ṭhayoḥ ṣa-rāmaḥ, ta-thayoḥ sa-rāmaḥ'], [80, 'ād a-rāma-gopālayor ur nityam'],
       [81, 'a-dvaya-bho-bhago-aghobhyo lopyaḥ (sarveśvara-gopālayoḥ), sarveśvare tu yaś ca, na ca lope sandhiḥ'],
       [82, 'eṣa-sa-paro viṣṇujane'], [83, 'ra īśvarāt sarveśvara-gopālayoḥ']
@@ -1960,8 +1967,14 @@ const MODULES = [
       X(56, 'd', 'pāṭhe', 'asti', null, 'B'),
       X(59, 'a', 'no', 'upendraḥ', 'no upendraḥ', 'B'),
       X(59, 'b', 'no', 'acyutaḥ', 'no acyutaḥ', 'B'),
-      X(59, 'c', 'a', 'ananta', 'a ananta', 'B'),
-      X(59, 'd', 'u', 'acyuta', 'u acyuta', 'B'),
+      X(59, 'c', 'a', 'ananta', 'a ananta', 'B', {
+        note: ['Here a is the particle used to call someone: “O Ananta”.', 'Qui a è la particella con cui si chiama: «O Ananta».'],
+        why: ['Here a is not the vowel a: it is an avyaya (indeclinable word) used for addressing (sambodhana). Such avyayas do not undergo sandhi (59). The prefix ā, instead, does: ā + anantam → ānantam (42).',
+              'Qui a non è la vocale a: è un avyaya (parola indeclinabile) che serve a chiamare (sambodhana). Gli avyaya di questo tipo non subiscono sandhi (59). Il prefisso ā invece sì: ā + anantam → ānantam (42).'] }),
+      X(59, 'd', 'u', 'acyuta', 'u acyuta', 'B', {
+        note: ['Here u is the particle of entreaty: “Please come, O Acyuta”.', 'Qui u è la particella di invito: «Vieni, per favore, o Acyuta».'],
+        why: ['Here u is not the vowel u: it is an avyaya (indeclinable word) used for entreaty (āmantraṇa). Such avyayas do not undergo sandhi (59).',
+              'Qui u non è la vocale u: è un avyaya (parola indeclinabile) usato per invitare (āmantraṇa). Gli avyaya di questo tipo non subiscono sandhi (59).'] }),
       X(59, 'e', 'bho', 'edhi', null, 'B'),
       X(59, 'f', 'aho', 'āpad', null, 'B'),
       X(60, 'a', 'harī', 'atra', 'harī atra', 'B'),
@@ -2000,19 +2013,19 @@ const MODULES = [
       X(66, 'f', 'paṅkāt', 'jātam', 'paṅkā[j] jātam', 'B', { alts: ['t', 'd', 'l'], also: [61] }),
       X(66, 'g', 'tattva-vit', 'labhate', 'tattva-vi[l] labhate', 'B', { alts: ['t', 'd', 'n'], also: [61] }),
       X(66, 'h', 'vratāt', 'cyutaḥ', 'vratā[c] cyutaḥ', 'B', { alts: ['t', 'd', 'j'], also: [61, 63] }),
-      X(68, 'a', 'vidvān', 'cinoti', 'vidvā[ṃś] cinoti', 'B', { alts: ['n', 'ṃs', 'ṃṣ'] }),
-      X(68, 'b', 'pumān', 'thūt-karoti', 'pumā[ṃs] thūt-karoti', 'B', { alts: ['n', 'ṃś', 'ṃṣ'] }),
-      X(68, 'c', 'bhagavān', 'tanoti', 'bhagavā[ṃs] tanoti', 'B', { alts: ['n', 'ṃś', 'ṃṣ'] }),
-      X(69, 'a', 'bhagavān', 'līlāyate', 'bhagavā[l] līlāyate', 'B', { alts: ['n', 'ṃ', 'ñ'] }),
-      X(70, 'a', 'bhagavān', 'jayati', 'bhagavā[ñ] jayati', 'B', { alts: ['n', 'ṃ', 'ṇ'] }),
-      X(70, 'b', 'śvasan', 'jighran', 'śvasa[ñ] jighran', 'B', { alts: ['n', 'ṃ', 'ṇ'] }),
-      X(72, 'a', 'kṛṣṇam', 'smarati', 'kṛṣṇa[ṃ] smarati', 'NB', { alts: ['m', 'n', 'ṅ'] }),
-      X(72, 'b', 'rādhām', 'sevate', 'rādhā[ṃ] sevate', 'B', { alts: ['m', 'n', 'ṅ'] }),
-      X(72, 'c', 'sthāpitam', 'tatra', 'sthāpita[ṃ] tatra', 'B', { also: [73] }),
-      X(72, 'd', 'saṃsāram', 'taranti', 'saṃsāra[ṃ] taranti', 'B', { also: [73] }),
-      X(76, 'a', 'gacchan', 'āsam', 'gaccha[nn] āsam', 'B', { alts: ['n', 'ṃ', 'ṇṇ'] }),
-      X(76, 'b', 'kurvan', 'asmi', 'kurva[nn] asmi', 'B', { alts: ['n', 'ṃ', 'ṇṇ'] }),
-      X(76, 'c', 'pratyaṅ', 'adri', 'pratya[ṅṅ] adri', 'B', { alts: ['ṅ', 'ṃ', 'nn'] }),
+      X(68, 'a', 'vidvān', 'cinoti', 'vidvā[ṁś] cinoti', 'B', { alts: ['n', 'ṁs', 'ṁṣ'] }),
+      X(68, 'b', 'pumān', 'thūt-karoti', 'pumā[ṁs] thūt-karoti', 'B', { alts: ['n', 'ṁś', 'ṁṣ'] }),
+      X(68, 'c', 'bhagavān', 'tanoti', 'bhagavā[ṁs] tanoti', 'B', { alts: ['n', 'ṁś', 'ṁṣ'] }),
+      X(69, 'a', 'bhagavān', 'līlāyate', 'bhagavā[l] līlāyate', 'B', { alts: ['n', 'ṁ', 'ñ'] }),
+      X(70, 'a', 'bhagavān', 'jayati', 'bhagavā[ñ] jayati', 'B', { alts: ['n', 'ṁ', 'ṇ'] }),
+      X(70, 'b', 'śvasan', 'jighran', 'śvasa[ñ] jighran', 'B', { alts: ['n', 'ṁ', 'ṇ'] }),
+      X(72, 'a', 'kṛṣṇam', 'smarati', 'kṛṣṇa[ṁ] smarati', 'NB', { alts: ['m', 'n', 'ṅ'] }),
+      X(72, 'b', 'rādhām', 'sevate', 'rādhā[ṁ] sevate', 'B', { alts: ['m', 'n', 'ṅ'] }),
+      X(72, 'c', 'sthāpitam', 'tatra', 'sthāpita[ṁ] tatra', 'B', { also: [73] }),
+      X(72, 'd', 'saṁsāram', 'taranti', 'saṁsāra[ṁ] taranti', 'B', { also: [73] }),
+      X(76, 'a', 'gacchan', 'āsam', 'gaccha[nn] āsam', 'B', { alts: ['n', 'ṁ', 'ṇṇ'] }),
+      X(76, 'b', 'kurvan', 'asmi', 'kurva[nn] asmi', 'B', { alts: ['n', 'ṁ', 'ṇṇ'] }),
+      X(76, 'c', 'pratyaṅ', 'adri', 'pratya[ṅṅ] adri', 'B', { alts: ['ṅ', 'ṁ', 'nn'] }),
       X(79, 'a', 'kṛṣṇaḥ', 'carati', 'kṛṣṇa[ś] carati', 'B', { alts: ['ḥ', 's', 'ṣ'] }),
       X(79, 'b', 'kṛṣṇaḥ', 'chādayati', 'kṛṣṇa[ś] chādayati', 'B', { alts: ['ḥ', 's', 'ṣ'] }),
       X(79, 'c', 'kṛṣṇaḥ', 'ṭīkate', 'kṛṣṇa[ṣ] ṭīkate', 'B', { alts: ['ḥ', 's', 'ś'] }),
@@ -2792,6 +2805,12 @@ const MODULES = [
     return topbar(`${t('ch.title')} <span class="dev-s">छन्दः</span>`, t('ch.sub'), 'moduli', t('tab.modules'), chandaNav()) + body;
   }
 
+  // audio di un metro (file in audio/, solo se ce n'è almeno uno); con più registrazioni ognuna ha il suo lettore
+  function audioBlock(m) {
+    const a = m.audio || [];
+    if (!a.length) return '';
+    return `<div class="aud">` + a.map((x, i) => `<audio controls preload="none" src="${esc(x.src)}" aria-label="${esc(t('met.listen') + (a.length > 1 ? ' ' + (i + 1) : ''))}"></audio>`).join('') + `</div>`;
+  }
   function viewMetri() {
     const gOpen = S.openMetre === 'gana';
     const gtab = E.GANA_ORDER.map(n => `<li><span class="gn-n">${n}<span class="dev-s">${E.toDevanagari(n)}</span></span>
@@ -2825,6 +2844,7 @@ const MODULES = [
           ${open ? `<div class="detail">
             <p class="lab">${t('met.laks')}</p>
             <p class="lak">${m.lak.map(esc).join('<br>')}</p>
+            ${audioBlock(m)}
             <p class="lab">${t('met.pattern')}</p>
             <p>${m.pattern ? E.ganaNames(m.pattern).join(' · ') + `<span class="muted"> · ${yatiText(m)}</span>` : esc(ruleOf(m))}</p>
             ${m.pattern ? strip(m) : ''}
@@ -3598,11 +3618,31 @@ const MODULES = [
       return Object.assign(base, { answer, opts: shuffle([answer].concat(Array.from(new Set(bad)).filter(v => v !== answer).slice(0, 3))) });
     }
     if (it.kind === 'sa_split') {
-      const pool = SANDHI.EX.filter(y => SANDHI.canSplit(y) && y.plain !== x.plain && y.pair !== x.pair);
-      const near = shuffle(pool.filter(y => SANDHI.grp(y.s) === SANDHI.grp(x.s))), far = shuffle(pool.filter(y => SANDHI.grp(y.s) !== SANDHI.grp(x.s)));
-      const others = [];
-      near.concat(far).forEach(y => { if (others.length < 3 && !others.includes(y.pair)) others.push(y.pair); });
-      return Object.assign(base, { answer: x.pair, opts: shuffle([x.pair].concat(others)) });
+      // risposte sbagliate SIMILI a quella giusta (v1.3.8): stessa seconda parola, prima parola con l'ultima lettera cambiata.
+      // Una variante entra solo se non può dare lo stesso risultato per un'altra via (es. tad e tat danno entrambi tal; n + l dà l):
+      // la lettera sostitutiva non deve appartenere alla "famiglia" della lettera giusta né a quella del risultato.
+      const bad = [], ok = new Set(SANDHI.EX.filter(y => y.plain === x.plain).map(y => y.pair));
+      const add = pr => { if (pr && pr !== x.pair && !ok.has(pr) && !bad.includes(pr)) bad.push(pr); };
+      // lettere che una consonante finale può diventare (o essere) davanti a una seconda parola
+      const RES = { t: ['t', 'd', 'l', 'j', 'c', 'ś', 'n', 'ñ', 'ṁ'], k: ['k', 'g', 'ṅ'], ṭ: ['ṭ', 'ḍ', 'ṇ'], p: ['p', 'b', 'm'], ḥ: ['ḥ', 's', 'ś', 'ṣ', 'r', 'o'] };
+      const fam = L => Object.keys(RES).filter(k => RES[k].some(r => L.includes(r)));   // quali famiglie toccano questa lettera / questo risultato
+      const VOW = { a: ['i', 'u', 'e', 'o'], ā: ['i', 'u', 'e', 'o'], i: ['a', 'u', 'e', 'o'], ī: ['a', 'u', 'e', 'o'], u: ['a', 'i', 'e', 'o'], ū: ['a', 'i', 'e', 'o'], ṛ: ['ar', 'i', 'u'], ṝ: ['ar', 'i', 'u'], e: ['a', 'i', 'o', 'ai'], o: ['a', 'u', 'e', 'au'], ai: ['a', 'i', 'e', 'au'], au: ['a', 'u', 'o', 'ai'] };
+      const m = /(kh|gh|ch|jh|ṭh|ḍh|th|dh|ph|bh|ai|au|[a-zāīūṛṝḷḹṅñṭḍṇśṣḥ])$/.exec(x.a);
+      if (m) {
+        const fin = m[0], stem = x.a.slice(0, x.a.length - fin.length);
+        if (VOW[fin]) shuffle(VOW[fin]).forEach(v => add(stem + v + ' + ' + x.b));
+        else {
+          const used = new Set(fam(fin).concat(fam(x.v || '')));
+          shuffle(['k', 't', 'ṭ', 'p', 'ḥ']).filter(f => !used.has(f)).forEach(f => add(stem + (f === 'ḥ' ? 'ḥ' : f) + ' + ' + x.b));
+        }
+      }
+      if (bad.length < 3) {   // se mancano varianti: altre coppie dell'app, le più simili alla parola unita
+        const lcp = (u, v) => { let i = 0; while (i < u.length && i < v.length && u[i] === v[i]) i++; return i; };
+        const pool = SANDHI.EX.filter(y => SANDHI.canSplit(y) && y.plain !== x.plain && y.pair !== x.pair);
+        pool.map(y => [y, lcp(y.plain, x.plain) + lcp(y.b, x.b) + (SANDHI.grp(y.s) === SANDHI.grp(x.s) ? 2 : 0) + Math.random()])
+          .sort((u, v) => v[1] - u[1]).forEach(([y]) => { if (bad.length < 3) add(y.pair); });
+      }
+      return Object.assign(base, { answer: x.pair, opts: shuffle([x.pair].concat(bad.slice(0, 3))) });
     }
     // sa_mat: quale esempio illustra il sūtra n
     const ban = new Set([x.s]), pool = SANDHI.EX.filter(y => SANDHI.canMat(y) && y.s !== x.s && !(y.also || []).includes(x.s) && !(x.also || []).includes(y.s));
@@ -3643,6 +3683,7 @@ const MODULES = [
   const numHs = n => `${NUM_SK[n]}<small>${t('nb.' + n)}</small>`;   // su due righe, per caselle strette
   const cnLab = (c, n) => `${CASE_SK[c]} ${NUM_SK[n]} ${itSm('(' + lc(t('cs.' + c)) + ' ' + lc(t('nb.' + n)) + ')')}`;
   const cnFull = (c, n) => cnLab(c, n);
+  const cnSk = (c, n) => `${CASE_SK[c]} ${NUM_SK[n]}`;   // parte alta delle domande: solo sanscrito
   const pnLab = (p, n) => perN(p) + ' · ' + numH(n);
   const pnTxt = (p, n) => perN(p) + ' · ' + numN(n);
   const nmPick = a => a[rnd(a.length)];
@@ -3975,8 +4016,8 @@ const MODULES = [
   // tabella (riga × numero) per la teoria e per le domande
   function tblHtml(P, o) {
     o = o || {};
-    const rl = o.rowLab || (c => `${CASE_SK[c]}<small>${t('cs.' + c)}</small>`);
-    const head = `<span></span>` + [0, 1, 2].map(n => `<span class="np-h">${NUM_SK[n]}<small>${t('nb.' + n)}</small></span>`).join('');
+    const rl = o.rowLab || (c => CASE_SK[c])   // tabella delle domande: solo sanscrito (v1.3.8);
+    const head = `<span></span>` + [0, 1, 2].map(n => `<span class="np-h">${NUM_SK[n]}</span>`).join('');
     let rows = '';
     for (let c = 0; c < P.nc; c++) {
       rows += `<span class="np-r">${rl(c)}</span>`;
@@ -4246,7 +4287,7 @@ const MODULES = [
     let lab, head, label, cls = 'g2', extra = '', ctx = '';
     if (k === 'no_cell' || k === 'pr_cell') {
       lab = t(k === 'no_cell' ? 'no.q.cell' : 'pr.q.cell');
-      head = `<p class="np-w">${esc(P.name)}</p><p class="np-d">${P.dev}</p><p class="np-s">${cnFull(q.cs, q.nb)}</p>`;
+      head = `<p class="np-w">${esc(P.name)}</p><p class="np-d">${P.dev}</p><p class="np-s">${cnSk(q.cs, q.nb)}</p>`;
       label = formLab(q); extra = ' oc';
       if (done) ctx = rowHtml(P, q.cs, q.nb);
     } else if (k === 'no_case' || k === 'pr_case') {
@@ -4256,19 +4297,19 @@ const MODULES = [
       if (done) ctx = rowHtml(P, q.cs, q.nb);
     } else if (k === 'no_num') {
       lab = t(q.mode === 's2p' ? 'no.q.num.p' : 'no.q.num.d');
-      head = bigForm(P.txt(q.cs, 0), P.dv(q.cs, 0)) + `<p class="np-s">${esc(P.name)} · ${cnFull(q.cs, 0)}</p>`;
+      head = bigForm(P.txt(q.cs, 0), P.dv(q.cs, 0)) + `<p class="np-s">${esc(P.name)} · ${cnSk(q.cs, 0)}</p>`;
       label = formLab(q); extra = ' oc';
       if (done) ctx = rowHtml(P, q.cs, q.tn);
     } else if (k === 'no_err') {
       lab = t('no.q.err');
-      head = `<p class="np-s first">${esc(P.name)} · ${caseH(q.cs)}</p><p class="np-trio">${q.row.map((s, n) => `<span class="${done ? (n === q.answer ? 'bad' : '') : ''}"><i>${numHs(n)}</i>${esc(s)}</span>`).join('')}</p>`;
+      head = `<p class="np-s first">${esc(P.name)} · ${caseN(q.cs)}</p><p class="np-trio">${q.row.map((s, n) => `<span class="${done ? (n === q.answer ? 'bad' : '') : ''}"><i>${numN(n)}</i>${esc(s)}</span>`).join('')}</p>`;
       label = o => `<span class="mname">${numHs(o)}</span>`; cls = 'g3';
       if (done) ctx = `<p class="note tight">${t('no.fb.err', { w: esc(q.rep), l: cnLab(q.c2, q.n2), c: esc(P.txt(q.cs, q.nb)), m: numH(q.nb) })}</p>`;
     } else if (k === 've_cell') {
       const p = Math.min(q.ps, 2);
       lab = t(q.mode === 'a' ? 've.q.cellA' : 've.q.cellB', { v: esc(P.name) });
       head = q.mode === 'a'
-        ? `<p class="np-w">${esc(P.name)}</p><p class="np-d">${P.dev}</p><p class="np-s">${pnLab(p, q.nb)}</p>`
+        ? `<p class="np-w">${esc(P.name)}</p><p class="np-d">${P.dev}</p><p class="np-s">${pnTxt(p, q.nb)}</p>`
         : `<p class="np-w">${esc(pronV(q.pid, q.ps, q.nb))} <span class="si-gap">${done ? esc(q.answer) : '_____'}</span></p><p class="np-s">${esc(P.name)} <span class="np-sk">${P.dev}</span></p>`;
       label = formLab(q); extra = ' oc';
       if (done) ctx = `<p class="note tight">${pnLab(p, q.nb)}: <b>${esc(q.answer)}</b> <span class="dev-s">${esc(P.dv(p, q.nb))}</span></p>`;
@@ -4379,6 +4420,19 @@ const MODULES = [
       }).join('') + '</div>';
   }
 
+  const glossHtml = x => (x && x.note ? `<p class="sa-gl">${esc(x.note[LANG === 'it' ? 1 : 0])}</p>` : '');
+  // "Perché": la regola in parole semplici (dal libro) e, se serve, perché non vale il sūtra scelto
+  function whyHtml(q, x, sn, right) {
+    const i = LANG === 'it' ? 1 : 0, info = SUT_INFO[sn];
+    let h = '';
+    if (x && x.why) h += `<p class="note tight sa-why"><b>${t('sa.why')}:</b> ${esc(x.why[i])}</p>`;
+    else if (info) h += `<p class="note tight sa-why"><b>${t('sa.why')}:</b> ${esc(info[i])}</p>`;
+    if (!right && q.kind === 'sa_sut') {
+      const pn = Number(q.opts[q.picked]), pi = SUT_INFO[pn];
+      if (pi) h += `<p class="note tight sa-why"><b>${t('sa.whyN', { n: pn })}:</b> ${esc(pi[i])}</p>`;
+    }
+    return h;
+  }
   function viewSandhiQ(q, ex) {
     const done = q.picked !== null, right = done && q.opts[q.picked] === q.answer;
     const x = q.xi ? SANDHI.EB[q.xi] : null, c = q.kind === 'sa_res' ? SANDHI.CLS[q.ci] : null;
@@ -4389,23 +4443,23 @@ const MODULES = [
       head = `<p class="sa-pair">${esc(q.ra)} + ${esc(q.rb)}</p><p class="sa-dev">${sdev(q.ra + ' + ' + q.rb)}</p>`;
       grid = true;
     } else if (q.kind === 'sa_sut') {
-      lab = t('sa.q.sut'); head = `<p class="sa-pair">${esc(x.pair)}</p><p class="sa-dev">${sdev(x.pair)}</p>`;
+      lab = t('sa.q.sut'); head = `<p class="sa-pair">${esc(x.pair)}</p><p class="sa-dev">${sdev(x.pair)}</p>`; head += glossHtml(x);
     } else if (q.kind === 'sa_join') {
-      lab = t('sa.q.join'); head = `<p class="sa-pair">${esc(x.pair)}</p><p class="sa-dev">${sdev(x.pair)}</p>`;
+      lab = t('sa.q.join'); head = `<p class="sa-pair">${esc(x.pair)}</p><p class="sa-dev">${sdev(x.pair)}</p>`; head += glossHtml(x);
     } else if (q.kind === 'sa_split') {
       lab = t('sa.q.split'); head = `<p class="sa-pair">${esc(x.plain)}</p><p class="sa-dev">${sdev(x.plain)}</p>`;
     } else if (q.kind === 'sa_mat') {
       lab = t('sa.q.mat', { n: q.sn }); head = `<p class="sa-pair sm">${esc(SANDHI.SB[q.sn].t)}</p><p class="sa-dev">${sdev(SANDHI.SB[q.sn].t)}</p>`;
     } else {
       lab = t('sa.q.comp');
-      head = `<p class="sa-pair">${esc(x.pair)}</p><p class="sa-dev">${sdev(x.pair)}</p><p class="sa-blank">${esc(x.pre)}<span class="sa-gap${done ? (right ? ' ok' : ' bad') : ''}">${done ? esc(x.v) : '&nbsp;&nbsp;&nbsp;'}</span>${esc(x.post)}</p>`;
+      head = `<p class="sa-pair">${esc(x.pair)}</p><p class="sa-dev">${sdev(x.pair)}</p><p class="sa-blank">${esc(x.pre)}<span class="sa-gap${done ? (right ? ' ok' : ' bad') : ''}">${done ? esc(x.v) : '&nbsp;&nbsp;&nbsp;'}</span>${esc(x.post)}</p>${glossHtml(x)}`;
       grid = true;
     }
     const label = o => (q.kind === 'sa_sut' ? t('sa.sutra', { n: o }) + ' · ' + SANDHI.SB[o].t : o);
     const opts = q.opts.map((o, i) => {
       let cls = 'opt' + (grid ? ' gopt' : '');
       if (done) { if (o === q.answer) cls += ' ok'; else if (i === q.picked) cls += ' bad'; }
-      return `<button class="${cls}" data-act="opt" data-i="${i}"${done ? ' disabled' : ''}>${grid ? (q.kind === 'sa_res' ? `<span class="sa-o c"><span>${esc(label(o))}</span><span class="sa-od">${sdev(o)}</span></span>` : esc(label(o))) : (q.kind === 'sa_sut' ? `<span class="sa-o"><span class="mname">${esc(t('sa.sutra', { n: o }))}</span><span class="sa-s">${esc(SANDHI.SB[o].t)}</span><span class="sa-od">${sdev(SANDHI.SB[o].t)}</span></span>` : `<span class="sa-o"><span class="mname">${esc(o)}</span><span class="sa-od">${sdev(o)}</span></span>`)}</button>`;
+      return `<button class="${cls}" data-act="opt" data-i="${i}"${done ? ' disabled' : ''}>${grid ? (q.kind === 'sa_res' ? `<span class="sa-o c"><span>${esc(label(o))}</span><span class="sa-od">${sdev(o)}</span></span>` : esc(label(o))) : (q.kind === 'sa_sut' ? `<span class="sa-o sk"><span class="sa-n">${esc(t('sa.sutra', { n: o }))}</span><span class="sa-sk">${esc(SANDHI.SB[o].t)}</span><span class="sa-od">${sdev(SANDHI.SB[o].t)}</span></span>` : `<span class="sa-o"><span class="mname">${esc(o)}</span><span class="sa-od">${sdev(o)}</span></span>`)}</button>`;
     }).join('');
     let fb = '';
     if (done) {
@@ -4415,6 +4469,7 @@ const MODULES = [
       fb = `<p class="res ${right ? 'ok' : 'bad'}" role="status">${right ? t('mq.right') : t('mq.wrong', { a: esc(label(q.answer)), b: esc(label(q.opts[q.picked])) })}</p>
         <p class="note tight"><span class="sa-eg">${esc(eg)}</span><span class="sa-od">${sdev(eg)}</span></p>
         <p class="note tight"><b>${t('sa.sutra', { n: sn })}</b> · <span class="sa-s">${esc(SANDHI.SB[sn].t)}</span><span class="sa-od">${sdev(SANDHI.SB[sn].t)}</span></p>
+        ${whyHtml(q, x, sn, right)}
         ${nextRow(ex)}`;
     }
     return `<section class="panel q"><p class="q-lab">${esc(lab)}</p>${head}
@@ -4496,7 +4551,8 @@ const MODULES = [
   function viewSillabeQ(q, ex) {
     const syl = q.syls, tap = q.kind === 'sl_tap', div = q.kind === 'sl_div';
     const done = tap || div ? q.checked : q.picked !== null;
-    const head = `<p class="dev q-dev">${E.toDevanagari(q.w)}</p><p class="q-iast">${esc(q.w)}</p><p class="note nt">${t(q.end ? 'sl.endNote' : 'sl.isoNote')}</p>`;
+    const pe = (m) => (q.end ? ' <span class="pe" aria-label="' + esc(t('sl.endAria')) + '">' + m + '</span>' : '');   // linea verticale = fine del pāda (v1.3.11)
+    const head = `<p class="dev q-dev">${E.toDevanagari(q.w)}${pe('।')}</p><p class="q-iast">${esc(q.w)}${pe('|')}</p><p class="note nt">${t(q.end ? 'sl.endNote' : 'sl.isoNote')}</p>`;
     let lab, body = '', fb = '';
     if (q.kind === 'sl_lg' || q.kind === 'sl_rule') {
       const right = done && q.opts[q.picked] === q.answer, sy = syl[q.si];
