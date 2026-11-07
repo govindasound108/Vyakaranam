@@ -1,12 +1,13 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=33;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=34;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
 <!-- v1.2.1: tutti i moduli senza riquadro grosso (come Sandhi) e paradigmi di Nomi, Pronomi e Verbi in tabelle vere -->
 <!-- v1.2.0: Alfabeto, scheda Tabelle: tabelle al posto delle celle singole -->
 <!-- v1.1.2: nomi hari delle colonne più evidenti (teoria, test, feedback del varga); Sandhi con devanāgarī; Analisi sillabica; moduli Nomi, Pronomi, Verbi e Vocabolario -->
 <!-- v1.1.4: scelta del tema Auto / Giorno / Notte nelle Impostazioni -->
+<!-- v1.3.4: la barra in basso scorrendo si riduce a una capsula con la sola scheda attiva (non sparisce più) -->
 <!-- v1.3.3: tema Notte in grafite Apple (grigi neutri, accento ambra, verde/rosso iOS) -->
 <!-- v1.3.2: funziona anche offline (service worker, manifest, icone) come Kārtika -->
 <!-- v1.3.1: Cerca per affinità (testo parziale o con errori) e «sutra 44»; barre più trasparenti (liquid glass) -->
@@ -157,11 +158,16 @@ p { margin: 0 0 8px; }
 html.in-frame .tabs { bottom: calc(max(env(safe-area-inset-bottom, 0px), 34px) + 26px); }
 /* le barre (scheda in basso, controllo segmentato in alto) si nascondono scorrendo verso il basso e tornano scorrendo verso l'alto */
 .nav .modbar { transition: transform .34s cubic-bezier(.3,.9,.3,1), opacity .24s ease; }
-html.bars-off .tabs { transform: translateY(calc(100% + 90px)); opacity: 0; pointer-events: none; }
+/* la barra in basso non sparisce: si riduce a una piccola capsula con la sola scheda attiva; un tocco la riapre */
+html.bars-off .tabs { width: 56px; gap: 0; }
+html.bars-off .tab:not(.on) { flex: 0 0 0; width: 0; min-width: 0; opacity: 0; pointer-events: none; overflow: hidden; }
+html.bars-off .tabs .thumb { width: calc(100% - 8px); transform: none; }
+.tab { transition: flex-basis .5s cubic-bezier(.4, 0, .2, 1), width .5s cubic-bezier(.4, 0, .2, 1), opacity .3s ease, transform .16s ease; }
 html.bars-off .nav .modbar { transform: translateY(-84px); opacity: 0; pointer-events: none; }
 /* quando spariscono, le barre lo fanno con calma; quando tornano restano veloci */
-html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease; }
-@media (prefers-reduced-motion: reduce) { .tabs, .nav .modbar, html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: opacity .01s; } }
+html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease; }
+html.bars-off .tabs { transition: width .55s cubic-bezier(.4, 0, .2, 1), gap .55s ease, transform .34s ease; }
+@media (prefers-reduced-motion: reduce) { .tabs, .tab, .thumb, .nav .modbar, html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: opacity .01s; } }
 /* esercizi: indietro è solo testo (niente cerchio di vetro) e a destra il cronometro */
 .nav.exnav { justify-content: space-between; padding-left: 2px; }
 .nav.exnav .back.txt { width: auto; min-width: 0; height: 44px; padding: 0 12px 0 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
@@ -202,7 +208,7 @@ html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { tr
   background: linear-gradient(135deg, color-mix(in srgb, var(--lq-a) 18%, transparent), color-mix(in srgb, var(--lq-b) 26%, transparent) 58%, color-mix(in srgb, var(--lq-c) 22%, transparent));
   box-shadow: var(--bar-edge), var(--gl-ring), 0 14px 34px -14px rgba(40, 30, 10, .3);
   -webkit-backdrop-filter: blur(26px) saturate(2.5) brightness(1.08); backdrop-filter: blur(26px) saturate(2.5) brightness(1.08);
-  transition: transform .34s cubic-bezier(.3,.9,.3,1), opacity .24s ease;
+  transition: width .4s cubic-bezier(.3, .9, .3, 1), gap .4s ease, transform .34s cubic-bezier(.3,.9,.3,1), opacity .24s ease;
 }
 @media (prefers-reduced-transparency: reduce) { .tabs { background: var(--ground); -webkit-backdrop-filter: none; backdrop-filter: none; } }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .tabs { background: var(--ground); } }
@@ -5236,7 +5242,7 @@ const MODULES = [
     const cancel = () => { if (timer) { clearTimeout(timer); timer = null; } };
     window.addEventListener('scroll', () => {
       const y = Math.max(0, window.scrollY), d = y - last; last = y;
-      if (y < 40) { acc = 0; cancel(); root.classList.remove('bars-off'); return; }
+      if (y < 40 || window.innerHeight + y >= document.documentElement.scrollHeight - 6) { acc = 0; cancel(); root.classList.remove('bars-off'); return; }
       if (Math.sign(d) !== Math.sign(acc)) acc = 0;
       acc += d;
       if (acc > 14) {
@@ -5244,6 +5250,10 @@ const MODULES = [
       } else if (acc < -8) { cancel(); root.classList.remove('bars-off'); }
     }, { passive: true });
     window.__barsReset = () => { cancel(); root.classList.remove('bars-off'); last = window.scrollY; acc = 0; };
+    // con la barra ridotta il primo tocco la riapre: non cambia scheda e non fa partire il trascinamento
+    const onPill = e => !!(root.classList.contains('bars-off') && e.target.closest && e.target.closest('.tabs'));
+    document.addEventListener('pointerdown', e => { if (onPill(e)) e.stopPropagation(); }, true);
+    document.addEventListener('click', e => { if (onPill(e)) { e.stopPropagation(); e.preventDefault(); window.__barsReset(); } }, true);
   })();
   document.addEventListener('visibilitychange', () => { if (document.hidden) { save(); queuePush(true); } });
   window.addEventListener('pagehide', () => { save(); queuePush(true); });
