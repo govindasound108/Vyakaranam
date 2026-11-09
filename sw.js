@@ -1,6 +1,6 @@
 /* Harināmāmṛta-vyākaraṇam — service worker: tutto in cache al primo avvio, poi funziona senza rete.
    Il numero di VERSION segue quello dell'app (window.VR_N in index.html): lo aggiorna tools/sync-sw-version.py. */
-const VERSION = "vyakaranam-v43";
+const VERSION = "vyakaranam-v44";
 /* Indispensabile: senza questo file l'app non può aprirsi offline. Se non si scarica (anche dopo i nuovi tentativi)
    l'installazione si ferma e riparte alla prossima apertura con la rete. */
 const REQUIRED = ["index.html"];
