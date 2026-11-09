@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=45;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=46;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
@@ -162,8 +162,8 @@ html.bars-off .tabs { transform: translateY(calc(100% + 80px)); opacity: 0; poin
 .tab { transition: flex-basis .5s cubic-bezier(.4, 0, .2, 1), width .5s cubic-bezier(.4, 0, .2, 1), opacity .3s ease, transform .16s ease; }
 html.bars-off .nav .modbar { transform: translateY(-84px); opacity: 0; pointer-events: none; }
 /* quando spariscono, le barre lo fanno con calma; quando tornano restano veloci */
-html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease; }
-html.bars-off .tabs { transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease; }
+html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: transform .45s cubic-bezier(.4, 0, .2, 1), opacity .4s ease; }
+html.bars-off .tabs { transition: transform .45s cubic-bezier(.4, 0, .2, 1), opacity .4s ease; }
 @media (prefers-reduced-motion: reduce) { .tabs, .tab, .thumb, .nav .modbar, html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: opacity .01s; } }
 /* esercizi: indietro è solo testo (niente cerchio di vetro) e a destra il cronometro */
 .nav.exnav { justify-content: space-between; padding-left: 2px; }
@@ -5306,7 +5306,7 @@ const MODULES = [
   // ---------- barre che si nascondono scorrendo ----------
   (function () {
     const root = document.documentElement; let last = window.scrollY, acc = 0, timer = null;
-    const HIDE_DELAY = 900;   // millisecondi di attesa, mentre si scorre verso il basso, prima che le barre spariscano
+    const HIDE_DELAY = 550;   // millisecondi di attesa, mentre si scorre verso il basso, prima che le barre spariscano
     const cancel = () => { if (timer) { clearTimeout(timer); timer = null; } };
     window.addEventListener('scroll', () => {
       const y = Math.max(0, window.scrollY), d = y - last; last = y;
