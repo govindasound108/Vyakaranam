@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=44;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=45;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
@@ -11,6 +11,7 @@
 <!-- v1.3.7: icona, manifest e colori della barra spostati nell'head (prima erano nel body e iOS non li leggeva) -->
 <!-- v1.3.6: casi e numeri in sanscrito (caturthī ekavacana…), italiano piccolo accanto -->
 <!-- v1.3.5: nuova icona dell'app (immagine fornita da Govinda) -->
+<!-- v1.4.5: la barra in basso scorrendo scompare di nuovo (non si riduce più a capsula); etichetta «La formula» senza «dal Notion» -->
 <!-- v1.3.4: la barra in basso scorrendo si riduce a una capsula con la sola scheda attiva (non sparisce più) -->
 <!-- v1.3.3: tema Notte in grafite Apple (grigi neutri, accento ambra, verde/rosso iOS) -->
 <!-- v1.3.2: funziona anche offline (service worker, manifest, icone) come Kārtika -->
@@ -156,15 +157,13 @@ p { margin: 0 0 8px; }
 html.in-frame .tabs { bottom: calc(max(env(safe-area-inset-bottom, 0px), 34px) + 26px); }
 /* le barre (scheda in basso, controllo segmentato in alto) si nascondono scorrendo verso il basso e tornano scorrendo verso l'alto */
 .nav .modbar { transition: transform .34s cubic-bezier(.3,.9,.3,1), opacity .24s ease; }
-/* la barra in basso non sparisce: si riduce a una piccola capsula con la sola scheda attiva; un tocco la riapre */
-html.bars-off .tabs { width: 56px; gap: 0; }
-html.bars-off .tab:not(.on) { flex: 0 0 0; width: 0; min-width: 0; opacity: 0; pointer-events: none; overflow: hidden; }
-html.bars-off .tabs .thumb { width: calc(100% - 8px); transform: none; }
+/* scorrendo verso il basso la barra in basso scompare; scorrendo verso l'alto torna */
+html.bars-off .tabs { transform: translateY(calc(100% + 80px)); opacity: 0; pointer-events: none; }
 .tab { transition: flex-basis .5s cubic-bezier(.4, 0, .2, 1), width .5s cubic-bezier(.4, 0, .2, 1), opacity .3s ease, transform .16s ease; }
 html.bars-off .nav .modbar { transform: translateY(-84px); opacity: 0; pointer-events: none; }
 /* quando spariscono, le barre lo fanno con calma; quando tornano restano veloci */
 html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease; }
-html.bars-off .tabs { transition: width .55s cubic-bezier(.4, 0, .2, 1), gap .55s ease, transform .34s ease; }
+html.bars-off .tabs { transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease; }
 @media (prefers-reduced-motion: reduce) { .tabs, .tab, .thumb, .nav .modbar, html.bars-off .tabs, html.bars-off .nav .modbar, html.bars-off .nav.seg-nav { transition: opacity .01s; } }
 /* esercizi: indietro è solo testo (niente cerchio di vetro) e a destra il cronometro */
 .nav.exnav { justify-content: space-between; padding-left: 2px; }
@@ -1141,7 +1140,7 @@ const I18N = {
     'ch.title': 'Chandaḥ', 'ch.sub': 'Sanskrit metrics',
     'met.intro': 'The gaṇas and the eight metres of the course. Tap a row to see the pattern, the lakṣaṇa and the verses.',
     'met.ganaSub': '8 patterns of three syllables · yamātārājabhānasalagaṃ',
-    'met.formula': 'The formula (from the course Notion)', 'met.ganas': 'The gaṇas',
+    'met.formula': 'The formula', 'met.ganas': 'The gaṇas',
     'met.trick': 'A trick added by the app: each gaṇa is its own syllable plus the next two in the formula. ya-mā-tā = laghu guru guru, mā-tā-rā = guru guru guru.',
     'met.practiceGana': 'Practise the gaṇas', 'met.sylls': '{n} syllables',
     'met.laks': 'Lakṣaṇa', 'met.listen': 'Listen to the lakṣaṇa', 'met.pattern': 'Pattern',
@@ -1342,7 +1341,7 @@ const I18N = {
     'ch.title': 'Chandaḥ', 'ch.sub': 'Metrica sanscrita',
     'met.intro': 'I gaṇa e gli otto metri del corso. Tocca una riga per vedere lo schema, la lakṣaṇa e i versi.',
     'met.ganaSub': '8 schemi di tre sillabe · yamātārājabhānasalagaṃ',
-    'met.formula': 'La formula (dal Notion del corso)', 'met.ganas': 'I gaṇa',
+    'met.formula': 'La formula', 'met.ganas': 'I gaṇa',
     'met.trick': 'Trucco, aggiunto dall’app: ogni gaṇa è la sua sillaba più le due successive nella formula. ya-mā-tā = laghu guru guru, mā-tā-rā = guru guru guru.',
     'met.practiceGana': 'Esercitati sui gaṇa', 'met.sylls': '{n} sillabe',
     'met.laks': 'Lakṣaṇa', 'met.listen': 'Ascolta il lakṣaṇa', 'met.pattern': 'Schema',
