@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=48;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=49;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
@@ -12,6 +12,7 @@
 <!-- v1.3.6: casi e numeri in sanscrito (caturthī ekavacana…), italiano piccolo accanto -->
 <!-- v1.3.5: nuova icona dell'app (immagine fornita da Govinda) -->
 <!-- v1.4.7: livelli per modulo (Base, Intermedio, Avanzato), «Allenati», recap degli errori, «Scrivi la forma» e «Scrivi il sūtra», esame di Chandaḥ, 13 versi in più, 10 parole come gopī (solo in «Scrivi la forma») -->
+<!-- v1.4.9: Analisi sillabica, scheda Regole: riferimenti al libro (sūtra 31–34) per laghu, guru, R1, R2 e R3 -->
 <!-- v1.4.8: i livelli sono a cascata (ogni livello comprende quelli sotto); Alfabeto: 1 lettere e composizioni, 2 + gruppi e lettera fuori posto, 3 + colonne (nomi hari) e griglia -->
 <!-- v1.4.5: la barra in basso scorrendo scompare di nuovo (non si riduce più a capsula); etichetta «La formula» senza «dal Notion» -->
 <!-- v1.3.4: la barra in basso scorrendo si riduce a una capsula con la sola scheda attiva (non sparisce più) -->
@@ -672,6 +673,7 @@ html { overscroll-behavior-y: contain; }
 .sa-r { grid-template-columns: minmax(0, 1fr); gap: 2px; }
 .sa-r .sa-n { font: 600 12px var(--f-ui); letter-spacing: .06em; color: var(--accent); }
 .sa-r .sa-n:empty { display: none; }
+.sa-src { display: block; margin-top: 4px; font: 400 13px/1.45 var(--f-ui); color: var(--soft); }
 .sa-n { font: 600 13px var(--f-ui); color: var(--soft); font-variant-numeric: tabular-nums; }
 .sa-l, .sa-t { font: 500 16px/1.45 var(--f-serif); min-width: 0; overflow-wrap: anywhere; }
 .sa-eq { color: var(--soft); }
@@ -1584,12 +1586,16 @@ Object.assign(I18N.en, {
   'sl.title': 'Syllable analysis', 'sl.sub': 'From the Notion page “Syllable analysis”',
   'sl.intro': 'Rules 1–4 of the Notion page. Words in the exercises come from the verses and the Sandhi examples of this app. To practise, go to the Exercises tab.',
   'sl.names': 'Names', 'sl.rules': 'Rules',
-  'sl.vam': '<b>vāmana akṣara</b> वामन अक्षर = <b>laghu</b> (short). “A vāmana is laghu.”',
-  'sl.tri': '<b>trivikrama akṣara</b> त्रिविक्रम अक्षर = <b>guru</b> (long). “A trivikrama is guru.”',
+  'sl.vam': '<b>vāmana akṣara</b> वामन अक्षर = <b>laghu</b> (short). “A vāmana is laghu.” <span class="sa-src">Sūtra 31. Book example: <i>bhagavati</i> = four laghu syllables.</span>',
+  'sl.tri': '<b>trivikrama akṣara</b> त्रिविक्रम अक्षर = <b>guru</b> (long). “A trivikrama is guru.” <span class="sa-src">Sūtra 32. Book example: <i>rādhā</i> = two guru syllables.</span>',
   'sl.r1': 'Vāmana akṣaras: a, i, u, ṛ. Trivikrama akṣaras: ā, ī, ū, ṝ, e, ai, o, au, aṁ, aḥ.',
   'sl.r2': '<i>satsaṅgat pūrvo vāmano ’pi guruḥ</i>: a vāmana that immediately precedes a conjunct consonant (sat-saṅga) is guru.',
   'sl.r3': 'Vāmana + anusvāra (viṣṇu-cakra), visarga (viṣṇu-sarga) or a final consonant (halanta) = trivikrama. At the end of the pāda the syllable becomes trivikrama.',
   'sl.r4': 'At the end of a line (pāda), before | or ||, the syllable is always treated as trivikrama.',
+  'sl.f1': 'Book, sūtra 32: <i>trivikramo guruḥ</i>. Example: <i>rādhā</i>, both syllables are guru because ā is long.',
+  'sl.f2': 'Book, sūtra 33: <i>sat-saṅgāt pūrvo vāmano ’pi guruḥ</i>. The sat-saṅga is defined by sūtra 34: <i>mithaḥ-saṁlagno viṣṇujanaḥ sat-saṅga-saṁjñaḥ</i> (the combination of consonants, also called saṁyoga). Examples from the book: <i>nitya</i>, <i>bhak-ta</i>, <i>tat-tva</i>, <i>bad-dha</i>, <i>saj-jana</i>, <i>bhaṭ-ṭa</i>: the vowel before the conjunct is short, but the syllable is guru (two mātrās).',
+  'sl.f3': 'Book: no sūtra states this rule. Only the commentary (Saṁśodhinī) on sūtra 33 says that a vāmana before a sat-saṅga, aṁ or ḥ is guru (examples from the book: <i>alaṁ</i>, <i>śivaḥ</i>: the syllables laṁ and vaḥ are guru). For the final consonant I found nothing in the book.',
+  'sl.fnote': 'Book references: Hari-nāmāmṛta-vyākaraṇam by Jīva Gosvāmī, vol. 1, Saṃjñā, sūtras 31–34 (pp. 64–66).',
   'sl.r4ex': 'Example (Bhagavad-gītā 9.31): in nigacchati and praṇaśyati the last syllable ti is laghu by itself, but at the end of the pāda it becomes guru.',
   'sl.iso': 'In the exercises a word is judged on its own. Rule 4 applies only to words that end a pāda, and the exercise marks them with a vertical line (|).',
   'sl.isoNote': 'Word taken on its own: rule 4 does not apply.', 'sl.endAria': 'end of the pāda',
@@ -1616,12 +1622,16 @@ Object.assign(I18N.it, {
   'sl.title': 'Analisi sillabica', 'sl.sub': 'Dalla pagina Notion “Syllable analysis”',
   'sl.intro': 'Le regole 1–4 della pagina Notion. Le parole degli esercizi vengono dai versi e dagli esempi del Sandhi di questa app. Per esercitarti passa alla scheda Esercizi.',
   'sl.names': 'Nomi', 'sl.rules': 'Regole',
-  'sl.vam': '<b>vāmana akṣara</b> वामन अक्षर = <b>laghu</b> (breve). “Un vāmana è laghu.”',
-  'sl.tri': '<b>trivikrama akṣara</b> त्रिविक्रम अक्षर = <b>guru</b> (lunga). “Un trivikrama è guru.”',
+  'sl.vam': '<b>vāmana akṣara</b> वामन अक्षर = <b>laghu</b> (breve). “Un vāmana è laghu.” <span class="sa-src">Sūtra 31. Esempio del libro: <i>bhagavati</i> = quattro sillabe laghu.</span>',
+  'sl.tri': '<b>trivikrama akṣara</b> त्रिविक्रम अक्षर = <b>guru</b> (lunga). “Un trivikrama è guru.” <span class="sa-src">Sūtra 32. Esempio del libro: <i>rādhā</i> = due sillabe guru.</span>',
   'sl.r1': 'Vāmana akṣara: a, i, u, ṛ. Trivikrama akṣara: ā, ī, ū, ṝ, e, ai, o, au, aṁ, aḥ.',
   'sl.r2': '<i>satsaṅgat pūrvo vāmano ’pi guruḥ</i>: un vāmana che precede immediatamente un nesso consonantico (sat-saṅga) è guru.',
   'sl.r3': 'Vāmana + anusvāra (viṣṇu-cakra), visarga (viṣṇu-sarga) o consonante finale (halanta) = trivikrama. A fine pāda la sillaba diventa trivikrama.',
   'sl.r4': 'A fine riga (pāda), prima di | o ||, la sillaba è sempre trattata come trivikrama.',
+  'sl.f1': 'Libro, sūtra 32: <i>trivikramo guruḥ</i>. Esempio: <i>rādhā</i>, entrambe le sillabe sono guru perché ā è lunga.',
+  'sl.f2': 'Libro, sūtra 33: <i>sat-saṅgāt pūrvo vāmano ’pi guruḥ</i>. Il sat-saṅga è definito dal sūtra 34: <i>mithaḥ-saṁlagno viṣṇujanaḥ sat-saṅga-saṁjñaḥ</i> (la combinazione di consonanti, detta anche saṁyoga). Esempi del libro: <i>nitya</i>, <i>bhakta</i>, <i>tattva</i>, <i>baddha</i>, <i>saj-jana</i>, <i>bhaṭṭa</i>: la vocale prima del nesso è breve, ma la sillaba è guru (due mātrā).',
+  'sl.f3': 'Libro: nessun sūtra enuncia questa regola. Solo il commento (Saṁśodhinī) al sūtra 33 dice che un vāmana prima di un sat-saṅga, di aṁ o di ḥ è guru (esempi del libro: <i>alaṁ</i>, <i>śivaḥ</i>: le sillabe laṁ e vaḥ sono guru). Per la consonante finale nel libro non ho trovato nulla.',
+  'sl.fnote': 'Riferimenti al libro: Hari-nāmāmṛta-vyākaraṇam di Jīva Gosvāmī, vol. 1, Saṃjñā, sūtra 31–34 (pp. 64–66).',
   'sl.r4ex': 'Esempio (Bhagavad-gītā 9.31): in nigacchati e praṇaśyati l’ultima sillaba ti da sola è laghu, ma a fine pāda diventa guru.',
   'sl.iso': 'Negli esercizi una parola è giudicata da sola. La regola 4 vale solo per le parole che chiudono un pāda, e l’esercizio le segna con una linea verticale (|).',
   'sl.isoNote': 'Parola presa da sola: la regola 4 non si applica.', 'sl.endAria': 'fine del pāda',
@@ -4851,15 +4861,16 @@ const MODULES = [
     return topbar(t('sl.title'), t('sl.sub'), 'moduli', t('tab.modules'), sillabeNav()) + (S.stab === 'regole' ? viewSillabeRegole() : viewSillabeEsercizi());
   }
   function viewSillabeRegole() {
-    const row = (n, h) => `<li class="sa-r"><span class="sa-n">${n}</span><span class="sa-t">${h}</span></li>`;
+    const row = (n, h, f) => `<li class="sa-r"><span class="sa-n">${n}</span><span class="sa-t">${h}${f ? `<span class="sa-src">${f}</span>` : ''}</span></li>`;
     return `<p class="intro">${t('sl.intro')}</p>
       <section class="card">
         <p class="lab first">${t('sl.names')}</p>
         <ul class="sa-ul">${row('', t('sl.vam'))}${row('', t('sl.tri'))}</ul>
         <p class="lab">${t('sl.rules')}</p>
-        <ul class="sa-ul">${row('R1', t('sl.r1'))}${row('R2', t('sl.r2'))}${row('R3', t('sl.r3'))}${row('R4', t('sl.r4'))}</ul>
+        <ul class="sa-ul">${row('R1', t('sl.r1'), t('sl.f1'))}${row('R2', t('sl.r2'), t('sl.f2'))}${row('R3', t('sl.r3'), t('sl.f3'))}${row('R4', t('sl.r4'))}</ul>
         <p class="note tight">${t('sl.r4ex')}</p>
         <p class="note tight">${t('sl.iso')}</p>
+        <p class="note tight">${t('sl.fnote')}</p>
       </section>`;
   }
   function viewSillabeEsercizi() { return levelPanel('sillabe'); }
