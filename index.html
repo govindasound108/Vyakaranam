@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=47;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=48;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
@@ -12,6 +12,7 @@
 <!-- v1.3.6: casi e numeri in sanscrito (caturthī ekavacana…), italiano piccolo accanto -->
 <!-- v1.3.5: nuova icona dell'app (immagine fornita da Govinda) -->
 <!-- v1.4.7: livelli per modulo (Base, Intermedio, Avanzato), «Allenati», recap degli errori, «Scrivi la forma» e «Scrivi il sūtra», esame di Chandaḥ, 13 versi in più, 10 parole come gopī (solo in «Scrivi la forma») -->
+<!-- v1.4.8: i livelli sono a cascata (ogni livello comprende quelli sotto); Alfabeto: 1 lettere e composizioni, 2 + gruppi e lettera fuori posto, 3 + colonne (nomi hari) e griglia -->
 <!-- v1.4.5: la barra in basso scorrendo scompare di nuovo (non si riduce più a capsula); etichetta «La formula» senza «dal Notion» -->
 <!-- v1.3.4: la barra in basso scorrendo si riduce a una capsula con la sola scheda attiva (non sparisce più) -->
 <!-- v1.3.3: tema Notte in grafite Apple (grigi neutri, accento ambra, verde/rosso iOS) -->
@@ -1833,9 +1834,9 @@ const MODULES = [
   Object.assign(I18N.en, {
     'lv.n1': 'Base', 'lv.n2': 'Intermediate', 'lv.n3': 'Advanced', 'lv.aria': 'Level', 'lv.level': 'Level', 'lv.tag': '{l}',
     'lv.d1': 'Recognise: pick the answer among the options.',
-    'lv.d2': 'Complete and correct: fill in or fix what is missing, with fewer aids.',
-    'lv.d3': 'Produce: whole tables, syllables to scan, forms and sūtras to write.',
-    'lv.intro': 'Choose your level and train: the session mixes the formats of that level. The level is yours and is kept for each module.',
+    'lv.d2': 'Adds completing and correcting, mixed with the Base exercises.',
+    'lv.d3': 'Adds whole tables, syllables to scan, forms and sūtras to write, mixed with all the rest.',
+    'lv.intro': 'Choose your level and train: each level also includes the ones below it, mixed together. The level is yours and is kept for each module.',
     'lv.go': 'Train', 'lv.pick': 'Choose the exercise yourself', 'lv.sessionTitle': '{m} · {l}',
     'lv.exam': 'Chandaḥ exam', 'lv.examD': '{n} verses, {m} minutes: identify the metre among all those of the course. The clock runs down and the exam ends when it reaches zero.', 'lv.examGo': 'Start the exam', 'lv.examTitle': 'Chandaḥ exam',
     'test.level': 'Level', 'test.lvAria': 'Level of the test', 'test.lv0': 'Mine', 'test.lv1': 'Base', 'test.lv2': 'Interm.', 'test.lv3': 'Adv.',
@@ -1854,9 +1855,9 @@ const MODULES = [
   Object.assign(I18N.it, {
     'lv.n1': 'Base', 'lv.n2': 'Intermedio', 'lv.n3': 'Avanzato', 'lv.aria': 'Livello', 'lv.level': 'Livello', 'lv.tag': '{l}',
     'lv.d1': 'Riconoscere: scegli la risposta tra le opzioni.',
-    'lv.d2': 'Completare e correggere: riempi o sistema ciò che manca, con meno aiuti.',
-    'lv.d3': 'Produrre: tabelle intere, sillabe da scandire, forme e sūtra da scrivere.',
-    'lv.intro': 'Scegli il tuo livello e allenati: la sessione mescola i formati di quel livello. Il livello è tuo e resta salvato per ogni modulo.',
+    'lv.d2': 'Aggiunge completare e correggere, mescolati agli esercizi del Base.',
+    'lv.d3': 'Aggiunge tabelle intere, sillabe da scandire, forme e sūtra da scrivere, mescolati a tutto il resto.',
+    'lv.intro': 'Scegli il tuo livello e allenati: ogni livello comprende anche quelli sotto, mescolati. Il livello è tuo e resta salvato per ogni modulo.',
     'lv.go': 'Allenati', 'lv.pick': 'Scegli tu l’esercizio', 'lv.sessionTitle': '{m} · {l}',
     'lv.exam': 'Esame di Chandaḥ', 'lv.examD': '{n} versi, {m} minuti: riconosci il metro tra tutti quelli del corso. Il tempo scende e l’esame finisce allo zero.', 'lv.examGo': 'Inizia l’esame', 'lv.examTitle': 'Esame di Chandaḥ',
     'test.level': 'Livello', 'test.lvAria': 'Livello del test', 'test.lv0': 'Il mio', 'test.lv1': 'Base', 'test.lv2': 'Interm.', 'test.lv3': 'Avanz.',
@@ -4517,7 +4518,7 @@ const MODULES = [
   // Ogni tipo di domanda sta in un solo livello; il livello si sceglie per modulo e si salva (archivio privato di ognuno).
   const KLEVEL = {
     metre: 1, schema: 1, gana: 1, yati: 2, spot: 2, fill: 2, scan: 3,
-    letter: 1, varga: 1, hari: 2, odd: 2, grid: 3,
+    letter: 1, varga: 2, odd: 2, hari: 3, grid: 3,
     sl_lg: 1, sl_rule: 2, sl_tap: 2, sl_div: 3,
     sa_res: 1, sa_mat: 1, sa_sut: 2, sa_comp: 2, sa_join: 3, sa_split: 3, sa_type: 3,
     no_case: 1, no_num: 1, no_cell: 2, no_err: 2, no_tab: 3, no_write: 3,
@@ -4527,7 +4528,7 @@ const MODULES = [
   };
   function lvlOf(mod) { const v = store.lvl && store.lvl[mod]; return v >= 1 && v <= 3 ? v : 1; }
   function levelKinds(mod, lv) {
-    const all = MOD_KINDS[mod] || [], k = all.filter(x => KLEVEL[x] === lv);
+    const all = MOD_KINDS[mod] || [], k = all.filter(x => KLEVEL[x] <= lv);   // a cascata: ogni livello comprende anche quelli sotto
     return k.length ? k : all;
   }
   function startLevelEx(mod) {
