@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=46;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=47;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
@@ -11,6 +11,7 @@
 <!-- v1.3.7: icona, manifest e colori della barra spostati nell'head (prima erano nel body e iOS non li leggeva) -->
 <!-- v1.3.6: casi e numeri in sanscrito (caturthī ekavacana…), italiano piccolo accanto -->
 <!-- v1.3.5: nuova icona dell'app (immagine fornita da Govinda) -->
+<!-- v1.4.7: livelli per modulo (Base, Intermedio, Avanzato), «Allenati», recap degli errori, «Scrivi la forma» e «Scrivi il sūtra», esame di Chandaḥ, 13 versi in più, 10 parole come gopī (solo in «Scrivi la forma») -->
 <!-- v1.4.5: la barra in basso scorrendo scompare di nuovo (non si riduce più a capsula); etichetta «La formula» senza «dal Notion» -->
 <!-- v1.3.4: la barra in basso scorrendo si riduce a una capsula con la sola scheda attiva (non sparisce più) -->
 <!-- v1.3.3: tema Notte in grafite Apple (grigi neutri, accento ambra, verde/rosso iOS) -->
@@ -801,6 +802,19 @@ button.si-s:active { transform: scale(.95); }
 .muted.c { text-align: center; }
 .vo-face { min-height: 150px; display: flex; flex-direction: column; justify-content: center; }
 .vo-hr { border: 0; border-top: 1px solid var(--hair); width: 60%; margin: 14px auto; }
+.lvl .seg { margin: 4px 0 4px; }
+.lvl .note { margin-top: 10px; }
+.lvl .btn.wide { margin-top: 14px; }
+.lvmore { display: flex; align-items: center; justify-content: space-between; width: 100%; margin: 4px 0 12px; padding: 14px 18px; border: 0; border-radius: 22px; background: var(--cell); box-shadow: inset 0 0 0 1px var(--hair); color: var(--ink); font: 600 15px var(--f-ui); cursor: pointer; text-align: left; }
+.lvmore .chev { width: 18px; height: 18px; transition: transform .2s ease; }
+.lvmore.open .chev { transform: rotate(90deg); }
+.ty-in { width: 100%; box-sizing: border-box; font: 500 20px var(--f-ui); padding: 14px 16px; border-radius: 18px; border: 0; background: var(--cell); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--hair); outline: none; margin-top: 14px; }
+.ty-in:focus { box-shadow: inset 0 0 0 2px var(--accent-fill); }
+.ty-keys { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 2px; }
+.ty-k { min-width: 38px; height: 40px; padding: 0 8px; border: 0; border-radius: 12px; background: var(--cell); box-shadow: inset 0 0 0 1px var(--hair); color: var(--ink); font: 500 18px var(--f-ui); cursor: pointer; touch-action: manipulation; }
+.ty-k:active { transform: scale(.94); }
+.ty-code { font: 600 34px var(--f-ui); letter-spacing: .04em; margin: 6px 0 2px; text-align: center; }
+.rc-it { border-radius: 24px; padding: 16px 18px 6px; margin: 0 0 12px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--hair); }
 </style>
 <div id="app"></div>
 <script>
@@ -1034,7 +1048,72 @@ const VERSES = [
     id: 'cc-antya-20-12', metre: 'shardula', ref: 'Caitanya-caritāmṛta Antya 20.12 (Śikṣāṣṭaka 1)', src: 'vedabase',
     url: 'https://vedabase.io/en/library/cc/antya/20/12/',
     lines: ['ceto-darpaṇa-mārjanaṁ bhava-mahā-dāvāgni-nirvāpaṇaṁ', 'śreyaḥ-kairava-candrikā-vitaraṇaṁ vidyā-vadhū-jīvanam', 'ānandāmbudhi-vardhanaṁ prati-padaṁ pūrṇāmṛtāsvādanaṁ', 'sarvātma-snapanaṁ paraṁ vijayate śrī-kṛṣṇa-saṅkīrtanam']
-  }
+  },
+  {
+    id: 'sb-10-21-9', metre: 'vasantatilaka', ref: 'Śrīmad-Bhāgavatam 10.21.9', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/sb/10/21/9/',
+    lines: ['gopyaḥ kim ācarad ayaṁ kuśalaṁ sma veṇur', 'dāmodarādhara-sudhām api gopikānām', 'bhuṅkte svayaṁ yad avaśiṣṭa-rasaṁ hradinyo', 'hṛṣyat-tvaco ’śru mumucus taravo yathāryaḥ']
+  },
+  {
+    id: 'sb-10-21-10', metre: 'vasantatilaka', ref: 'Śrīmad-Bhāgavatam 10.21.10', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/sb/10/21/10/',
+    lines: ['vṛndāvanaṁ sakhi bhuvo vitanoti kīrtiṁ', 'yad devakī-suta-padāmbuja-labdha-lakṣmi', 'govinda-veṇum anu matta-mayūra-nṛtyaṁ', 'prekṣyādri-sānv-avaratānya-samasta-sattvam']
+  },
+  {
+    id: 'sb-10-29-31', metre: 'vasantatilaka', ref: 'Śrīmad-Bhāgavatam 10.29.31', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/sb/10/29/31/',
+    lines: ['maivaṁ vibho ’rhati bhavān gadituṁ nṛ-śaṁsaṁ', 'santyajya sarva-viṣayāṁs tava pāda-mūlam', 'bhaktā bhajasva duravagraha mā tyajāsmān', 'devo yathādi-puruṣo bhajate mumukṣūn']
+  },
+  {
+    id: 'sb-10-29-32', metre: 'vasantatilaka', ref: 'Śrīmad-Bhāgavatam 10.29.32', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/sb/10/29/32/',
+    lines: ['yat paty-apatya-suhṛdām anuvṛttir aṅga', 'strīṇāṁ sva-dharma iti dharma-vidā tvayoktam', 'astv evam etad upadeśa-pade tvayīśe', 'preṣṭho bhavāṁs tanu-bhṛtāṁ kila bandhur ātmā']
+  },
+  {
+    id: 'cc-adi-1-3', metre: 'shikharini', ref: 'Caitanya-caritāmṛta Ādi 1.3', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/cc/adi/1/3/',
+    lines: ['yad advaitaṁ brahmopaniṣadi tad apy asya tanu-bhā', 'ya ātmāntar-yāmī puruṣa iti so ’syāṁśa-vibhavaḥ', 'ṣaḍ-aiśvaryaiḥ pūrṇo ya iha bhagavān sa svayam ayaṁ', 'na caitanyāt kṛṣṇāj jagati para-tattvaṁ param iha']
+  },
+  {
+    id: 'cc-adi-1-7', metre: 'indravajra', ref: 'Caitanya-caritāmṛta Ādi 1.7', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/cc/adi/1/7/',
+    lines: ['saṅkarṣaṇaḥ kāraṇa-toya-śāyī', 'garbhoda-śāyī ca payo ’bdhi-śāyī', 'śeṣaś ca yasyāṁśa-kalāḥ sa nityā-', 'nandākhya-rāmaḥ śaraṇaṁ mamāstu']
+  },
+  {
+    id: 'cc-adi-1-8', metre: 'shalini', ref: 'Caitanya-caritāmṛta Ādi 1.8', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/cc/adi/1/8/',
+    lines: ['māyātīte vyāpi-vaikuṇṭha-loke', 'pūrṇaiśvarye śrī-catur-vyūha-madhye', 'rūpaṁ yasyodbhāti saṅkarṣaṇākhyaṁ', 'taṁ śrī-nityānanda-rāmaṁ prapadye']
+  },
+  {
+    id: 'bg-4-7', metre: 'anustup', ref: 'Bhagavad-gītā 4.7', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/bg/4/7/',
+    lines: ['yadā yadā hi dharmasya', 'glānir bhavati bhārata', 'abhyutthānam adharmasya', 'tadātmānaṁ sṛjāmy aham']
+  },
+  {
+    id: 'bg-18-66', metre: 'anustup', ref: 'Bhagavad-gītā 18.66', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/bg/18/66/',
+    lines: ['sarva-dharmān parityajya', 'mām ekaṁ śaraṇaṁ vraja', 'ahaṁ tvāṁ sarva-pāpebhyo', 'mokṣayiṣyāmi mā śucaḥ']
+  },
+  {
+    id: 'cc-antya-20-16', metre: 'vasantatilaka', ref: 'Caitanya-caritāmṛta Antya 20.16 (Śikṣāṣṭaka 2)', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/cc/antya/20/16/',
+    lines: ['nāmnām akāri bahudhā nija-sarva-śaktis', 'tatrārpitā niyamitaḥ smaraṇe na kālaḥ', 'etādṛśī tava kṛpā bhagavan mamāpi', 'durdaivam īdṛśam ihājani nānurāgaḥ']
+  },
+  {
+    id: 'cc-antya-20-39', metre: 'anustup', ref: 'Caitanya-caritāmṛta Antya 20.39 (Śikṣāṣṭaka 7)', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/cc/antya/20/39/',
+    lines: ['yugāyitaṁ nimeṣeṇa', 'cakṣuṣā prāvṛṣāyitam', 'śūnyāyitaṁ jagat sarvaṁ', 'govinda-viraheṇa me']
+  },
+  {
+    id: 'cc-adi-1-9', metre: 'shalini', ref: 'Caitanya-caritāmṛta Ādi 1.9', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/cc/adi/1/9/',
+    lines: ['māyā-bhartājāṇḍa-saṅghāśrayāṅgaḥ', 'śete sākṣāt kāraṇāmbhodhi-madhye', 'yasyaikāṁśaḥ śrī-pumān ādi-devas', 'taṁ śrī-nityānanda-rāmaṁ prapadye']
+  },
+  {
+    id: 'cc-adi-1-10', metre: 'shalini', ref: 'Caitanya-caritāmṛta Ādi 1.10', src: 'vedabase',
+    url: 'https://vedabase.io/en/library/cc/adi/1/10/',
+    lines: ['yasyāṁśāṁśaḥ śrīla-garbhoda-śāyī', 'yan-nābhy-abjaṁ loka-saṅghāta-nālam', 'loka-sraṣṭuḥ sūtikā-dhāma dhātus', 'taṁ śrī-nityānanda-rāmaṁ prapadye']
+  },
 ];
 
 // ---------- Lingue ----------
@@ -1750,6 +1829,49 @@ const MODULES = [
 
   // ---------- lingua: preferenza salvata, altrimenti quella del telefono, altrimenti inglese ----------
   const LKEY = 'vr-lang-v1';
+  // v1.4.2: livelli, Allenati, esercizi da scrivere, esame, riepilogo
+  Object.assign(I18N.en, {
+    'lv.n1': 'Base', 'lv.n2': 'Intermediate', 'lv.n3': 'Advanced', 'lv.aria': 'Level', 'lv.level': 'Level', 'lv.tag': '{l}',
+    'lv.d1': 'Recognise: pick the answer among the options.',
+    'lv.d2': 'Complete and correct: fill in or fix what is missing, with fewer aids.',
+    'lv.d3': 'Produce: whole tables, syllables to scan, forms and sūtras to write.',
+    'lv.intro': 'Choose your level and train: the session mixes the formats of that level. The level is yours and is kept for each module.',
+    'lv.go': 'Train', 'lv.pick': 'Choose the exercise yourself', 'lv.sessionTitle': '{m} · {l}',
+    'lv.exam': 'Chandaḥ exam', 'lv.examD': '{n} verses, {m} minutes: identify the metre among all those of the course. The clock runs down and the exam ends when it reaches zero.', 'lv.examGo': 'Start the exam', 'lv.examTitle': 'Chandaḥ exam',
+    'test.level': 'Level', 'test.lvAria': 'Level of the test', 'test.lv0': 'Mine', 'test.lv1': 'Base', 'test.lv2': 'Interm.', 'test.lv3': 'Adv.',
+    'test.lvNote': '“Mine” uses, for each module, the level you chose in it.',
+    'kind.no_write': 'Write the form', 'kind.sa_type': 'Write the sūtra',
+    'ex.no_writeD': 'Type the declined form with its diacritics, from the case and number or from a code such as 6.3.',
+    'ex.sa_typeD': 'Type the text of the sūtra that applies to a combination, with diacritics.',
+    'ty.q.write': 'Write the form of this word:', 'ty.q.code': 'Write the form given by the code (case.number):', 'ty.q.sut': 'Write the sūtra that applies to this combination.',
+    'ty.ph': 'Write here', 'ty.keys': 'IAST letters', 'ty.skip': 'I don’t know',
+    'ty.hint': 'Capitals, spaces and hyphens do not matter; the diacritics do (ā, ṭ, ś, ṁ, ḥ…).',
+    'ty.near': 'Almost: the letters are right but the diacritics are not.',
+    'ty.code': 'Code {c} = {k}.',
+    'ty.nati': 'Here the n of the ending becomes ṇ (ṇatva-vidhi): there is an r or ṣ before it, with only a vowel or permitted consonants in between.',
+    'rc.title.one': 'To review · {n} mistake', 'rc.title.other': 'To review · {n} mistakes', 'rc.item': 'Mistake {n}'
+  });
+  Object.assign(I18N.it, {
+    'lv.n1': 'Base', 'lv.n2': 'Intermedio', 'lv.n3': 'Avanzato', 'lv.aria': 'Livello', 'lv.level': 'Livello', 'lv.tag': '{l}',
+    'lv.d1': 'Riconoscere: scegli la risposta tra le opzioni.',
+    'lv.d2': 'Completare e correggere: riempi o sistema ciò che manca, con meno aiuti.',
+    'lv.d3': 'Produrre: tabelle intere, sillabe da scandire, forme e sūtra da scrivere.',
+    'lv.intro': 'Scegli il tuo livello e allenati: la sessione mescola i formati di quel livello. Il livello è tuo e resta salvato per ogni modulo.',
+    'lv.go': 'Allenati', 'lv.pick': 'Scegli tu l’esercizio', 'lv.sessionTitle': '{m} · {l}',
+    'lv.exam': 'Esame di Chandaḥ', 'lv.examD': '{n} versi, {m} minuti: riconosci il metro tra tutti quelli del corso. Il tempo scende e l’esame finisce allo zero.', 'lv.examGo': 'Inizia l’esame', 'lv.examTitle': 'Esame di Chandaḥ',
+    'test.level': 'Livello', 'test.lvAria': 'Livello del test', 'test.lv0': 'Il mio', 'test.lv1': 'Base', 'test.lv2': 'Interm.', 'test.lv3': 'Avanz.',
+    'test.lvNote': '“Il mio” usa, per ogni modulo, il livello che hai scelto in quel modulo.',
+    'kind.no_write': 'Scrivi la forma', 'kind.sa_type': 'Scrivi il sūtra',
+    'ex.no_writeD': 'Scrivi la forma declinata con i diacritici, da caso e numero o da un codice come 6.3.',
+    'ex.sa_typeD': 'Scrivi il testo del sūtra che si applica a una combinazione, con i diacritici.',
+    'ty.q.write': 'Scrivi la forma di questa parola:', 'ty.q.code': 'Scrivi la forma indicata dal codice (caso.numero):', 'ty.q.sut': 'Scrivi il sūtra che si applica a questa combinazione.',
+    'ty.ph': 'Scrivi qui', 'ty.keys': 'Lettere IAST', 'ty.skip': 'Non lo so',
+    'ty.hint': 'Maiuscole, spazi e trattini non contano; i diacritici sì (ā, ṭ, ś, ṁ, ḥ…).',
+    'ty.near': 'Quasi: le lettere sono giuste ma i diacritici no.',
+    'ty.code': 'Codice {c} = {k}.',
+    'ty.nati': 'Qui la n della desinenza diventa ṇ (ṇatva-vidhi): prima c’è una r o una ṣ, con in mezzo solo vocali o consonanti permesse.',
+    'rc.title.one': 'Da rivedere · {n} errore', 'rc.title.other': 'Da rivedere · {n} errori', 'rc.item': 'Errore {n}'
+  });
   const LANGS = Object.keys(I18N);
   let langPref = 'auto';
   try { langPref = localStorage.getItem(LKEY) || 'auto'; } catch (e) { /* ok */ }
@@ -2120,6 +2242,32 @@ const MODULES = [
   // ---------- dati dei moduli Nomi, Pronomi, Verbi e Vocabolario: pagine Notion "Noun declension", "Pronouns declension", "Verbs", "Vocabulary" ----------
   // nomi: t[caso][numero] = [IAST, devanāgarī, segno]  (segno "x" = punto aperto sul Notion, "alt" = due forme sul Notion)
   const NOUNS = [{"id":"krishna","name":"kṛṣṇa","dev":"कृष्ण","g":"m","cls":"puruṣottama liṅgam vāmana arāmāntaḥ śabda","t":[[["kṛṣṇaḥ","कृष्णः"],["kṛṣṇau","कृष्णौ"],["kṛṣṇāḥ","कृष्णाः"]],[["kṛṣṇam","कृष्णम्"],["kṛṣṇau","कृष्णौ"],["kṛṣṇān","कृष्णान्"]],[["kṛṣṇena","कृष्णेन"],["kṛṣṇābhyām","कृष्णाभ्याम्"],["kṛṣṇaiḥ","कृष्णैः"]],[["kṛṣṇāya","कृष्णाय"],["kṛṣṇābhyām","कृष्णाभ्याम्"],["kṛṣṇebhyaḥ","कृष्णेभ्यः"]],[["kṛṣṇāt","कृष्णात्"],["kṛṣṇābhyām","कृष्णाभ्याम्"],["kṛṣṇebhyaḥ","कृष्णेभ्यः"]],[["kṛṣṇasya","कृष्णस्य"],["kṛṣṇayoḥ","कृष्णयोः"],["kṛṣṇānām","कृष्णानाम्"]],[["kṛṣṇe","कृष्णे"],["kṛṣṇayoḥ","कृष्णयोः"],["kṛṣṇeṣu","कृष्णेषु"]],[["he kṛṣṇa","हे कृष्ण"],["he kṛṣṇau","हे कृष्णौ"],["he kṛṣṇāḥ","हे कृष्णाः"]]]},{"id":"radha","name":"rādhā","dev":"राधा","g":"f","cls":"lakṣmī liṅgam trivikrama ārāmāntaḥ śabda","t":[[["rādhā","राधा"],["rādhe","राधे"],["rādhāḥ","राधाः"]],[["rādhām","राधाम्"],["rādhe","राधे"],["rādhāḥ","राधाः"]],[["rādhayā","राधया"],["rādhābhyām","राधाभ्याम्"],["rādhābhiḥ","राधाभिः"]],[["rādhāyai","राधायै"],["rādhābhyām","राधाभ्याम्"],["rādhābhyaḥ","राधाभ्यः"]],[["rādhāyāḥ","राधायाः"],["rādhābhyām","राधाभ्याम्"],["rādhābhyaḥ","राधाभ्यः"]],[["rādhāyāḥ","राधायाः"],["rādhayoḥ","राधयोः"],["rādhānām","राधानाम्"]],[["rādhāyām","राधायाम्"],["rādhayoḥ","राधयोः"],["rādhāsu","राधासु"]],[["he rādhe","हे राधे"],["he rādhe","हे राधे"],["he rādhāḥ","हे राधाः"]]]},{"id":"hari","name":"hari","dev":"हरि","g":"m","cls":"puruṣottama liṅgam vamana irāmāntaḥ śabda","t":[[["hariḥ","हरिः"],["harī","हरी"],["harayaḥ","हरयः"]],[["harim","हरिम्"],["harī","हरी"],["harīn","हरीन्"]],[["hariṇā","हरिणा"],["haribhyām","हरिभ्याम्"],["haribhiḥ","हरिभिः"]],[["haraye","हरये"],["haribhyām","हरिभ्याम्"],["haribhyaḥ","हरिभ्यः"]],[["hareḥ","हरेः"],["haribhyām","हरिभ्याम्"],["haribhyaḥ","हरिभ्यः"]],[["hareḥ","हरेः"],["haryoḥ","हर्योः"],["harīṇām","हरीणाम्"]],[["harau","हरौ"],["haryoḥ","हर्योः"],["hariṣu","हरिषु"]],[["he hare","हे हरे"],["he harī","हे हरी"],["he harayaḥ","हे हरयः"]]]},{"id":"vishnu","name":"viṣṇu","dev":"विष्णु","g":"m","cls":"puruṣottama liṅgam vamana urāmāntaḥ śabda","t":[[["viṣṇuḥ","विष्णुः"],["viṣṇū","विष्णू"],["viṣṇavaḥ","विष्णवः"]],[["viṣṇum","विष्णुम्"],["viṣṇū","विष्णू"],["viṣṇūn","विष्णून्"]],[["viṣṇunā","विष्णुना"],["viṣṇubhyām","विष्णुभ्याम्"],["viṣṇubhiḥ","विष्णुभिः"]],[["viṣṇave","विष्णवे"],["viṣṇubhyām","विष्णुभ्याम्"],["viṣṇubhyaḥ","विष्णुभ्यः"]],[["viṣṇoḥ","विष्णोः"],["viṣṇubhyām","विष्णुभ्याम्"],["viṣṇubhyaḥ","विष्णुभ्यः"]],[["viṣṇoḥ","विष्णोः"],["viṣṇvoḥ","विष्ण्वोः"],["viṣṇūnām","विष्णूनाम्"]],[["viṣṇau","विष्णौ"],["viṣṇvoḥ","विष्ण्वोः"],["viṣṇuṣu","विष्णुषु"]],[["he viṣṇo","हे विष्णो"],["he viṣṇū","हे विष्णू"],["he viṣṇavaḥ","हे विष्णवः"]]]},{"id":"gopi","name":"gopī","dev":"गोपी","g":"f","cls":"lakṣmī liṅgam trivikrama īrāmāntaḥ śabda","t":[[["gopī","गोपी"],["gopyau","गोप्यौ"],["gopyaḥ","गोप्यः"]],[["gopīm","गोपीम्"],["gopyau","गोप्यौ"],["gopīḥ","गोपीः"]],[["gopyā","गोप्या"],["gopībhyām","गोपीभ्याम्"],["gopībhiḥ","गोपीभिः"]],[["gopyai","गोप्यै"],["gopībhyām","गोपीभ्याम्"],["gopībhyaḥ","गोपीभ्यः"]],[["gopyāḥ","गोप्याः"],["gopībhyām","गोपीभ्याम्"],["gopībhyaḥ","गोपीभ्यः"]],[["gopyāḥ","गोप्याः"],["gopyoḥ","गोप्योः"],["gopīnām","गोपीनाम्"]],[["gopyām","गोप्याम्"],["gopyoḥ","गोप्योः"],["gopīṣu","गोपीषु"]],[["he gopi","हे गोपि"],["he gopyau","हे गोप्यौ"],["he gopyaḥ","हे गोप्यः"]]]},{"id":"vanam","name":"vanam","dev":"वनम्","g":"n","cls":"brahma liṅgam","t":[[["vanam","वनम्"],["vane","वने"],["vanāni","वनानि"]],[["vanam","वनम्"],["vane","वने"],["vanāni","वनानि"]],[["vanena","वनेन"],["vanābhyām","वनाभ्याम्"],["vanaiḥ","वनैः"]],[["vanāya","वनाय"],["vanābhyām","वनाभ्याम्"],["vanebhyaḥ","वनेभ्यः"]],[["vanāt","वनात्"],["vanābhyām","वनाभ्याम्"],["vanebhyaḥ","वनेभ्यः"]],[["vanasya","वनस्य"],["vanoḥ","वनोः","x"],["vanānām","वनानाम्"]],[["vane","वने"],["vanoḥ","वनोः","x"],["vaneṣu","वनेषु"]],[["vana","वन"],["vane","वने"],["vanāni","वनानि"]]]},{"id":"bhakti","name":"bhakti","dev":"भक्ति","g":null,"cls":"","t":[[["bhaktiḥ","भक्तिः"],["bhaktī","भक्ती"],["bhaktayaḥ","भक्तयः"]],[["bhaktim","भक्तिम्"],["bhaktī","भक्ती"],["bhaktīḥ","भक्तीः"]],[["bhaktyā","भक्त्या"],["bhaktibhyām","भक्तिभ्याम्"],["bhaktibhiḥ","भक्तिभिः"]],[["bhaktyai","भक्त्यै"],["bhaktibhyām","भक्तिभ्याम्"],["bhaktibhyaḥ","भक्तिभ्यः"]],[["bhaktyāḥ","भक्त्याः"],["bhaktibhyām","भक्तिभ्याम्"],["bhaktibhyaḥ","भक्तिभ्यः"]],[["bhaktyāḥ","भक्त्याः"],["bhaktyoḥ","भक्त्योः"],["bhaktīnām","भक्तीनाम्"]],[["bhaktau / bhaktyām","भक्तौ / भक्त्याम्","alt"],["bhaktyoḥ","भक्त्योः"],["bhaktīṣu","भक्तीषु"]],[["he bhakte","हे भक्ते"],["he bhaktī","हे भक्ती"],["he bhaktayaḥ","हे भक्तयः"]]]}];
+  // ---- dieci parole declinate come gopī (compito della lezione 19, "scegline tre") ----
+  // NON sono nel Notion: le forme sono generate dalla tabella di gopī (il maestro dice che si declinano così), e compaiono solo
+  // nell'esercizio "Scrivi la forma". Il genitivo plurale di lakṣmī e gaurī diventa -ṇām per la regola ṇatva-vidhi (lezione 18).
+  // Il nominativo singolare di lakṣmī resta escluso: non ho dati affidabili che sia uguale a quello di gopī.
+  (function () {
+    const g = NOUNS.find(n => n.id === 'gopi');
+    const WORDS = [
+      ['dāsī', 'dās', 'maidservant', 'serva'], ['devī', 'dev', 'goddess (many meanings)', 'dea (molti significati)'],
+      ['jananī', 'janan', 'mother', 'madre'], ['gaurī', 'gaur', 'a name of Pārvatī, and also of Rādhārāṇī', 'un nome di Pārvatī, e anche di Rādhārāṇī'],
+      ['vāṇī', 'vāṇ', 'speech/process; also a name of Sarasvatī-devī', 'parola/processo; anche un nome di Sarasvatī-devī'],
+      ['patnī', 'patn', 'wife', 'moglie'], ['lakṣmī', 'lakṣm', null, null],
+      ['hariṇī', 'hariṇ', 'doe (literally), woman', 'cerva (letteralmente), donna'],
+      ['śacī', 'śac', 'the name of Caitanya’s mother', 'il nome della madre di Caitanya'], ['nadī', 'nad', 'river', 'fiume']
+    ];
+    if (!g) return;
+    WORDS.forEach(([name, stem, en, it]) => {
+      const t = g.t.map((row, c) => row.map((cell, n) => {
+        let rom = cell[0].replace('gop', stem);
+        if (c === 5 && n === 2 && (stem === 'lakṣm' || stem === 'gaur')) rom = rom.replace(/nām$/, 'ṇām');
+        const cc = [rom, E.toDevanagari(rom)];
+        if (stem === 'lakṣm' && c === 0 && n === 0) cc.push(true);
+        return cc;
+      }));
+      NOUNS.push({ id: 'w-' + stem, name, dev: E.toDevanagari(name), g: 'f', cls: g.cls, t, hid: true, gl: en ? { en, it } : null });
+    });
+  })();
   // pronomi: t[caso][numero] = testo della cella, come sul Notion (le forme alternative restano insieme)
   const PRONS = [{"id":"asmad","name":"asmad","dev":"अस्मद्","p":1,"t":[["aham","āvām","vayam"],["mām / mā","āvām / nau","asmān / naḥ"],["mayā","āvābhyām","asmābhiḥ"],["mahyam / me","āvābhyām / nau","asmabhyam / naḥ"],["mat","āvābhyām","asmat"],["mama / me","āvayoḥ / nau","asmākam / naḥ"],["mayi","āvayoḥ","asmāsu"]]},{"id":"yusmad","name":"yuṣmad","dev":"युष्मद्","p":2,"t":[["tvam","yuvām","yūyam"],["tvām / tvā","yuvām / vām","yuṣmān / vaḥ"],["tvayā","yuvābhyām","yuṣmābhiḥ"],["tubhyam / te","yuvābhyām / vām","yuṣmabhyam / vaḥ"],["tvat","yuvābhyām","yuṣmat"],["tava / te","yuvayoḥ / vām","yuṣmākam / vaḥ"],["tvayi","yuvayoḥ","yuṣmāsu"]]},{"id":"tad","name":"tad","dev":"तद्","p":3,"t":[["saḥ","tau","te"],["tam","tau","tān"],["tena","tābhyām","taiḥ"],["tasmai","tābhyām","tebhyaḥ"],["tasmāt","tābhyām","tebhyaḥ"],["tasya","tayoḥ","teṣām"],["tasmin","tayoḥ","teṣu"]]}];
   // verbi: suf = desinenze, f = forme, d = devanāgarī; PRON_V = i pronomi della pagina Verbs (3ª persona maschile plurale: cella confusa sul Notion)
@@ -2130,11 +2278,12 @@ const MODULES = [
   const VOCAB = [{"g":"v","d":"गच्छति","i":"gacchati","m":"Goes","tr":0},{"g":"v","d":"खादति","i":"khādati","m":"Eats","tr":0},{"g":"v","d":"नृत्यति","i":"nṛtyati","m":"Dances","tr":0},{"g":"v","d":"ददाति","i":"dadāti","m":"Gives","tr":0},{"g":"v","d":"आगच्छति","i":"āgacchati","m":"Comes","tr":0},{"g":"v","d":"अस्ति","i":"asti","m":"Is","tr":0},{"g":"v","d":"अस्तु","i":"astu","m":"May there be","tr":0},{"g":"v","d":"वर्णय","i":"varṇaya","m":"Please describe","tr":0},{"g":"n","d":"भ्रातृ","i":"bhrātṛ","m":"brother","tr":0},{"g":"n","d":"दुहितृ","i":"duhitṛ","m":"daughter","tr":0},{"g":"n","d":"लेखनी","i":"lekanī","m":"pen","tr":0},{"g":"n","d":"मातृ","i":"mātṛ","m":"mother","tr":0},{"g":"n","d":"पितृ","i":"pitṛ","m":"father","tr":0},{"g":"n","d":"पुत्र","i":"putra","m":"son","tr":0},{"g":"n","d":"स्वसृ","i":"svasṛ","m":"sister","tr":0},{"g":"n","d":"वनम्","i":"vanam","m":"forest","tr":1},{"g":"n","d":"फलम्","i":"phalam","m":"fruit","tr":1},{"g":"n","d":"पत्रम्","i":"patram","m":"leaf","tr":1},{"g":"n","d":"पुष्पम्","i":"puṣpam","m":"flower","tr":1},{"g":"n","d":"तोयम् / जलम्","i":"toyam / jalam","m":"water","tr":1},{"g":"n","d":"धनम्","i":"dhanam","m":"wealth","tr":1},{"g":"n","d":"नेत्रम्","i":"netram","m":"eye","tr":1},{"g":"n","d":"कमलम्","i":"kamalam","m":"lotus","tr":1},{"g":"n","d":"मित्रम्","i":"mitram","m":"friend","tr":1},{"g":"n","d":"गोत्रम्","i":"gotram","m":"lineage / dynasty; hill / mountain","tr":1},{"g":"n","d":"सुखम् / दुःखम्","i":"sukham / duḥkham","m":"happiness / suffering","tr":1},{"g":"n","d":"अन्नम्","i":"annam","m":"food","tr":1},{"g":"n","d":"अलंकारः","i":"alaṁkāraḥ","m":"ornamentation / literary embellishment","tr":1},{"g":"n","d":"श्लेषः","i":"śleṣaḥ","m":"wordplay / double meaning / pun","tr":1}];
   const VOC_BY = Object.fromEntries(VOCAB.map(e => [e.i, e]));
   const SI_KINDS = [];   // modulo "Analisi sillabica" disattivato qui: vale quello pubblicato (tipi sl_*)
-  const NO_KINDS = ['no_cell', 'no_case', 'no_num', 'no_err', 'no_tab'];
+  const NO_KINDS = ['no_cell', 'no_case', 'no_num', 'no_err', 'no_tab', 'no_write'];
+  const TY_KINDS = ['sa_type'];   // sandhi: scrivere il testo del sūtra
   const PR_KINDS = ['pr_cell', 'pr_case', 'pr_tab'];
   const VE_KINDS = ['ve_cell', 've_end', 've_pada', 've_tab'];
   const VO_KINDS = ['vo_card', 'vo_mean', 'vo_word'];
-  const NEWK = NO_KINDS.concat( PR_KINDS, VE_KINDS, VO_KINDS);   // tipi di domanda dei moduli aggiunti nella 1.1.2
+  const NEWK = NO_KINDS.concat(PR_KINDS, VE_KINDS, VO_KINDS, TY_KINDS);   // tipi di domanda dei moduli aggiunti nella 1.1.2
   const EXK = CH_KINDS.concat(ALPHA_KINDS, SANDHI_KINDS, SYL_KINDS, NEWK);
   const cellId = i => ALPHA.grid[Math.floor(i / 5)].ids[i % 5];
   const gname = g => t('ag.' + g);
@@ -2145,7 +2294,7 @@ const MODULES = [
   const KEY = 'vr-proto-progress-v1';   // esiti per tipo di esercizio
   const KEY2 = 'vr-proto-study-v2';     // obiettivo, tempo di studio per giorno, test del giorno, errori da ripassare, punti deboli
   const GOAL_MIN = 5, GOAL_MAX = 60;
-  const freshStore = () => ({ goal: 15, days: {}, last: null, wrong: [], weak: {}, daily: null, ts: 0, epoch: 0 });
+  const freshStore = () => ({ goal: 15, days: {}, last: null, wrong: [], weak: {}, daily: null, ts: 0, epoch: 0, lvl: {} });
   let progress = {};
   let store = freshStore();
   try { progress = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { progress = {}; }
@@ -2159,6 +2308,8 @@ const MODULES = [
     if (!store.weak || typeof store.weak !== 'object') store.weak = {};
     if (!(store.ts >= 0)) store.ts = 0;
     if (!(store.epoch >= 0)) store.epoch = 0;
+    if (!store.lvl || typeof store.lvl !== 'object' || Array.isArray(store.lvl)) store.lvl = {};
+    Object.keys(store.lvl).forEach(k => { if (!/^[a-z]{3,12}$/.test(k) || !(store.lvl[k] >= 1 && store.lvl[k] <= 3)) delete store.lvl[k]; else store.lvl[k] = Math.round(store.lvl[k]); });
     if (store.last === 'review') store.last = 'daily';
     if (store.daily && !Array.isArray(store.daily.items)) store.daily = null;
   }
@@ -2192,7 +2343,7 @@ const MODULES = [
     const snap = readCode(d.code);
     const rE = d.epoch | 0, lE = store.epoch | 0;
     if (rE < lE) return false;
-    if (rE > lE) { const g = store.goal; progress = {}; store = freshStore(); store.goal = g; store.epoch = rE; }
+    if (rE > lE) { const g = store.goal, lv = store.lvl; progress = {}; store = freshStore(); store.goal = g; store.lvl = lv || {}; store.epoch = rE; }
     applyCode(snap, (d.ts || 0) > (store.ts || 0));
     return true;
   }
@@ -2299,7 +2450,7 @@ const MODULES = [
   const b64 = str => btoa(unescape(encodeURIComponent(str)));
   const unb64 = str => decodeURIComponent(escape(atob(str)));
   function makeSnap() {
-    return { v: 1, t: Date.now(), progress, store: { goal: store.goal, days: store.days, last: store.last, wrong: store.wrong, weak: store.weak, daily: store.daily } };
+    return { v: 1, t: Date.now(), progress, store: { goal: store.goal, days: store.days, last: store.last, wrong: store.wrong, weak: store.weak, daily: store.daily, lvl: store.lvl } };
   }
   function makeCode() { return CODE_PREFIX + b64(JSON.stringify(makeSnap())); }
   function readCode(txt) {
@@ -2363,6 +2514,9 @@ const MODULES = [
     store.wrong = store.wrong.slice(0, 40);
     if ((adopt || !hadData) && num(st.goal, GOAL_MAX) >= GOAL_MIN) store.goal = Math.round(num(st.goal, GOAL_MAX) / 5) * 5;
     if ((adopt || !LAST_KINDS.includes(store.last)) && LAST_KINDS.includes(st.last)) store.last = st.last;
+    if ((adopt || !hadData) && st.lvl && typeof st.lvl === 'object' && !Array.isArray(st.lvl)) {
+      Object.keys(st.lvl).sort().forEach(k => { if (/^[a-z]{3,12}$/.test(k) && st.lvl[k] >= 1 && st.lvl[k] <= 3) store.lvl[k] = Math.round(st.lvl[k]); });
+    }
     const d = st.daily;
     if (d && typeof d === 'object' && /^\d{4}-\d{2}-\d{2}$/.test(d.k || '') && Array.isArray(d.items) && d.items.length && d.items.length <= 30 && d.items.every(validItem)) {
       const cur = store.daily;
@@ -2417,7 +2571,7 @@ const MODULES = [
   const LENS = [10, 20, 30];
   const CORDER = ['metri', 'esercizi'];
   const AORDER = ['tabelle', 'esercizi'];
-  const S = { hl: null, screen: 'home', tab: 'metri', atab: 'tabelle', stab: 'regole', mtab: 'teoria', nsel: { nomi: 'krishna', pronomi: 'asmad', verbi: 'vand' }, openMetre: null, verse: null, scan: false, ex: null, sheet: null, testMods: [], testAll: true, testLen: 10, peek: false, still: false, dir: 0, tp: {}, rst: false, code: null, codeMsg: null, restore: false, pm: {}, sx: {}, q: '' };
+  const S = { hl: null, screen: 'home', tab: 'metri', atab: 'tabelle', stab: 'regole', mtab: 'teoria', nsel: { nomi: 'krishna', pronomi: 'asmad', verbi: 'vand' }, openMetre: null, verse: null, scan: false, ex: null, sheet: null, testMods: [], testAll: true, testLen: 10, peek: false, still: false, dir: 0, tp: {}, rst: false, code: null, codeMsg: null, restore: false, pm: {}, sx: {}, q: '', lvo: {}, testLvl: 0 };
 
   // ---------- componenti ----------
   function topbar(title, sub, backAct, backLabel, navExtra, exMode) {
@@ -2584,6 +2738,7 @@ const MODULES = [
         return `<button class="pick${on ? ' on' : ''}" data-act="pickmod" data-id="${m.id}" aria-pressed="${on}">${CHECK}${t('mod.' + m.id)}</button>`; }).join('');
     const lens = tabBar('len', LENS.map(k => `<button class="segb${S.testLen === k ? ' on' : ''}" data-act="testlen" data-n="${k}" aria-pressed="${S.testLen === k}">${k}</button>`),
       Math.max(0, LENS.indexOf(S.testLen)), 'seg', t('test.qAria'), false);
+    const lvs = tabBar('tlv', [0, 1, 2, 3].map(k => `<button class="segb${S.testLvl === k ? ' on' : ''}" data-act="testlvl" data-n="${k}" aria-pressed="${S.testLvl === k}">${t('test.lv' + k)}</button>`), S.testLvl, 'seg', t('test.lvAria'), false);
     return `<header class="bar top"><h1 class="t">${t('test.title')}</h1><p class="sub">${t('test.sub')}</p></header>
       <div class="list gap">${dailyRow()}${reviewRow()}</div>
       <h2 class="h2">${t('test.custom')}</h2>
@@ -2591,6 +2746,8 @@ const MODULES = [
         <p class="lab first">${t('test.modules')}</p><div class="picks">${chips}</div>
         ${soon ? `<p class="note tight">${tn('test.soon', soon)}</p>` : ''}
         <p class="lab">${t('test.questions')}</p>${lens}
+        <p class="lab">${t('test.level')}</p>${lvs}
+        <p class="note tight">${t('test.lvNote')}</p>
         <p class="note">${t('test.mix')}</p>
         <button class="btn btn-p wide" data-act="test-start"${sel.length ? '' : ' disabled'}>${t('test.start')}</button>
       </section>`;
@@ -2786,7 +2943,8 @@ const MODULES = [
       </section>`;
   }
 
-  function viewAlfaEsercizi() {
+  function viewAlfaEsercizi() { return levelPanel('alfabeto'); }
+  function viewAlfaEsercizi_old() {
     const EX = [['letter', 'ex.letterD'], ['varga', 'ex.vargaD'], ['hari', 'ex.hariD'], ['odd', 'ex.oddD'], ['grid', 'ex.gridD']];
     return `<p class="intro">${t('ex.intro')}</p><div class="list">` +
       EX.map(([id, dk]) => {
@@ -2897,7 +3055,8 @@ const MODULES = [
       </article>`;
   }
 
-  function viewEsercizi() {
+  function viewEsercizi() { return levelPanel('chanda'); }
+  function viewEsercizi_old() {
     const EX = [['scan', 'ex.scanD'], ['fill', 'ex.fillD'], ['spot', 'ex.spotD'], ['metre', 'ex.metreD'],
       ['schema', 'ex.schemaD'], ['yati', 'ex.yatiD'], ['gana', 'ex.ganaD']];
     return `<p class="intro">${t('ex.intro')}</p><div class="list">` +
@@ -2909,12 +3068,12 @@ const MODULES = [
   }
 
   // ---------- esercizi ----------
-  const MOD_KINDS = { chanda: CH_KINDS, alfabeto: ALPHA_KINDS, sandhi: SANDHI_KINDS, sillabe: SYL_KINDS, nomi: NO_KINDS, pronomi: PR_KINDS, verbi: VE_KINDS, vocab: VO_KINDS }; // tipi di domanda che ogni modulo mette nei test
+  const MOD_KINDS = { chanda: CH_KINDS, alfabeto: ALPHA_KINDS, sandhi: SANDHI_KINDS.concat(TY_KINDS), sillabe: SYL_KINDS, nomi: NO_KINDS, pronomi: PR_KINDS, verbi: VE_KINDS, vocab: VO_KINDS }; // tipi di domanda che ogni modulo mette nei test
   function testKinds() {
     const act = MODULES.filter(m => m.active).map(m => m.id);
     const ids = S.testAll ? act : S.testMods.filter(id => act.includes(id));
     const k = [], mods = ids.filter(id => MOD_KINDS[id]);
-    mods.forEach(id => MOD_KINDS[id].forEach(x => { if (!k.includes(x)) k.push(x); }));
+    mods.forEach(id => levelKinds(id, S.testLvl || lvlOf(id)).forEach(x => { if (!k.includes(x)) k.push(x); }));
     return k.length ? { kinds: k, mods } : { kinds: CH_KINDS.slice(), mods: ['chanda'] };
   }
 
@@ -3037,7 +3196,7 @@ const MODULES = [
     }
     if (it.kind === 'metre') {
       const v = verseById(it.vid);
-      const others = shuffle(E.METRES.filter(m => m.id !== v.metre)).slice(0, 3).map(m => m.id);
+      const others = shuffle(E.METRES.filter(m => m.id !== v.metre)).slice(0, it.all ? 99 : 3).map(m => m.id);
       return { kind: 'metre', key, item, vid: it.vid, pi: it.pi, answer: v.metre, opts: shuffle([v.metre, ...others]), picked: null };
     }
     if (it.kind === 'schema') {
@@ -3128,7 +3287,7 @@ const MODULES = [
       const wq = weakQ(ks); if (wq) return wq;
       // prima si sceglie il modulo, poi il tipo di domanda: ogni modulo pesa uguale
       const ms = ex.mods && ex.mods.length ? ex.mods : null;
-      if (ms) { const ka = MOD_KINDS[ms[rnd(ms.length)]]; kind = ka[rnd(ka.length)]; }
+      if (ms) { const m = ms[rnd(ms.length)], ka = levelKinds(m, ex.lvl || lvlOf(m)); kind = ka[rnd(ka.length)]; }
       else kind = ks[rnd(ks.length)];
     }
     return buildQ(randItem(kind, ex));
@@ -3148,16 +3307,23 @@ const MODULES = [
     const m = E.METRE_BY_ID[mid], kinds = ['scan', 'fill', 'spot'].concat(m.yati.length ? ['yati'] : []);
     begin(newEx('mix', { origin: 'chanda', metre: mid, kinds, total: 8 }));
   }
-  function startTest() { store.last = 'mix'; save(); const k = testKinds(); begin(newEx('mix', { origin: 'test', total: S.testLen, kinds: k.kinds, mods: k.mods })); }
+  function startTest() { store.last = 'mix'; save(); const k = testKinds(); begin(newEx('mix', { origin: 'test', total: S.testLen, kinds: k.kinds, mods: k.mods, lvl: S.testLvl })); }
 
   // Test del giorno: un po' di tutto, con fino a tre domande da ripassare (quelle in scadenza)
   function buildDaily(total) {
     const items = [], seen = new Set();
     const push = it => { const k = keyOf(it); if (seen.has(k)) return; seen.add(k); items.push(cleanItem(it)); };
     shuffle(dueList().filter(validItem)).slice(0, 3).forEach(push);
-    const ex = { used: new Set() }, order = shuffle(EXK);
+    const ex = { used: new Set() }, order = dailyOrder();
     for (let i = 0, guard = 0; items.length < total && guard < 300; guard++) push(randItem(order[i++ % order.length], ex));
     return shuffle(items);
+  }
+  // tipi di domanda del Test del giorno: per ogni modulo attivo, quelli del livello in cui si è, a rotazione tra i moduli
+  function dailyOrder() {
+    const lists = MODULES.filter(m => m.active && MOD_KINDS[m.id]).map(m => shuffle(levelKinds(m.id, lvlOf(m.id))));
+    const out = [];
+    for (let r = 0; out.length < 120 && r < 40; r++) lists.forEach(l => { if (l.length) out.push(l[r % l.length]); });
+    return out.length ? out : shuffle(EXK);
   }
   function startDaily(fresh) {
     const d = store.daily;
@@ -3200,7 +3366,7 @@ const MODULES = [
 
   // cronometro dell'esercizio: parte con la prima domanda, si ferma al risultato
   function exClock(ex) {
-    const ms = Math.max(0, (ex.end || Date.now()) - (ex.t0 || Date.now())), m = Math.floor(ms / 60000), sec = Math.floor(ms / 1000) % 60;
+    const el = Math.max(0, (ex.end || Date.now()) - (ex.t0 || Date.now())), ms = ex.limit && !ex.done ? Math.max(0, ex.limit - el) : el, m = Math.floor(ms / 60000), sec = Math.floor(ms / 1000) % 60;
     return m + ':' + String(sec).padStart(2, '0');
   }
   function exHead(ex) {
@@ -3208,7 +3374,7 @@ const MODULES = [
     const pct = ex.done ? 100 : Math.round(100 * ((ex.n - 1) + (answered ? 1 : 0)) / ex.total);
     const back = ex.origin === 'test' ? 'ex-exit-test' : ex.vid ? 'ex-exit-verse' : 'ex-exit';
     const label = ex.origin === 'test' ? t('x.test') : ex.metre ? t('tab.metres') : ex.vid ? t('x.toVerse') : t('x.exercises');
-    return topbar(ex.metre ? E.METRE_BY_ID[ex.metre].name : kindName(ex.type), ex.done ? t('x.result') : t('x.qOf', { n: ex.n, t: ex.total }), back, label, `<span class="extimer" id="extimer" role="timer" aria-label="${esc(t('x.timer'))}">${exClock(ex)}</span>`, true) +
+    return topbar(ex.metre ? E.METRE_BY_ID[ex.metre].name : ex.title || kindName(ex.type), ex.done ? t('x.result') : t('x.qOf', { n: ex.n, t: ex.total }), back, label, `<span class="extimer" id="extimer" role="timer" aria-label="${esc(t('x.timer'))}">${exClock(ex)}</span>`, true) +
       `<div class="bar-track slim"><div class="bar-fill" style="width:${pct}%"></div></div>`;
   }
 
@@ -3225,7 +3391,7 @@ const MODULES = [
         <p class="done-n">${t('x.outOf', { s: ex.score, t: ex.total })}</p>
         <p class="muted">${ex.type === 'scan' ? t('x.padaOk') : t('x.correct')}</p>${brk}${note}
         <div class="row"><button class="btn btn-p" data-act="again">${ex.type === 'daily' ? t('x.dailyAgain') : t('x.again')}</button>
-        <button class="btn" data-act="${back}">${ex.origin === 'test' ? t('x.toTests') : ex.metre ? t('x.toMetre') : ex.vid ? t('x.toVerseBtn') : t('x.toEx')}</button></div></section>`;
+        <button class="btn" data-act="${back}">${ex.origin === 'test' ? t('x.toTests') : ex.metre ? t('x.toMetre') : ex.vid ? t('x.toVerseBtn') : t('x.toEx')}</button></div></section>` + recapHtml(ex);
     }
     const q = ex.q;
     const V = { scan: viewScanQ, fill: viewFillQ, spot: viewSpotQ, metre: viewMetreQ, schema: viewSchemaQ, yati: viewYatiQ, gana: viewGanaQ,
@@ -3667,7 +3833,7 @@ const MODULES = [
   // ======================================================================
   const NEWMOD = { nomi: NO_KINDS, pronomi: PR_KINDS, verbi: VE_KINDS, vocab: VO_KINDS };
   const NMODS = Object.keys(NEWMOD);
-  const modOfKind = k => (CH_KINDS.includes(k) ? 'chanda' : ALPHA_KINDS.includes(k) ? 'alfabeto' : SANDHI_KINDS.includes(k) ? 'sandhi' : SYL_KINDS.includes(k) ? 'sillabe' : NMODS.find(m => NEWMOD[m].includes(k)) || 'chanda');
+  const modOfKind = k => (TY_KINDS.includes(k) ? 'sandhi' : CH_KINDS.includes(k) ? 'chanda' : ALPHA_KINDS.includes(k) ? 'alfabeto' : SANDHI_KINDS.includes(k) ? 'sandhi' : SYL_KINDS.includes(k) ? 'sillabe' : NMODS.find(m => NEWMOD[m].includes(k)) || 'chanda');
   const CASE_SK = ['prathamā', 'dvitīyā', 'tṛtīyā', 'caturthī', 'pañcamī', 'ṣaṣṭhī', 'saptamī', 'sambodhana'];
   const CASE_DV = ['प्रथमा', 'द्वितीया', 'तृतीया', 'चतुर्थी', 'पञ्चमी', 'षष्ठी', 'सप्तमी', 'संबोधन'];
   const NUM_SK = ['ekavacana', 'dvivacana', 'bahuvacana'];
@@ -3693,7 +3859,7 @@ const MODULES = [
   NOUNS.forEach(p => { PAR[p.id] = { id: p.id, mod: 'nomi', name: p.name, dev: p.dev, nc: 8, txt: (c, n) => p.t[c][n][0], dv: (c, n) => p.t[c][n][1], ok: (c, n) => !p.t[c][n][2], raw: p }; });
   PRONS.forEach(p => { PAR[p.id] = { id: p.id, mod: 'pronomi', name: p.name, dev: p.dev, nc: 7, txt: (c, n) => p.t[c][n], dv: () => '', ok: () => true, raw: p }; });
   VERBS.forEach(v => { PAR[v.id] = { id: v.id, mod: 'verbi', name: v.name, dev: v.dev, nc: 3, txt: (p, n) => v.f[p][n], dv: (p, n) => v.d[p][n], ok: () => true, raw: v }; });
-  const parIds = mod => (mod === 'nomi' ? NOUNS : mod === 'pronomi' ? PRONS : VERBS).map(p => p.id);
+  const parIds = mod => (mod === 'nomi' ? NOUNS : mod === 'pronomi' ? PRONS : VERBS).filter(p => !p.hid).map(p => p.id);
   const cellsOf = P => { const a = []; for (let c = 0; c < P.nc; c++) for (let n = 0; n < 3; n++) if (P.ok(c, n)) a.push({ c, n }); return a; };
   const txtAt = (P, i) => P.txt(Math.floor(i / 3), i % 3);
   const dupCount = (P, s) => { let k = 0; for (let c = 0; c < P.nc; c++) for (let n = 0; n < 3; n++) if (P.txt(c, n) === s) k++; return k; };
@@ -3818,6 +3984,8 @@ const MODULES = [
       case 've_cell': return `ve_cell:${it.pid}:${it.mode}:${it.ps}:${it.nb}`;
       case 've_end': return `ve_end:${it.pid}:${it.ps}:${it.nb}`;
       case 've_pada': return `ve_pada:${it.w}`;
+      case 'no_write': return `no_write:${it.pid}:${it.cs}:${it.nb}:${it.mode}`;
+      case 'sa_type': return `sa_type:${it.xi}`;
       case 'si_wt': case 'si_rule': return `${it.kind}:${it.vid}:${it.pi}:${it.wi}:${it.sy}`;
       case 'si_tap': case 'si_div': return `${it.kind}:${it.vid}:${it.pi}:${it.wi}`;
       default: return `${it.kind}:${it.w}${it.mode ? ':' + it.mode : ''}`;   // vo_*
@@ -3836,6 +4004,7 @@ const MODULES = [
       const s = info.syls[it.sy];
       return inRange(it.sy, info.syls.length) && !s.amb && (info.syls.length >= 2 || info.last);
     }
+    if (k === 'sa_type') { const x = typeof it.xi === 'string' ? SANDHI.EB[it.xi] : null; return tyOkX(x); }
     const P = typeof it.pid === 'string' ? PAR[it.pid] : null;
     if (!P || P.mod !== modOfKind(k)) return false;
     if (k === 'no_tab' || k === 'pr_tab' || k === 've_tab') {
@@ -3848,6 +4017,7 @@ const MODULES = [
     }
     if (k === 've_end') return inRange(it.ps, 3) && inRange(it.nb, 3);
     if (!inRange(it.cs, P.nc)) return false;
+    if (k === 'no_write') return inRange(it.nb, 3) && P.ok(it.cs, it.nb) && !(it.cs === 0 && it.nb === 0) && (it.mode === 'name' || it.mode === 'code');
     if (k === 'no_cell' || k === 'pr_cell') return inRange(it.nb, 3) && P.ok(it.cs, it.nb);
     if (k === 'no_case' || k === 'pr_case') return inRange(it.nb, 3) && uniqCell(P, it.cs, it.nb);
     if (k === 'no_num') return (it.mode === 's2p' || it.mode === 's2d') && P.ok(it.cs, 0) && P.ok(it.cs, it.mode === 's2p' ? 2 : 1) && P.txt(it.cs, 0) !== P.txt(it.cs, it.mode === 's2p' ? 2 : 1);
@@ -3886,6 +4056,8 @@ const MODULES = [
       });
       case 've_end': return once(() => ({ kind, pid: nmPick(VERBS).id, ps: rnd(3), nb: rnd(3) }));
       case 've_pada': return once(() => ({ kind, w: nmPick(PADA).s }));
+      case 'no_write': return once(() => { const p = PAR[nmPick(NOUNS).id], x = nmPick(cellsOf(p).filter(y => !(y.c === 0 && y.n === 0))); return { kind, pid: p.id, cs: x.c, nb: x.n, mode: rnd(2) ? 'code' : 'name' }; });
+      case 'sa_type': return once(() => ({ kind, xi: nmPick(SANDHI.EX.filter(tyOkX)).id }));
       case 'si_wt': case 'si_rule': return once(() => {
         const cl = siPools().cls;
         let c;
@@ -3904,6 +4076,14 @@ const MODULES = [
   // ---- domande ----
   function buildNew(it, key, item) {
     const k = it.kind, base = { kind: k, key, item, picked: null };
+    if (k === 'no_write') {
+      const P = PAR[it.pid], ans = P.txt(it.cs, it.nb);
+      return Object.assign(base, { pid: it.pid, cs: it.cs, nb: it.nb, mode: it.mode, answer: ans, alts: ans.split('/').map(s => s.trim()).filter(Boolean), text: '', checked: false });
+    }
+    if (k === 'sa_type') {
+      const x = SANDHI.EB[it.xi], ns = [x.s].concat(x.also || []).filter(n => SANDHI.SB[n]);
+      return Object.assign(base, { xi: it.xi, answer: SANDHI.SB[x.s].t, alts: ns.map(n => SANDHI.SB[n].t), text: '', checked: false });
+    }
     if (k === 'no_cell' || k === 'pr_cell') {
       const P = PAR[it.pid], ans = P.txt(it.cs, it.nb), opts = formOpts(P, it.cs, it.nb, ans);
       return Object.assign(base, { pid: it.pid, cs: it.cs, nb: it.nb, answer: ans, opts, dv: devMapOf(P, opts) });
@@ -4143,7 +4323,8 @@ const MODULES = [
     return `<p class="intro">${t('vo.intro')}</p><section class="card">${grp('v', 'vo.verbs')}${grp('n', 'vo.nouns')}<p class="note tight">${t('vo.tr')}</p></section>`;
   }
   const THEORY = { sillabe: viewTeoriaSillabe, nomi: viewTeoriaNomi, pronomi: viewTeoriaPronomi, verbi: viewTeoriaVerbi, vocab: viewTeoriaVocab };
-  function viewEserciziNew(mod) {
+  function viewEserciziNew(mod) { return levelPanel(mod); }
+  function viewEserciziNew_old(mod) {
     return `<p class="intro">${t('ex.intro')}</p><div class="list">` + NEWMOD[mod].map(id => {
       const p = progress[id];
       return `<button class="vrow ex-c" data-act="start" data-type="${id}">
@@ -4272,6 +4453,7 @@ const MODULES = [
 
   function viewNewQ(q, ex) {
     const k = q.kind;
+    if (k === 'no_write' || k === 'sa_type') return viewTypeQ(q, ex);
     if (k.startsWith('si_')) return viewSiQ(q, ex);
     if (k.startsWith('vo_')) return viewVocabQ(q, ex);
     if (k === 'no_tab' || k === 'pr_tab' || k === 've_tab') return viewTabQ(q, ex);
@@ -4326,6 +4508,146 @@ const MODULES = [
       fb = `${fbRow(right, q, A, B)}${ctx}${nextRow(ex)}`;
     }
     return `<section class="panel q"><p class="q-lab">${lab}</p>${head}${optsHtml(q, lbl, cls, extra)}${fb}</section>`;
+  }
+
+  // ======================================================================
+  // v1.4.2 — livelli, "Allenati", esercizi da scrivere, esame di Chandaḥ, riepilogo degli errori
+  // ======================================================================
+  // Il livello cambia il FORMATO dell'esercizio (riconoscere → completare → scrivere), non le domande.
+  // Ogni tipo di domanda sta in un solo livello; il livello si sceglie per modulo e si salva (archivio privato di ognuno).
+  const KLEVEL = {
+    metre: 1, schema: 1, gana: 1, yati: 2, spot: 2, fill: 2, scan: 3,
+    letter: 1, varga: 1, hari: 2, odd: 2, grid: 3,
+    sl_lg: 1, sl_rule: 2, sl_tap: 2, sl_div: 3,
+    sa_res: 1, sa_mat: 1, sa_sut: 2, sa_comp: 2, sa_join: 3, sa_split: 3, sa_type: 3,
+    no_case: 1, no_num: 1, no_cell: 2, no_err: 2, no_tab: 3, no_write: 3,
+    pr_case: 1, pr_cell: 2, pr_tab: 3,
+    ve_end: 1, ve_pada: 1, ve_cell: 2, ve_tab: 3,
+    vo_card: 1, vo_mean: 2, vo_word: 3
+  };
+  function lvlOf(mod) { const v = store.lvl && store.lvl[mod]; return v >= 1 && v <= 3 ? v : 1; }
+  function levelKinds(mod, lv) {
+    const all = MOD_KINDS[mod] || [], k = all.filter(x => KLEVEL[x] === lv);
+    return k.length ? k : all;
+  }
+  function startLevelEx(mod) {
+    const lv = lvlOf(mod), kinds = levelKinds(mod, lv);
+    begin(newEx('mix', { origin: 'chanda', mod, mods: [mod], lvl: lv, lvlSession: 1, kinds, total: 10, title: t('lv.sessionTitle', { m: t('mod.' + mod), l: t('lv.n' + lv) }) }));
+  }
+  // esame di Chandaḥ (lezione 35): 20 versi, 90 minuti, riconoscere il metro tra tutti quelli del corso
+  function startExam() {
+    const n = Math.min(20, VERSES.length), vs = shuffle(VERSES).slice(0, n);
+    const items = vs.map(v => ({ kind: 'metre', vid: v.id, pi: rnd(4), all: true }));
+    begin(newEx('exam', { origin: 'chanda', mod: 'chanda', queue: items, total: n, limit: n * 270000, title: t('lv.examTitle') }));
+  }
+
+  // pannello unico degli esercizi di un modulo: livello, "Allenati", e l'elenco completo chiuso
+  function levelPanel(mod) {
+    const L = lvlOf(mod), kinds = MOD_KINDS[mod] || [];
+    const seg = tabBar('lv-' + mod, [1, 2, 3].map(n => `<button class="segb${L === n ? ' on' : ''}" data-act="setlvl" data-mod="${mod}" data-n="${n}" aria-pressed="${L === n}">${t('lv.n' + n)}</button>`), L - 1, 'seg', t('lv.aria'), false);
+    const open = !!S.lvo[mod];
+    const list = kinds.map(id => {
+      const p = progress[id];
+      return `<button class="vrow ex-c" data-act="start" data-type="${id}">
+        <span class="vt"><span class="ex-t">${kindName(id)}</span><span class="vd">${t('ex.' + id + 'D')}</span><span class="vp">${t('lv.tag', { l: t('lv.n' + KLEVEL[id]) })} · ${p ? t('ex.tried', { ok: p.ok, tot: p.tot }) : t('ex.notTried')}</span></span>${CHEV}</button>`;
+    }).join('');
+    const exam = mod === 'chanda' ? `<section class="card lvl"><p class="lab first">${t('lv.exam')}</p><p class="note tight">${t('lv.examD', { n: Math.min(20, VERSES.length), m: Math.round(Math.min(20, VERSES.length) * 4.5) })}</p><button class="btn wide" data-act="exam-start">${t('lv.examGo')}</button></section>` : '';
+    return `<p class="intro">${t('lv.intro')}</p>
+      <section class="card lvl"><p class="lab first">${t('lv.level')}</p>${seg}<p class="note tight" id="lvd">${t('lv.d' + L)}</p>
+        <button class="btn btn-p wide" data-act="lvl-go" data-mod="${mod}">${t('lv.go')}</button></section>
+      ${exam}
+      <button class="lvmore${open ? ' open' : ''}" data-act="lvl-more" data-mod="${mod}" aria-expanded="${open}"><span>${t('lv.pick')}</span>${CHEV}</button>
+      ${open ? `<div class="list">${list}</div>` : ''}`;
+  }
+
+  // ---------- esercizi da scrivere: la forma di un nome (no_write) e il testo del sūtra (sa_type) ----------
+  const TY_KEYS = ['ā', 'ī', 'ū', 'ṛ', 'ṝ', 'ḷ', 'ṅ', 'ñ', 'ṭ', 'ḍ', 'ṇ', 'ś', 'ṣ', 'ṁ', 'ḥ', '’'];
+  const tyCode = (c, n) => (c + 1) + '.' + (n + 1);   // "6.3" = ṣaṣṭhī (6), bahuvacana (3): dagli appunti della lezione 18
+  // sūtra scrivibili: con risultato, con un sūtra proprio, non troppo lunghi e senza parentesi (testo da imparare a memoria)
+  const tyOkX = x => !!(x && x.r && !x.nosut && x.a !== 'madhu' && typeof x.s === 'number' && SANDHI.SB[x.s] && SANDHI.SB[x.s].t.length <= 42 && !/[()]/.test(SANDHI.SB[x.s].t));
+  // confronto tollerante: maiuscole, spazi, trattini, virgole, apostrofi e ṃ/ṁ non contano; i diacritici sì
+  const tyKey = (s, voc) => {
+    let x = String(s || '').normalize('NFC').toLowerCase().replace(/ṃ/g, 'ṁ').trim();
+    if (voc) x = x.replace(/^he\s+/, '');
+    return x.replace(/[\s\-–—,.;:’‘ʼ'`´"()\/|।]/g, '');
+  };
+  const tyPlain = (s, voc) => tyKey(s, voc).normalize('NFD').replace(/[̀-ͯ]/g, '');
+  function tyJudge(q) {
+    const voc = q.kind === 'no_write', typed = tyKey(q.text, voc);
+    if (!typed) return 'bad';
+    if (q.alts.some(a => tyKey(a, voc) === typed)) return 'ok';
+    const pl = tyPlain(q.text, voc);
+    return q.alts.some(a => tyPlain(a, voc) === pl) ? 'near' : 'bad';
+  }
+  function viewTypeQ(q, ex) {
+    const done = q.checked, ok = done && q.verdict === 'ok';
+    let lab, head, ctx = '';
+    if (q.kind === 'no_write') {
+      const P = PAR[q.pid];
+      lab = t(q.mode === 'code' ? 'ty.q.code' : 'ty.q.write');
+      head = `<p class="np-w">${esc(P.txt(0, 0))}</p><p class="np-d">${P.dv(0, 0)}</p>` + (q.mode === 'code' ? `<p class="ty-code">${tyCode(q.cs, q.nb)}</p>` : `<p class="np-s">${cnSk(q.cs, q.nb)}</p>`);
+      if (done) {
+        ctx = `<p class="note tight">${t('ty.code', { c: tyCode(q.cs, q.nb), k: cnLab(q.cs, q.nb) })}</p><p class="np-d">${esc(P.dv(q.cs, q.nb))}</p>${rowHtml(P, q.cs, q.nb)}`;
+        if (q.cs === 5 && q.nb === 2 && /^(lakṣm|gaur)/.test(P.id.replace('w-', ''))) ctx += `<p class="note tight">${t('ty.nati')}</p>`;
+        if (P.raw.gl) ctx += `<p class="note tight"><b>${esc(P.name)}</b> · ${esc(P.raw.gl[LANG === 'it' ? 'it' : 'en'])}</p>`;
+      }
+    } else {
+      const x = SANDHI.EB[q.xi];
+      lab = t('ty.q.sut'); head = `<p class="sa-pair">${esc(x.pair)}</p><p class="sa-dev">${sdev(x.pair)}</p>${glossHtml(x)}`;
+      if (done) ctx = `<p class="note tight"><span class="sa-eg">${esc(x.text)}</span><span class="sa-od">${sdev(x.text)}</span></p>
+        <p class="note tight"><b>${t('sa.sutra', { n: x.s })}</b> · <span class="sa-s">${esc(SANDHI.SB[x.s].t)}</span><span class="sa-od">${sdev(SANDHI.SB[x.s].t)}</span></p>${whyHtml(q, x, x.s, ok)}`;
+    }
+    if (done) {
+      const you = q.text ? esc(q.text) : '—';
+      const msg = ok ? t('mq.right') : (q.verdict === 'near' ? t('ty.near') + ' ' : '') + t('mq.wrong', { a: esc(q.answer), b: you });
+      return `<section class="panel q"><p class="q-lab">${esc(lab)}</p>${head}<p class="res ${ok ? 'ok' : 'bad'}" role="status">${msg}</p>${ctx}${nextRow(ex)}</section>`;
+    }
+    return `<section class="panel q"><p class="q-lab">${esc(lab)}</p>${head}
+      <div class="ty-box"><input id="ty-in" class="ty-in" type="text" lang="sa-Latn" value="${esc(q.text || '')}" placeholder="${esc(t('ty.ph'))}" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done" aria-label="${esc(lab)}">
+      <div class="ty-keys" role="group" aria-label="${esc(t('ty.keys'))}">${TY_KEYS.map(c => `<button type="button" class="ty-k" data-act="ty-ins" data-c="${c}">${c}</button>`).join('')}</div></div>
+      <p class="note tight">${t('ty.hint')}</p>
+      <div class="row"><button class="btn btn-p" data-act="ty-check">${t('sq.check')}</button><button class="btn" data-act="ty-skip">${t('ty.skip')}</button></div></section>`;
+  }
+  function tyAnswer(skip) {
+    const ex = S.ex, q = ex && ex.q;
+    if (!q || q.checked || !q.alts) return;
+    const inp = document.getElementById('ty-in');
+    if (skip) q.text = ''; else if (inp) q.text = inp.value;
+    q.verdict = tyJudge(q); q.checked = true;
+    const ok = q.verdict === 'ok';
+    if (ok) { ex.score++; noteRight(q); }
+    else noteWrong(q, q.kind === 'no_write' ? ['case:' + q.cs] : ['sutra:' + SANDHI.EB[q.xi].s]);
+    addResult(q.kind, ok); ex.log.push({ kind: q.kind, ok });
+    draw(false);
+  }
+
+  // ---------- riepilogo degli errori, in fondo a ogni sessione ----------
+  // Si copia la schermata della domanda sbagliata (con la spiegazione) togliendo ciò che serve solo per rispondere.
+  // Resta in memoria nella sessione: non va nell'archivio.
+  function recCapture() {
+    const ex = S.ex;
+    if (S.screen !== 'ex' || !ex || ex.done || !ex.q) return;
+    const q = ex.q, answered = q.checked || (q.picked !== null && q.picked !== undefined), last = ex.log[ex.log.length - 1];
+    if (!answered || !last || last.ok) return;
+    if (ex.recap && ex.recap[ex.n]) return;
+    const p = app.querySelector('.panel.q');
+    if (!p) return;
+    const c = p.cloneNode(true);
+    c.querySelectorAll('.opts, .row, .al-pool, .ty-box, .hint').forEach(n => n.remove());
+    c.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+    c.querySelectorAll('[data-act]').forEach(n => { n.removeAttribute('data-act'); n.removeAttribute('disabled'); });
+    (ex.recap || (ex.recap = {}))[ex.n] = c.innerHTML;
+  }
+  function recapHtml(ex) {
+    const ks = ex.recap ? Object.keys(ex.recap).map(Number).sort((a, b) => a - b) : [];
+    if (!ks.length) return '';
+    return `<h2 class="h2">${tn('rc.title', ks.length)}</h2>` + ks.slice(0, 20).map(k => `<section class="rc-it" aria-label="${esc(t('rc.item', { n: k }))}">${ex.recap[k]}</section>`).join('');
+  }
+  function tyFocus() {
+    const q = S.ex && S.ex.q;
+    if (S.screen !== 'ex' || !q || q.checked || !q.alts || q.text) return;
+    const i = document.getElementById('ty-in');
+    if (i) { try { i.focus({ preventScroll: true }); } catch (e) { /* ok */ } }
   }
 
   // ---------- schermate ----------
@@ -4410,7 +4732,8 @@ const MODULES = [
       <p class="note">${t('sa.fnote')}</p>
       <p class="note tight">${t('sa.snote', { l: missing.join(', ') })}</p>`;
   }
-  function viewSandhiEsercizi() {
+  function viewSandhiEsercizi() { return levelPanel('sandhi'); }
+  function viewSandhiEsercizi_old() {
     return `<p class="intro">${t('ex.intro')}</p><div class="list">` +
       SANDHI_KINDS.map(id => {
         const p = progress[id];
@@ -4538,7 +4861,8 @@ const MODULES = [
         <p class="note tight">${t('sl.iso')}</p>
       </section>`;
   }
-  function viewSillabeEsercizi() {
+  function viewSillabeEsercizi() { return levelPanel('sillabe'); }
+  function viewSillabeEsercizi_old() {
     return `<p class="intro">${t('ex.intro')}</p><div class="list">` +
       SYL_KINDS.map(id => {
         const p = progress[id];
@@ -4690,7 +5014,7 @@ const MODULES = [
     VERSES.forEach(v => add('verse', v.id, v.ref, v.lines[0], v.ref + ' ' + v.lines.join(' ') + ' ' + v.lines.map(l => E.toDevanagari(l)).join(' ')));
     VOCAB.forEach(w => add('vocab', w.i, w.i + ' · ' + w.d, w.m, w.i + ' ' + w.d + ' ' + w.m));
     // paradigmi (solo nome e classe) e, a parte, ogni forma delle tabelle con le sue caselle. Le forme segnate come punto aperto del Notion non entrano.
-    NOUNS.forEach(n => add('nomi', n.id, n.name + ' · ' + n.dev, n.cls || '', n.name + ' ' + n.dev + ' ' + n.cls + ' ' + n.id));
+    NOUNS.filter(n => !n.hid).forEach(n => add('nomi', n.id, n.name + ' · ' + n.dev, n.cls || '', n.name + ' ' + n.dev + ' ' + n.cls + ' ' + n.id));
     PRONS.forEach(p => add('pronomi', p.id, p.name + ' · ' + p.dev, '', p.name + ' ' + p.dev + ' ' + p.id));
     VERBS.forEach(v => add('verbi', v.id, v.name + ' · ' + v.dev, v.mean, v.name + ' ' + v.dev + ' ' + v.mean + ' ' + v.id));
     Object.keys(PAR).forEach(id => {
@@ -4844,6 +5168,7 @@ const MODULES = [
     window.scrollTo(0, top ? 0 : y);
     if (top && window.__barsReset) window.__barsReset();
     Upd.sync();
+    recCapture(); tyFocus();
   }
 
   // ---------- azioni ----------
@@ -4975,13 +5300,48 @@ const MODULES = [
     start(d) { startEx(d.type, d.vid); S.dir = 1; draw(true); },
     again() {
       const ex = S.ex;
-      if (ex.metre) startMetreEx(ex.metre);
+      if (ex.lvlSession) startLevelEx(ex.mod);
+      else if (ex.type === 'exam') startExam();
+      else if (ex.metre) startMetreEx(ex.metre);
       else if (ex.type === 'mix') startTest();
       else if (ex.type === 'daily') startDaily(true);
       else if (ex.type === 'review') startReview();
       else startEx(ex.type, ex.vid);
       S.dir = 1; draw(true);
     },
+    setlvl(d, b) {
+      const n = +d.n;
+      if (!(n >= 1 && n <= 3) || !MOD_KINDS[d.mod]) return;
+      store.lvl[d.mod] = n; save();
+      const el = b && b.closest('[data-scrub]');
+      if (!el) { draw(false); return; }
+      S.tp[el.dataset.scrub] = n - 1; el.dataset.i = n - 1; el.style.setProperty('--i', n - 1);
+      el.querySelectorAll('[data-act]').forEach((x, j) => x.setAttribute('aria-pressed', String(j === n - 1)));
+      syncOn(el, n - 1);
+      const dd = document.getElementById('lvd'); if (dd) dd.textContent = t('lv.d' + n);
+    },
+    'lvl-go'(d) { if (!MOD_KINDS[d.mod]) return; startLevelEx(d.mod); S.dir = 1; draw(true); },
+    'lvl-more'(d) { S.lvo[d.mod] = !S.lvo[d.mod]; draw(false); },
+    'exam-start'() { startExam(); S.dir = 1; draw(true); },
+    testlvl(d, b) {
+      S.testLvl = Math.max(0, Math.min(3, +d.n));
+      const el = b && b.closest('[data-scrub]');
+      if (!el) { draw(false); return; }
+      S.tp[el.dataset.scrub] = S.testLvl; el.dataset.i = S.testLvl; el.style.setProperty('--i', S.testLvl);
+      el.querySelectorAll('[data-act]').forEach((x, j) => x.setAttribute('aria-pressed', String(j === S.testLvl)));
+      syncOn(el, S.testLvl);
+    },
+    'ty-ins'(d) {
+      const i = document.getElementById('ty-in');
+      if (!i || !S.ex || !S.ex.q) return;
+      const s = i.selectionStart == null ? i.value.length : i.selectionStart, e = i.selectionEnd == null ? s : i.selectionEnd;
+      i.value = i.value.slice(0, s) + d.c + i.value.slice(e);
+      const p = s + d.c.length;
+      try { i.focus(); i.setSelectionRange(p, p); } catch (err) { /* ok */ }
+      S.ex.q.text = i.value;
+    },
+    'ty-check'() { tyAnswer(false); },
+    'ty-skip'() { tyAnswer(true); },
     'ex-exit'() {
       if (S.ex && S.ex.metre) { S.screen = 'chanda'; S.tab = 'metri'; S.openMetre = S.ex.metre; S.verse = null; S.dir = -1; draw(true); return; }
       if (S.ex && S.ex.mod === 'alfabeto') { S.screen = 'alfabeto'; S.atab = 'esercizi'; }
@@ -5193,6 +5553,9 @@ const MODULES = [
     if (box) box.innerHTML = searchResults(S.q);
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.sheet) { S.sheet = null; draw(false); } });
+  document.addEventListener('input', e => { if (e.target && e.target.id === 'ty-in' && S.ex && S.ex.q) S.ex.q.text = e.target.value; });
+  document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target && e.target.id === 'ty-in') { e.preventDefault(); tyAnswer(false); } });
+  app.addEventListener('mousedown', e => { if (e.target.closest && e.target.closest('.ty-k')) e.preventDefault(); });   // i tasti non tolgono il fuoco al campo
 
   // ---------- movimenti ----------
   // 1) trascinare il dito sulla barra in basso o sul controllo segmentato: l'indicatore segue il dito,
@@ -5301,7 +5664,11 @@ const MODULES = [
     if (++ticks % 10 === 0) save();
   }
   setInterval(tick, 1000);
-  setInterval(() => { const el = document.getElementById('extimer'); if (el && S.screen === 'ex' && S.ex && !S.ex.done && !document.hidden) el.textContent = exClock(S.ex); }, 500);
+  setInterval(() => {
+    const x = S.ex;
+    if (S.screen === 'ex' && x && x.limit && !x.done && Date.now() - x.t0 >= x.limit) { x.done = true; x.q = null; x.end = Date.now(); save(); draw(true); return; }   // esame: tempo finito
+    const el = document.getElementById('extimer'); if (el && S.screen === 'ex' && x && !x.done && !document.hidden) el.textContent = exClock(x);
+  }, 500);
 
   // ---------- barre che si nascondono scorrendo ----------
   (function () {
@@ -5325,7 +5692,7 @@ const MODULES = [
   })();
   document.addEventListener('visibilitychange', () => { if (document.hidden) { save(); queuePush(true); } });
   window.addEventListener('pagehide', () => { save(); queuePush(true); });
-  if (window.__VR_TEST__) window.__vr = { tick, shift(n) { dayShift += n; draw(false); }, api: { S, ACT, store: () => store, progress: () => progress, buildQ, randItem, validItem, keyOf, cleanItem, newEx, wordInfo, siPools, divVariants, divParts, divStr, PAR, PADA, NEWK, NEWMOD, buildDaily, startDaily, weakQ, okWeakKey, weakText, makeCode, readCode, applyCode, EXK, MOD_KINDS, view, draw, E } };
+  if (window.__VR_TEST__) window.__vr = { tick, shift(n) { dayShift += n; draw(false); }, api: { S, ACT, store: () => store, progress: () => progress, buildQ, randItem, validItem, keyOf, cleanItem, newEx, wordInfo, siPools, divVariants, divParts, divStr, PAR, PADA, NEWK, NEWMOD, buildDaily, startDaily, weakQ, okWeakKey, weakText, makeCode, readCode, applyCode, EXK, MOD_KINDS, view, draw, E, levelKinds, lvlOf, KLEVEL, startLevelEx, startExam, tyJudge, tyOkX, recapHtml, dailyOrder, VERSES, SANDHI, NOUNS, begin, nextQ } };
 
   // ---------- aggiornamenti: trascina verso il basso nella Home ----------
   // L'app vive già sul dispositivo e funziona senza rete. La ricerca parte solo dal gesto e non blocca mai:
