@@ -1,6 +1,7 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=50;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=51;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<!-- v1.5.1: tre nuovi metri in Chandaḥ (Bhujaṅgaprayāta, Toṭakam, Sragviṇī) dal Notion; versi: Dāmodarāṣṭakam 1 e 6 (prabhupada.io) e Madhurāṣṭakam 1 e 2 (shlokam.org), Sragviṇī ancora senza versi; con «Riprova» e segnalazione degli errori ricorrenti -->
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
 <!-- v1.2.2: scheda Cerca nella barra in basso (sūtra, metri, versi, vocabolario, nomi, pronomi, verbi) -->
@@ -931,6 +932,12 @@ const Engine = (function () {
       ['syād indravajrā yadi tau ja gau gaḥ']),
     metre('shalini', 'Śālinī', 'शालिनी', ['ma', 'ta', 'ta'], 'GG', [4],
       ['māt tau gau cet śālinī vedalokaiḥ']),
+    metre('bhujangaprayata', 'Bhujaṅgaprayāta', 'भुजङ्गप्रयात', ['ya', 'ya', 'ya', 'ya'], '', [3, 6, 9],
+      ['bhujaṅgaprayātaś caturbhir yakāraiḥ']),
+    metre('totaka', 'Toṭakam', 'तोटकम्', ['sa', 'sa', 'sa', 'sa'], '', [3, 6, 9],
+      ['iha toṭakam ambudhisaiḥ prathitam']),
+    metre('sragvini', 'Sragviṇī', 'स्रग्विणी', ['ra', 'ra', 'ra', 'ra'], '', [3, 6, 9],
+      ['raiś caturbhir yutā sragviṇī sammatā']),
     metre('vasantatilaka', 'Vasantatilakā', 'वसन्ततिलक', ['ta', 'bha', 'ja', 'ja'], 'GG', [8],
       ['uktā vasantatilakā tabhajā jagau gaḥ']),
     metre('malini', 'Mālinī', 'मालिनी', ['na', 'na', 'ma', 'ya', 'ya'], '', [8],
@@ -1129,6 +1136,26 @@ const VERSES = [
     url: 'https://vedabase.io/en/library/cc/adi/1/10/',
     lines: ['yasyāṁśāṁśaḥ śrīla-garbhoda-śāyī', 'yan-nābhy-abjaṁ loka-saṅghāta-nālam', 'loka-sraṣṭuḥ sūtikā-dhāma dhātus', 'taṁ śrī-nityānanda-rāmaṁ prapadye']
   },
+  {
+    id: 'damodarastaka-1', metre: 'bhujangaprayata', ref: 'Śrī Dāmodarāṣṭakam 1 (Padma Purāṇa)', src: 'web', site: 'prabhupada.io',
+    url: 'https://prabhupada.io/extras/sva/48',
+    lines: ['namāmīśvaraṁ sac-cid-ānanda-rūpaṁ', 'lasat-kuṇḍalaṁ gokule bhrājamānam', 'yaśodā-bhiyolūkhalād dhāvamānaṁ', 'parāmṛṣṭam atyantato drutya gopyā']
+  },
+  {
+    id: 'damodarastaka-6', metre: 'bhujangaprayata', ref: 'Śrī Dāmodarāṣṭakam 6 (Padma Purāṇa)', src: 'web', site: 'prabhupada.io',
+    url: 'https://prabhupada.io/extras/sva/48',
+    lines: ['namo deva dāmodarānanta viṣṇo', 'prasīda prabho duḥkha-jālābdhi-magnam', 'kṛpā-dṛṣṭi-vṛṣṭyāti-dīnaṁ batānu', 'gṛhāṇeṣa mām ajñam edhy akṣi-dṛśyaḥ']
+  },
+  {
+    id: 'madhurastaka-1', metre: 'totaka', ref: 'Madhurāṣṭakam 1 (Vallabhācārya)', src: 'web', site: 'shlokam.org',
+    url: 'https://shlokam.org/?p=112669',
+    lines: ['adharaṁ madhuraṁ vadanaṁ madhuraṁ', 'nayanaṁ madhuraṁ hasitaṁ madhuram', 'hṛdayaṁ madhuraṁ gamanaṁ madhuraṁ', 'madhurādhi-pater akhilaṁ madhuram']
+  },
+  {
+    id: 'madhurastaka-2', metre: 'totaka', ref: 'Madhurāṣṭakam 2 (Vallabhācārya)', src: 'web', site: 'shlokam.org',
+    url: 'https://shlokam.org/?p=112669',
+    lines: ['vacanaṁ madhuraṁ caritaṁ madhuraṁ', 'vasanaṁ madhuraṁ valitaṁ madhuram', 'calitaṁ madhuraṁ bhramitaṁ madhuraṁ', 'madhurādhi-pater akhilaṁ madhuram']
+  },
 ];
 
 // ---------- Lingue ----------
@@ -1232,7 +1259,7 @@ const I18N = {
     'code.doneNone': 'Done. The code had no study days, but results and weak points were merged.',
 
     'ch.title': 'Chandaḥ', 'ch.sub': 'Sanskrit metrics',
-    'met.intro': 'The gaṇas and the eight metres of the course. Tap a row to see the pattern, the lakṣaṇa and the verses.',
+    'met.intro': 'The gaṇas and the eleven metres of the course. Tap a row to see the pattern, the lakṣaṇa and the verses.',
     'met.ganaSub': '8 patterns of three syllables · yamātārājabhānasalagaṃ',
     'met.formula': 'The formula', 'met.ganas': 'The gaṇas',
     'met.trick': 'A trick added by the app: each gaṇa is its own syllable plus the next two in the formula. ya-mā-tā = laghu guru guru, mā-tā-rā = guru guru guru.',
@@ -1247,6 +1274,7 @@ const I18N = {
     'v.practice': 'Practise on this verse', 'v.scanBtn': 'Scan the pādas', 'v.metreBtn': 'Identify the metre',
     'v.srcVeda': 'Only the verse text is here. Word-for-word, translation and purport are on {link}.',
     'v.srcNotion': 'Text taken from the course Notion.',
+    'v.srcWeb': 'Only the verse text is here. The text comes from {link}, not from Vedabase or the course Notion.',
     'ex.intro': 'Sessions of five questions. Correct answers are saved on this device.',
     'ex.scanD': 'Tap each syllable: laghu or guru? Then check with rules 1–4.',
     'ex.metreD': 'Read a pāda and choose the metre among the eight of the course.',
@@ -1433,7 +1461,7 @@ const I18N = {
     'code.doneNone': 'Fatto. Il codice non conteneva giorni di studio, ma ho unito risultati e punti deboli.',
 
     'ch.title': 'Chandaḥ', 'ch.sub': 'Metrica sanscrita',
-    'met.intro': 'I gaṇa e gli otto metri del corso. Tocca una riga per vedere lo schema, la lakṣaṇa e i versi.',
+    'met.intro': 'I gaṇa e gli undici metri del corso. Tocca una riga per vedere lo schema, la lakṣaṇa e i versi.',
     'met.ganaSub': '8 schemi di tre sillabe · yamātārājabhānasalagaṃ',
     'met.formula': 'La formula', 'met.ganas': 'I gaṇa',
     'met.trick': 'Trucco, aggiunto dall’app: ogni gaṇa è la sua sillaba più le due successive nella formula. ya-mā-tā = laghu guru guru, mā-tā-rā = guru guru guru.',
@@ -1448,6 +1476,7 @@ const I18N = {
     'v.practice': 'Esercitati su questo verso', 'v.scanBtn': 'Scandisci i pāda', 'v.metreBtn': 'Riconosci il metro',
     'v.srcVeda': 'Qui c\'è solo il testo del verso. Sinonimi, traduzione e commento sono su {link}.',
     'v.srcNotion': 'Testo preso dal Notion del corso.',
+    'v.srcWeb': 'Qui c\'è solo il testo del verso. Il testo viene da {link}, non da Vedabase né dal Notion del corso.',
     'ex.intro': 'Sessioni da cinque domande. Le risposte giuste si salvano su questo dispositivo.',
     'ex.scanD': 'Tocca ogni sillaba: laghu o guru? Poi verifica con le regole 1–4.',
     'ex.metreD': 'Leggi un pāda e scegli il metro tra gli otto del corso.',
@@ -3070,7 +3099,9 @@ const MODULES = [
     }
     const src = v.src === 'vedabase'
       ? t('v.srcVeda', { link: `<a class="ext" href="${v.url}" target="_blank" rel="noopener">Vedabase ↗</a>` })
-      : t('v.srcNotion');
+      : v.src === 'web'
+        ? t('v.srcWeb', { link: `<a class="ext" href="${v.url}" target="_blank" rel="noopener">${esc(v.site)} ↗</a>` })
+        : t('v.srcNotion');
     return `
       <button class="back inline" data-act="close-verse">${BACK}<span class="bl">${t('vs.back', { m: m.name })}</span></button>
       <article class="verse">
