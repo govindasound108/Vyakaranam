@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=51;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=52;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.5.1: tre nuovi metri in Chandaḥ (Bhujaṅgaprayāta, Toṭakam, Sragviṇī) dal Notion; versi: Dāmodarāṣṭakam 1 e 6 (prabhupada.io) e Madhurāṣṭakam 1 e 2 (shlokam.org), Sragviṇī ancora senza versi; con «Riprova» e segnalazione degli errori ricorrenti -->
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
@@ -786,6 +786,8 @@ html { overscroll-behavior-y: contain; }
 .np-d { font: 500 22px var(--f-dev); color: var(--soft); text-align: center; margin: 0 0 4px; }
 .np-s { text-align: center; color: var(--soft); font: 500 14px var(--f-ui); margin: 6px 0 12px; }
 .np-s.first { margin-top: 0; }
+.np-goal { text-align: center; color: var(--ink); font: 500 15px var(--f-ui); margin: -6px 0 14px; }
+.np-goal b { color: var(--accent); font-weight: 700; }
 .opts.g3 { grid-template-columns: repeat(3, 1fr); }
 .opt .dv { display: block; font: 400 14px var(--f-dev); color: var(--soft); }
 .opt.oc .mname { font-size: 17px; text-align: center; }
@@ -1747,7 +1749,8 @@ Object.assign(I18N.en, {
   'no.flagX': 'Form still open on the Notion page: it is not used in the exercises.',
   'no.flagAlt': 'The Notion page gives two forms for this cell: it is not used in the exercises.',
   'no.q.cell': 'Which form is this?', 'no.q.case': 'Which case and number is this form?',
-  'no.q.num.p': 'What is the plural of this form?', 'no.q.num.d': 'What is the dual of this form?',
+  'no.q.num.p': 'Same case, plural: which form?', 'no.q.num.d': 'Same case, dual: which form?',
+  'no.given': 'Given form', 'no.goal': 'Find', 'no.fb.num': '“{w}” is {l}.',
   'no.q.err': 'One of the three forms is wrong. Which one?', 'no.q.tab': 'Complete the table of {n}.',
   'no.fb.err': '“{w}” is {l}, not {m} (that is “{c}”).',
   'kind.no_cell': 'Form of the case', 'kind.no_case': 'Which case is it', 'kind.no_num': 'From singular to plural', 'kind.no_err': 'Correct the wrong form', 'kind.no_tab': 'Complete the table',
@@ -1830,7 +1833,8 @@ Object.assign(I18N.it, {
   'no.flagX': 'Forma ancora aperta sul Notion: non viene usata negli esercizi.',
   'no.flagAlt': 'Sul Notion questa cella ha due forme: non viene usata negli esercizi.',
   'no.q.cell': 'Qual è questa forma?', 'no.q.case': 'Che caso e numero è questa forma?',
-  'no.q.num.p': 'Qual è il plurale di questa forma?', 'no.q.num.d': 'Qual è il duale di questa forma?',
+  'no.q.num.p': 'Stesso caso, al plurale: qual è la forma?', 'no.q.num.d': 'Stesso caso, al duale: qual è la forma?',
+  'no.given': 'Forma data', 'no.goal': 'Cerca', 'no.fb.num': '“{w}” è {l}.',
   'no.q.err': 'Una delle tre forme è sbagliata. Quale?', 'no.q.tab': 'Completa la tabella di {n}.',
   'no.fb.err': '“{w}” è {l}, non {m} (che è “{c}”).',
   'kind.no_cell': 'Forma del caso', 'kind.no_case': 'Che caso è', 'kind.no_num': 'Dal singolare al plurale', 'kind.no_err': 'Correggi la forma sbagliata', 'kind.no_tab': 'Completa la tabella',
@@ -3944,6 +3948,14 @@ const MODULES = [
     near.concat(far).forEach(x => { const s = P.txt(x.c, x.n); if (out.length < 3 && !out.includes(s)) out.push(s); });
     return shuffle([ans].concat(out));
   }
+  // "stesso caso, altro numero": quattro forme senza mai la forma data; prima quella dello stesso caso nell'altro numero, poi forme di altri casi
+  function numOpts(P, c, n, ans) {
+    const given = P.txt(c, 0), ok = x => { const s = P.txt(x.c, x.n); return s !== ans && s !== given; };
+    const pool = cellsOf(P).filter(ok), same = shuffle(pool.filter(x => x.c === c)), rest = shuffle(pool.filter(x => x.c !== c && x.n === n)).concat(shuffle(pool.filter(x => x.c !== c && x.n !== n)));
+    const out = [];
+    same.concat(rest).forEach(x => { const s = P.txt(x.c, x.n); if (out.length < 3 && !out.includes(s)) out.push(s); });
+    return shuffle([ans].concat(out));
+  }
   // quattro combinazioni riga+numero ("c,n"): la giusta e tre altre celle valide della stessa tabella
   function comboOpts(P, c, n) {
     const me = c + ',' + n, pool = cellsOf(P).map(x => x.c + ',' + x.n).filter(k => k !== me);
@@ -4159,7 +4171,7 @@ const MODULES = [
       return Object.assign(base, { pid: it.pid, cs: it.cs, nb: it.nb, answer: me, opts: comboOpts(P, it.cs, it.nb) });
     }
     if (k === 'no_num') {
-      const P = PAR[it.pid], n = it.mode === 's2p' ? 2 : 1, ans = P.txt(it.cs, n), opts = formOpts(P, it.cs, n, ans);
+      const P = PAR[it.pid], n = it.mode === 's2p' ? 2 : 1, ans = P.txt(it.cs, n), opts = numOpts(P, it.cs, n, ans);
       return Object.assign(base, { pid: it.pid, cs: it.cs, mode: it.mode, tn: n, answer: ans, opts, dv: devMapOf(P, opts.concat([P.txt(it.cs, 0)])) });
     }
     if (k === 'no_err') {
@@ -4544,9 +4556,13 @@ const MODULES = [
       if (done) ctx = rowHtml(P, q.cs, q.nb);
     } else if (k === 'no_num') {
       lab = t(q.mode === 's2p' ? 'no.q.num.p' : 'no.q.num.d');
-      head = bigForm(P.txt(q.cs, 0), P.dv(q.cs, 0)) + `<p class="np-s">${esc(P.name)} · ${cnSk(q.cs, 0)}</p>`;
+      head = bigForm(P.txt(q.cs, 0), P.dv(q.cs, 0)) + `<p class="np-s">${esc(P.name)} · ${t('no.given')}: ${cnSk(q.cs, 0)}</p><p class="np-goal">${t('no.goal')}: <b>${cnSk(q.cs, q.tn)}</b></p>`;
       label = formLab(q); extra = ' oc';
-      if (done) ctx = rowHtml(P, q.cs, q.tn);
+      if (done) {
+        ctx = rowHtml(P, q.cs, q.tn);
+        const pk = q.opts[q.picked];
+        if (!right && pk !== undefined) { const at = cellsOf(P).filter(x => P.txt(x.c, x.n) === pk).map(x => cnLab(x.c, x.n)).join(' / '); if (at) ctx += `<p class="note tight">${t('no.fb.num', { w: esc(pk), l: at })}</p>`; }
+      }
     } else if (k === 'no_err') {
       lab = t('no.q.err');
       head = `<p class="np-s first">${esc(P.name)} · ${caseN(q.cs)}</p><p class="np-trio">${q.row.map((s, n) => `<span class="${done ? (n === q.answer ? 'bad' : '') : ''}"><i>${numN(n)}</i>${esc(s)}</span>`).join('')}</p>`;
