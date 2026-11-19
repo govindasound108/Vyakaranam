@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=54;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=55;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.5.1: tre nuovi metri in Chandaḥ (Bhujaṅgaprayāta, Toṭakam, Sragviṇī) dal Notion; versi: Dāmodarāṣṭakam 1 e 6 (prabhupada.io) e Madhurāṣṭakam 1 e 2 (shlokam.org), Sragviṇī ancora senza versi; con «Riprova» e segnalazione degli errori ricorrenti -->
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
@@ -15,6 +15,7 @@
 <!-- v1.4.7: livelli per modulo (Base, Intermedio, Avanzato), «Allenati», recap degli errori, «Scrivi la forma» e «Scrivi il sūtra», esame di Chandaḥ, 13 versi in più, 10 parole come gopī (solo in «Scrivi la forma») -->
 <!-- v1.5.3 (53): Alfabeto, Base: nuovo esercizio «I nomi di Jīva Gosvāmī» (vocale = sarveśvara, consonante = viṣṇujana, anusvāra, visarga) -->
 <!-- v1.5.4 (54): Alfabeto, nota sulle vocali: «ekātamaka» → «ekātmaka» -->
+<!-- v1.5.5 (55): Alfabeto, nomi delle colonne: «harigoṣāḥ» → «harighoṣāḥ» -->
 <!-- v1.4.9: Analisi sillabica, scheda Regole: sūtra 31–34 del libro in evidenza (numero, sūtra, devanāgarī, significato); gli esempi si aprono toccando la riga, con sillabe e pesi dal motore -->
 <!-- v1.4.8: i livelli sono a cascata (ogni livello comprende quelli sotto); Alfabeto: 1 lettere e composizioni, 2 + gruppi e lettera fuori posto, 3 + colonne (nomi hari) e griglia -->
 <!-- v1.4.5: la barra in basso scorrendo scompare di nuovo (non si riduce più a capsula); etichetta «La formula» senza «dal Notion» -->
@@ -2030,7 +2031,7 @@ const MODULES = [
       return odd.length === 1 ? odd[0] : null;
     };
     // i sette "nomi hari": cinque colonne della griglia ka–ma e i due gruppi finali
-    const COLN = ['harikamalāni', 'harikhaḍgāḥ', 'harigadāḥ', 'harigoṣāḥ', 'hariveṇavaḥ'];
+    const COLN = ['harikamalāni', 'harikhaḍgāḥ', 'harigadāḥ', 'harighoṣāḥ', 'hariveṇavaḥ'];
     const NAMES = COLN.map((n, c) => ({ id: 'c' + c, n, ids: G.slice(0, 5).map(g => g.ids[c]) }))
       .concat([{ id: 'mitra', n: 'harimitrāṇi', ids: GB.mitra.ids }, { id: 'gotra', n: 'harigotrāṇi', ids: GB.gotra.ids }]);
     const NB = Object.create(null); NAMES.forEach(x => { NB[x.id] = x; });
@@ -2040,7 +2041,7 @@ const MODULES = [
     };
     return { L, order, G, GB, CJ, pool, oddOf, NAMES, NB, nameOf, grid: G.slice(0, 5), svara: order.filter(x => L[x].kind === 'svara'),
       cons: order.filter(x => L[x].kind === 'cons'),
-      cols: ['harikamalāni', 'harikhaḍgāḥ', 'harigadāḥ', 'harigoṣāḥ', 'hariveṇavaḥ'] };
+      cols: ['harikamalāni', 'harikhaḍgāḥ', 'harigadāḥ', 'harighoṣāḥ', 'hariveṇavaḥ'] };
   })();
   Object.assign(I18N.it, { 'met.versesBtn': 'Versi', 'met.practiceBtn': 'Esercitati', 'vs.of': 'Versi nel metro {m}', 'vs.back': 'Versi · {m}', 'x.toMetre': 'Torna ai metri' });
   Object.assign(I18N.en, { 'met.versesBtn': 'Verses', 'met.practiceBtn': 'Practise', 'vs.of': 'Verses in the {m} metre', 'vs.back': 'Verses · {m}', 'x.toMetre': 'Back to metres' });
