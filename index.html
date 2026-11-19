@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><meta name="theme-color" content="#FDFAF3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vyākaraṇam"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"></head><body>
 <title>Harināmāmṛta-vyākaraṇam</title>
-<script>window.VR_N=52;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
+<script>window.VR_N=53;try{if(window.self!==window.top)document.documentElement.classList.add("in-frame")}catch(e){document.documentElement.classList.add("in-frame")}</script>
 <!-- v1.5.1: tre nuovi metri in Chandaḥ (Bhujaṅgaprayāta, Toṭakam, Sragviṇī) dal Notion; versi: Dāmodarāṣṭakam 1 e 6 (prabhupada.io) e Madhurāṣṭakam 1 e 2 (shlokam.org), Sragviṇī ancora senza versi; con «Riprova» e segnalazione degli errori ricorrenti -->
 <!-- v1.4.2: Chandaḥ, Śikhariṇī: audio del lakṣaṇa (lettore sotto il lakṣaṇa; il file sta in audio/ e funziona anche offline) -->
 <!-- v1.2.3: barra dei moduli in alto, barra della Home sempre in basso (tranne negli esercizi), Chandaḥ con Versi ed Esercitati su ogni metro, swipe sui paradigmi -->
@@ -13,6 +13,7 @@
 <!-- v1.3.6: casi e numeri in sanscrito (caturthī ekavacana…), italiano piccolo accanto -->
 <!-- v1.3.5: nuova icona dell'app (immagine fornita da Govinda) -->
 <!-- v1.4.7: livelli per modulo (Base, Intermedio, Avanzato), «Allenati», recap degli errori, «Scrivi la forma» e «Scrivi il sūtra», esame di Chandaḥ, 13 versi in più, 10 parole come gopī (solo in «Scrivi la forma») -->
+<!-- v1.5.3 (53): Alfabeto, Base: nuovo esercizio «I nomi di Jīva Gosvāmī» (vocale = sarveśvara, consonante = viṣṇujana, anusvāra, visarga) -->
 <!-- v1.4.9: Analisi sillabica, scheda Regole: sūtra 31–34 del libro in evidenza (numero, sūtra, devanāgarī, significato); gli esempi si aprono toccando la riga, con sillabe e pesi dal motore -->
 <!-- v1.4.8: i livelli sono a cascata (ogni livello comprende quelli sotto); Alfabeto: 1 lettere e composizioni, 2 + gruppi e lettera fuori posto, 3 + colonne (nomi hari) e griglia -->
 <!-- v1.4.5: la barra in basso scorrendo scompare di nuovo (non si riduce più a capsula); etichetta «La formula» senza «dal Notion» -->
@@ -1177,6 +1178,11 @@ const I18N = {
     'ex.hariD': 'From a consonant to the name of its column (harikamalāni…) or of the group harimitrāṇi / harigotrāṇi, and back.',
     'hq.l2n': 'In which column or group is this consonant?', 'hq.n2l': 'Which consonant belongs to <b>{x}</b>?', 'weak.hname': 'Column or group {n}',
     'kind.letter': 'Devanāgarī ↔ IAST', 'kind.varga': 'The consonant’s group', 'kind.odd': 'Odd letter out', 'kind.grid': 'Viṣṇuvarga grid',
+    'kind.term': 'Jīva Gosvāmī’s names', 'kn.term': 'Names',
+    'ex.termD': 'What Jīva Gosvāmī calls a vowel, a consonant, the anusvāra and the visarga, and back.',
+    'tq.c2n': 'What does Jīva Gosvāmī call <b>{x}</b>?', 'tq.n2c': 'What is <b>{x}</b>?', 'weak.term': 'Name: {x}',
+    'tm.svara': 'a vowel', 'tm.vyanjana': 'a consonant', 'tm.anusvara': 'the anusvāra (ṁ)', 'tm.visarga': 'the visarga (ḥ)',
+    'tn.svara': 'a vowel (svara)', 'tn.vyanjana': 'a consonant (vyañjana)', 'tn.anusvara': 'the anusvāra', 'tn.visarga': 'the visarga',
     'kn.letter': 'Letters', 'kn.varga': 'Group', 'kn.odd': 'Odd one out', 'kn.grid': 'Grid',
     'ex.letterD': 'One letter at a time: from Devanāgarī to IAST and back (vowels, consonants, conjuncts).',
     'ex.vargaD': 'Which row or group a consonant belongs to.',
@@ -1379,6 +1385,11 @@ const I18N = {
     'ex.hariD': 'Da una consonante al nome della sua colonna (harikamalāni…) o del gruppo harimitrāṇi / harigotrāṇi, e viceversa.',
     'hq.l2n': 'In quale colonna o gruppo sta questa consonante?', 'hq.n2l': 'Quale consonante appartiene a <b>{x}</b>?', 'weak.hname': 'Colonna o gruppo {n}',
     'kind.letter': 'Devanāgarī ↔ IAST', 'kind.varga': 'Il gruppo della consonante', 'kind.odd': 'Lettera fuori posto', 'kind.grid': 'Griglia dei viṣṇuvarga',
+    'kind.term': 'I nomi di Jīva Gosvāmī', 'kn.term': 'Nomi',
+    'ex.termD': 'Come Jīva Gosvāmī chiama una vocale, una consonante, l’anusvāra e il visarga, e viceversa.',
+    'tq.c2n': 'Come chiama Jīva Gosvāmī <b>{x}</b>?', 'tq.n2c': 'Che cos’è <b>{x}</b>?', 'weak.term': 'Nome: {x}',
+    'tm.svara': 'una vocale', 'tm.vyanjana': 'una consonante', 'tm.anusvara': 'l’anusvāra (ṁ)', 'tm.visarga': 'il visarga (ḥ)',
+    'tn.svara': 'una vocale (svara)', 'tn.vyanjana': 'una consonante (vyañjana)', 'tn.anusvara': 'l’anusvāra', 'tn.visarga': 'il visarga',
     'kn.letter': 'Lettere', 'kn.varga': 'Gruppo', 'kn.odd': 'Fuori posto', 'kn.grid': 'Griglia',
     'ex.letterD': 'Una lettera alla volta: dal devanāgarī all’IAST e viceversa (vocali, consonanti, nessi).',
     'ex.vargaD': 'A quale riga o gruppo appartiene la consonante.',
@@ -2305,7 +2316,9 @@ const MODULES = [
     }
     return { RULES, ruleKey, sylls, WB, END, words, byRule, cuts };
   })();
-  const ALPHA_KINDS = ['letter', 'varga', 'hari', 'odd', 'grid'];
+  const ALPHA_KINDS = ['letter', 'term', 'varga', 'hari', 'odd', 'grid'];
+  // nomi di Jīva Gosvāmī per i suoni (Notion: «Sanskrit alphabet» e «Lesson 1»): id → nome
+  const TERMS = { svara: 'sarveśvara', vyanjana: 'viṣṇujana', anusvara: 'viṣṇucakram', visarga: 'viṣṇusarga' };
   const CH_KINDS = ['scan', 'fill', 'spot', 'metre', 'schema', 'yati', 'gana'];   // tipi di domanda di Chandaḥ
   // ---------- dati dei moduli Nomi, Pronomi, Verbi e Vocabolario: pagine Notion "Noun declension", "Pronouns declension", "Verbs", "Vocabulary" ----------
   // nomi: t[caso][numero] = [IAST, devanāgarī, segno]  (segno "x" = punto aperto sul Notion, "alt" = due forme sul Notion)
@@ -2827,6 +2840,7 @@ const MODULES = [
     if (ty === 'gana') return t('weak.gana', { x: a });
     if (ty === 'letter') return t('weak.letter', { x: ALPHA.L[a].dev + ' ' + a });
     if (ty === 'varga') return t('weak.varga', { g: gname(a) });
+    if (ty === 'term') return t('weak.term', { x: TERMS[a] || a });
     if (ty === 'hname') return t('weak.hname', { n: ALPHA.NB[a].n });
     if (ty === 'sutra') return t('weak.sutra', { n: a }) + (SANDHI.SB[a] ? ' · ' + SANDHI.SB[a].t : '');
     if (ty === 'case') return t('weak.case', { c: caseN(+a) });
@@ -3187,6 +3201,13 @@ const MODULES = [
       if (kind === 'hari') return { kind, letter: id, mode: rnd(2) === 0 ? 'l2n' : 'n2l' };
       return kind === 'letter' ? { kind, answer: id, mode: rnd(2) === 0 ? 'd2i' : 'i2d' } : { kind, letter: id };
     }
+    if (kind === 'term') {
+      const ids = Object.keys(TERMS);
+      let id = ids[rnd(ids.length)];
+      for (let k = 0; k < 20 && ex.used.has('term' + id); k++) id = ids[rnd(ids.length)];
+      ex.used.add('term' + id);
+      return { kind, id, mode: rnd(2) === 0 ? 'c2n' : 'n2c' };
+    }
     if (kind === 'odd') {
       const gs = shuffle(ALPHA.G.map(x => x.id)), g = ALPHA.GB[gs[0]], h = ALPHA.GB[gs[1]];
       return { kind, ids: shuffle(g.ids).slice(0, 3).concat(h.ids[rnd(h.ids.length)]) };
@@ -3210,6 +3231,7 @@ const MODULES = [
       case 'letter': return 'letter:' + it.answer + ':' + it.mode;
       case 'varga': return 'varga:' + it.letter;
       case 'hari': return 'hari:' + it.letter + ':' + it.mode;
+      case 'term': return 'term:' + it.id + ':' + it.mode;
       case 'odd': return 'odd:' + it.ids.slice().sort().join(',');
       case 'grid': return 'grid:' + it.blanks.slice().sort((a, b) => a - b).join(',');
       case 'gana': return 'gana:' + it.answer + ':' + it.mode + (it.given ? ':' + it.given : '');
@@ -3229,6 +3251,7 @@ const MODULES = [
     if (it.kind === 'letter') return typeof it.answer === 'string' && !!ALPHA.L[it.answer] && (it.mode === 'd2i' || it.mode === 'i2d');
     if (it.kind === 'varga') return typeof it.letter === 'string' && !!ALPHA.L[it.letter] && ALPHA.L[it.letter].kind === 'cons';
     if (it.kind === 'hari') return typeof it.letter === 'string' && !!ALPHA.L[it.letter] && ALPHA.L[it.letter].kind === 'cons' && (it.mode === 'l2n' || it.mode === 'n2l');
+    if (it.kind === 'term') return Object.prototype.hasOwnProperty.call(TERMS, it.id) && (it.mode === 'c2n' || it.mode === 'n2c');
     if (it.kind === 'odd') return !!ALPHA.oddOf(it.ids);
     if (it.kind === 'grid') return Array.isArray(it.blanks) && it.blanks.length === 5 && new Set(it.blanks).size === 5 && it.blanks.every(n => Number.isInteger(n) && n >= 0 && n < 25);
     if (it.kind === 'schema') return !!(E.METRE_BY_ID[it.mid] && E.METRE_BY_ID[it.mid].pattern) && (it.mode === 'marks' || it.mode === 'names');
@@ -3302,6 +3325,10 @@ const MODULES = [
       const others = shuffle(ALPHA.cons.filter(x => ALPHA.nameOf(x) !== nm)).slice(0, 3);
       return { kind: 'hari', key, item, mode: 'n2l', letter: it.letter, name: nm, answer: it.letter, opts: shuffle([it.letter, ...others]), picked: null };
     }
+    if (it.kind === 'term') {
+      const others = shuffle(Object.keys(TERMS).filter(x => x !== it.id)).slice(0, 3);
+      return { kind: 'term', key, item, mode: it.mode, id: it.id, answer: it.id, opts: shuffle([it.id, ...others]), picked: null };
+    }
     if (it.kind === 'odd') {
       const odd = ALPHA.oddOf(it.ids), ids = it.ids.slice().sort();
       return { kind: 'odd', key, item, answer: odd, opts: shuffle(ids), picked: null };
@@ -3328,6 +3355,7 @@ const MODULES = [
     if (ty === 'gana' && ks.includes('gana') && E.GANA[a]) return buildQ({ kind: 'gana', answer: a, mode: rnd(2) === 0 ? 'p2n' : 'n2p' });
     if (ty === 'letter' && ks.includes('letter') && ALPHA.L[a]) return buildQ({ kind: 'letter', answer: a, mode: rnd(2) === 0 ? 'd2i' : 'i2d' });
     if (ty === 'varga' && ks.includes('varga') && ALPHA.GB[a]) return buildQ({ kind: 'varga', letter: ALPHA.GB[a].ids[rnd(ALPHA.GB[a].ids.length)] });
+    if (ty === 'term' && ks.includes('term') && TERMS[a]) return buildQ({ kind: 'term', id: a, mode: rnd(2) === 0 ? 'c2n' : 'n2c' });
     if (ty === 'hname' && ks.includes('hari') && ALPHA.NB[a]) return buildQ({ kind: 'hari', letter: ALPHA.NB[a].ids[rnd(ALPHA.NB[a].ids.length)], mode: rnd(2) === 0 ? 'l2n' : 'n2l' });
     if (ty === 'metre' && ks.includes('metre')) {
       const vs = VERSES.filter(v => v.metre === a.split('>')[0]);
@@ -3465,7 +3493,7 @@ const MODULES = [
     }
     const q = ex.q;
     const V = { scan: viewScanQ, fill: viewFillQ, spot: viewSpotQ, metre: viewMetreQ, schema: viewSchemaQ, yati: viewYatiQ, gana: viewGanaQ,
-      letter: viewLetterQ, varga: viewVargaQ, hari: viewHariQ, odd: viewOddQ, grid: viewGridQ,
+      letter: viewLetterQ, term: viewTermQ, varga: viewVargaQ, hari: viewHariQ, odd: viewOddQ, grid: viewGridQ,
       sl_lg: viewSillabeQ, sl_rule: viewSillabeQ, sl_tap: viewSillabeQ, sl_div: viewSillabeQ,
       sa_res: viewSandhiQ, sa_sut: viewSandhiQ, sa_join: viewSandhiQ, sa_split: viewSandhiQ, sa_mat: viewSandhiQ, sa_comp: viewSandhiQ }[q.kind] || viewNewQ;
     return exHead(ex) + V(q, ex);
@@ -3719,6 +3747,22 @@ const MODULES = [
   }
 
   const nameSet = id => `${ALPHA.NB[id].n}: ${ALPHA.NB[id].ids.map(i => ALPHA.L[i].dev + ' ' + i).join(' · ')}`;
+  function viewTermQ(q, ex) {
+    const done = q.picked !== null, c2n = q.mode === 'c2n';
+    const head = c2n ? `<p class="q-lab">${t('tq.c2n', { x: t('tm.' + q.id) })}</p>` : `<p class="q-lab">${t('tq.n2c', { x: TERMS[q.id] })}</p>`;
+    const opts = '<div class="opts lst hari">' + q.opts.map((id, i) => {
+      let cls = 'opt';
+      if (done) { if (id === q.answer) cls += ' ok'; else if (i === q.picked) cls += ' bad'; }
+      return `<button class="${cls}" data-act="opt" data-i="${i}"${done ? ' disabled' : ''}><span class="mname">${esc(c2n ? TERMS[id] : t('tn.' + id))}</span></button>`;
+    }).join('') + '</div>';
+    let fb = '';
+    if (done) {
+      const right = q.opts[q.picked] === q.answer;
+      fb = `<p class="res ${right ? 'ok' : 'bad'}" role="status">${right ? t('mq.right') : t('gq.wrong')} <b>${esc(TERMS[q.id])}</b> = ${esc(t('tn.' + q.id))}</p>${nextRow(ex)}`;
+    }
+    return `<section class="panel q">${head}${opts}${fb}</section>`;
+  }
+
   function viewHariQ(q, ex) {
     const done = q.picked !== null, l2n = q.mode === 'l2n';
     let head, opts;
@@ -4599,7 +4643,7 @@ const MODULES = [
   // Ogni tipo di domanda sta in un solo livello; il livello si sceglie per modulo e si salva (archivio privato di ognuno).
   const KLEVEL = {
     metre: 1, schema: 1, gana: 1, yati: 2, spot: 2, fill: 2, scan: 3,
-    letter: 1, varga: 2, odd: 2, hari: 3, grid: 3,
+    letter: 1, term: 1, varga: 2, odd: 2, hari: 3, grid: 3,
     sl_lg: 1, sl_rule: 2, sl_tap: 2, sl_div: 3,
     sa_res: 1, sa_mat: 1, sa_sut: 2, sa_comp: 2, sa_join: 3, sa_split: 3, sa_type: 3,
     no_case: 1, no_num: 1, no_cell: 2, no_err: 2, no_tab: 3, no_write: 3,
@@ -5503,6 +5547,7 @@ const MODULES = [
         else if (q.kind === 'metre' || q.kind === 'schema') wk = 'metre:' + q.answer + '>' + q.opts[q.picked];
         else if (q.kind === 'letter') wk = 'letter:' + q.answer;
         else if (q.kind === 'varga') wk = 'varga:' + q.answer;
+        else if (q.kind === 'term') wk = 'term:' + q.answer;
         else if (q.kind === 'hari') wk = 'hname:' + ALPHA.nameOf(q.letter);
         else if (q.kind === 'odd') wk = 'varga:' + ALPHA.L[q.answer].grp;
         else if (q.kind === 'sl_lg' || q.kind === 'sl_rule') wk = weakRule(q.syls[q.si]);
